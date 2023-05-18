@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta charset="ISO-8859-1">
-        <title>DPA Portal - Admin Login</title>
+        <title>DPA Portal - User Login</title>
         <jsp:include page="../assets/head/head.jsp"></jsp:include>
         <link rel="stylesheet" src="../assets/css/main.css"/>
 
