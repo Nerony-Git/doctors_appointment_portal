@@ -61,6 +61,8 @@
                                 <button type="submit" class="btn bg_color text-white col-md-12"><i class="fa-solid fa-right-to-bracket"></i></i> Login </button>
                             </form>
                             <!-- End Form -->
+                            <br/>
+                            <p>Not registered yet? <a href="" class="text-decoration-none">Register</a></p>
                         </div>
                     </div>
                 </div>
