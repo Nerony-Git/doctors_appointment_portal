@@ -14,7 +14,8 @@
         <meta charset="ISO-8859-1">
         <title>DPA Portal - Admin Login</title>
         <jsp:include page="../assets/head/head.jsp"></jsp:include>
-        <link rel="stylesheet" src="../assets/css/main.css"/>
+        <link rel="stylesheet" href="../assets/css/main.css"/>
+        <script type="text/javascript" src="../assets/js/main.js"></script>
 
     </head>
     <body>
@@ -24,12 +25,12 @@
 
         <div class="container p-5">
             <div class="row">
-                <div class="col-md-4 offset-md-4">
+                <div class="col-md-6 offset-md-3">
                     <div class="card register_card">
                         <div class="card-header text-center text-white bg_color">
                             <p class="fs-4 text-center text-white mt-2">
-                                <i class="fa fa-universal-access"></i>
-                                Admin Login
+                                <i class="fa fa-universal-access"></i> &nbsp;
+                                Administrators Login
                             </p>
                         </div>
                         <div class="card-body">
@@ -54,11 +55,12 @@
                                     <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="uName" required />
                                 </div>
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text" id="pass"><i class="fa-solid fa-lock-keyhole"></i></span>
-                                    <input type="text" name="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="pass" required />
+                                    <span class="input-group-text" id="pass"><i class="fa-solid fa-lock"></i></span>
+                                    <input type="password" name="password" id="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="pass" required />
+                                    <i class=" view_password input-group-text bi bi-eye-slash" id="togglePassword"></i>
                                 </div>
 
-                                <button type="submit" class="btn bg_color text-white col-md-12"><i class="fa-solid fa-right-to-bracket"></i></i> Login </button>
+                                <button type="submit" class="btn bg_color text-white col-md-12"><i class="fa-solid fa-right-to-bracket"></i> &nbsp; Login </button>
                             </form>
                             <!-- End Form -->
                             <br/>
