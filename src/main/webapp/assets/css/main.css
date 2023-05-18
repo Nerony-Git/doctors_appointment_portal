@@ -5,3 +5,8 @@
 .bg_color {
     background-color: #4568dc;
 }
+
+.view_password {
+    cursor: pointer;
+    /*margin-left: -30px;*/
+}
