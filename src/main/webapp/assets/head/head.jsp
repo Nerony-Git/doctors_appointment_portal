@@ -9,3 +9,4 @@
 
 <jsp:include page="../third_parties/bootstrap.jsp"></jsp:include>
 <jsp:include page="../third_parties/font_awesome.jsp"></jsp:include>
+<jsp:include page="../third_parties/bootstrap_icon.jsp"></jsp:include>
