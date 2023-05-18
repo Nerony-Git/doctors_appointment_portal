@@ -62,15 +62,15 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="uName"><i class="fa fa-tags"></i></span>
-                                    <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="uName" />
+                                    <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="uName" required />
                                 </div>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="eMail"><i class="fa-solid fa-envelope"></i></span>
-                                    <input type="email" name="userEmail" class="form-control" placeholder="Email Address" aria-label="Email Address" aria-describedby="eMail" />
+                                    <input type="email" name="userEmail" class="form-control" placeholder="Email Address" aria-label="Email Address" aria-describedby="eMail" required />
                                 </div>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="pass"><i class="fa-solid fa-lock-keyhole"></i></span>
-                                    <input type="text" name="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="pass" />
+                                    <input type="text" name="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="pass" required />
                                 </div>
 
                                 <button type="submit" class="btn bg_color text-white col-md-12"><i class="fa-solid fa-user-pen"></i> Register </button>
