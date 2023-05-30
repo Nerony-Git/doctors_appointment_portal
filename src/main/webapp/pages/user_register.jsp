@@ -52,6 +52,7 @@
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="fName"><i class="fa fa-user"></i></span>
                                     <input type="text" name="firstName" class="form-control" placeholder="First Name" aria-label="First Name" aria-describedby="fName" required />
+                                    <input type="hidden" name="userID" value="" />
                                 </div>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="lName"><i class="fa fa-user"></i></span>
@@ -66,8 +67,24 @@
                                     <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="uName" required />
                                 </div>
                                 <div class="input-group mb-3">
+                                    <span class="input-group-text" id="uDob"><i class="fa-solid fa-calendar-days"></i></span>
+                                    <input type="date" name="dob" class="form-control" aria-label="Date of Birth" aria-describedby="uDob" required />
+                                </div>
+                                <div class="input-group mb-3">
                                     <span class="input-group-text" id="eMail"><i class="fa-solid fa-envelope"></i></span>
-                                    <input type="email" name="userEmail" class="form-control" placeholder="Email Address" aria-label="Email Address" aria-describedby="eMail" required />
+                                    <input type="email" name="email" class="form-control" placeholder="Email Address" aria-label="Email Address" aria-describedby="eMail" required />
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="uContact"><i class="fa-solid fa-phone"></i></span>
+                                    <input type="number" name="contact" maxlength="11" class="form-control" placeholder="Contact" aria-label="Phone Number" aria-describedby="uContact" required />
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="uAddress"><i class="fa-solid fa-location-dot"></i></span>
+                                    <input type="text" name="address" class="form-control" placeholder="Address" aria-label="Address" aria-describedby="uAddress" required />
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="uPostal"><i class="fa-solid fa-map-location-dot"></i></span>
+                                    <input type="text" name="postalAddress" class="form-control" placeholder="Postal Address" aria-label="Postal Address" aria-describedby="uAddress" required />
                                 </div>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="pass"><i class="fa-solid fa-lock"></i></span>
