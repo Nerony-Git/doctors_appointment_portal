@@ -1,19 +1,21 @@
 package com.george.doctors_appointment_portal.model;
 
+import java.time.LocalDate;
+
 public class Appointment {
-    private String appointmentID;
+    private Long appointmentID;
     private String userID;
     private String specialityID;
     private String doctorID;
-    private String appointmentDate;
+    private LocalDate appointmentDate;
     private String description;
     private String status;
 
-    public String getAppointmentID() {
+    public Long getAppointmentID() {
         return appointmentID;
     }
 
-    public void setAppointmentID(String appointmentID) {
+    public void setAppointmentID(Long appointmentID) {
         this.appointmentID = appointmentID;
     }
 
@@ -41,11 +43,11 @@ public class Appointment {
         this.doctorID = doctorID;
     }
 
-    public String getAppointmentDate() {
+    public LocalDate getAppointmentDate() {
         return appointmentDate;
     }
 
-    public void setAppointmentDate(String appointmentDate) {
+    public void setAppointmentDate(LocalDate appointmentDate) {
         this.appointmentDate = appointmentDate;
     }
 

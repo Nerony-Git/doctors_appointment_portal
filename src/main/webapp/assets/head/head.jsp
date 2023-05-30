@@ -10,3 +10,9 @@
 <jsp:include page="../third_parties/bootstrap.jsp"></jsp:include>
 <jsp:include page="../third_parties/font_awesome.jsp"></jsp:include>
 <jsp:include page="../third_parties/bootstrap_icon.jsp"></jsp:include>
+<jsp:include page="../third_parties/jquery.jsp"></jsp:include>
+<jsp:include page="../third_parties/animate.jsp"></jsp:include>
+<jsp:include page="../third_parties/aos.jsp"></jsp:include>
+<jsp:include page="../third_parties/glightbox.jsp"></jsp:include>
+<jsp:include page="../third_parties/swiper_bundle.jsp"></jsp:include>
+<jsp:include page="../third_parties/purecounter.jsp"></jsp:include>

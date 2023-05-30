@@ -15,7 +15,7 @@
         <title>DPA Portal - User Login</title>
         <jsp:include page="../assets/head/head.jsp"></jsp:include>
         <link rel="stylesheet" href="../assets/css/main.css"/>
-        <script type="text/javascript" src="../assets/js/main.js"></script>
+        <script type="text/javascript" src="../assets/js/view_password.js"></script>
 
     </head>
     <body>
@@ -49,7 +49,7 @@
                             <!-- End Error Message -->
 
                             <!-- Form -->
-                            <form action="" method="post">
+                            <form action="<%=request.getContextPath()%>/hello-servlet" method="post">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="uName"><i class="fa fa-tags"></i></span>
                                     <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="uName" required />

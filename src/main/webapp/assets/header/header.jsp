@@ -6,7 +6,33 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<nav class="navbar navbar-expand-lg navbar-dark bg_color">
+<header id="header" class="d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+        <div class="logo">
+            <h1 class="text-light">
+                <a class="navbar-brand" href="/hello-servlet">
+                    <i class="fa-sharp fa-solid fa-hospital"></i>
+                    <span><strong>DPA </strong> Portal</span>
+                </a>
+            </h1>
+        </div>
+
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a class="nav-link active" href="/hello-servlet"><i class="fa-sharp fa-solid fa-hospital"></i> Home </a> </li>
+                <li class="dropdown"><a href="#"><i class="fas fa-sign-in-alt"></i> <span>Logins</span> <i class="bi bi-chevron-down"></i> </a>
+                    <ul>
+                        <li><a class="nav-link" href=""><i class="fas fa-sign-in-alt"></i> Customer Login </a> </li>
+                        <li><a class="nav-link" href=""><i class="fas fa-sign-in-alt"></i> Doctor Login </a> </li>
+                        <li><a class="nav-link" href=""><i class="fas fa-sign-in-alt"></i> Admin Login </a> </li>
+                    </ul>
+                </li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+    </div>
+</header>
+<%--<nav class="navbar navbar-expand-lg navbar-dark bg_color">
     <div class="container-fluid">
         <a class="navbar-brand" href="/hello-servlet"><i class="fa-sharp fa-solid fa-hospital"></i> <strong>DPA </strong> &nbsp; Portal </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,4 +62,4 @@
         </li>
       </ul>
     </div>
-</nav>
+</nav>--%>

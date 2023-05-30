@@ -19,7 +19,7 @@ public class UserDao {
             preparedStatement.setString(3, users.getLastName());
             preparedStatement.setString(4, users.getOtherName());
             preparedStatement.setString(5, users.getUsername());
-            preparedStatement.setString(6, users.getDob());
+            preparedStatement.setDate(6, JDBCUtils.getSQLDate(users.getDob()));
             preparedStatement.setString(7, users.getContact());
             preparedStatement.setString(8, users.getAddress());
             preparedStatement.setString(9, users.getPostalAddress());

@@ -15,7 +15,7 @@
         <title>DPA Portal - Admin Login</title>
         <jsp:include page="../assets/head/head.jsp"></jsp:include>
         <link rel="stylesheet" href="../assets/css/main.css"/>
-        <script type="text/javascript" src="../assets/js/main.js"></script>
+        <script type="text/javascript" src="../assets/js/view_password.js"></script>
 
     </head>
     <body>
