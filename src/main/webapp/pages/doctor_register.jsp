@@ -52,6 +52,7 @@
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="fName"><i class="fa fa-user"></i></span>
                                     <input type="text" name="firstName" class="form-control" placeholder="First Name" aria-label="First Name" aria-describedby="fName" required />
+                                    <input type="hidden" name="userID" class="form-control" />
                                 </div>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="lName"><i class="fa fa-user"></i></span>
@@ -66,8 +67,27 @@
                                     <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="uName" required />
                                 </div>
                                 <div class="input-group mb-3">
+                                    <span class="input-group-text" id="uDob"><i class="fa-solid fa-calendar-days"></i></span>
+                                    <input type="date" name="dob" class="form-control" aria-label="Date of Birth" aria-describedby="uDob" required />
+                                </div>
+                                <div class="input-group mb-3">
                                     <span class="input-group-text" id="eMail"><i class="fa-solid fa-envelope"></i></span>
-                                    <input type="email" name="userEmail" class="form-control" placeholder="Email Address" aria-label="Email Address" aria-describedby="eMail" required />
+                                    <input type="email" name="email" class="form-control" placeholder="Email Address" aria-label="Email Address" aria-describedby="eMail" required />
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="uContact"><i class="fa-solid fa-phone"></i></span>
+                                    <input type="number" name="contact" maxlength="11" class="form-control" placeholder="Contact" aria-label="Phone Number" aria-describedby="uContact" required />
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="uSpeciality"><i class="fa-solid fa-books-medical"></i></span>
+                                    <select name="speciality" class="form-control" required>
+                                        <option selected="selected" disabled="disabled">---Select Speciality---</option>
+                                        <option value="<c:out value='${todo.todoDate}' />"><c:out value='${todo.todoDate}' /></option>
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="uQualification"></span>
+                                    <input type="text" name="qualification" class="form-control" placeholder="Qualification" aria-label="Qualification" aria-describedby="uQualification" required />
                                 </div>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="pass"><i class="fa-solid fa-lock"></i></span>
