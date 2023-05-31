@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Enumeration;
 
 @WebServlet("/users")
 public class UserController extends HttpServlet {
@@ -94,5 +95,36 @@ public class UserController extends HttpServlet {
         session.removeAttribute("user");
         session.setAttribute("successMsg", "Successfully Logout");
         response.sendRedirect("");
+    }
+
+    private void authenticate(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+
+        try {
+            User user = userDao.validateUser(username, password);
+            String destPage = "pages/user_login.jsp";
+
+            if (user != null) {
+                HttpSession session = request.getSession();
+                session.setAttribute("user", user);
+                Enumeration<String> attributeNames = session.getAttributeNames();
+                while (attributeNames.hasMoreElements()){
+                    String attributeName = attributeNames.nextElement();
+                    Object attributeValue = session.getAttribute(attributeName);
+                    System.out.println(attributeName + ": " + attributeValue);
+                }
+                destPage = "user/dashboard.jsp";
+            }else {
+                String message = "Invalid username or password";
+                request.setAttribute("message", message);
+            }
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher(destPage);
+            dispatcher.forward(request, response);
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new ServletException(ex);
+        }
+
     }
 }
