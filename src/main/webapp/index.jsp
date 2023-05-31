@@ -187,16 +187,103 @@
 
         </div>
     </section>
-
     <!-- End Counts Section -->
 
-</main>
+    <!-- Teams Section -->
+    <section id="team" class="team">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Team</h2>
+                <p>Below are the teams working to make this the best.</p>
+            </div>
 
+            <div class="row">
+                <div class="col-xl-3 col-lg-4 col-md-6">
+                    <div class="member register_card">
+                        <img src="assets/img/team/team1.jpg" class="img-fluid" alt="Dr. Kpese White" />
+                        <div class="member-info">
+                            <h4> Dr. Kpese White </h4>
+                            <span>Chief Executive Officer</span>
+                        </div>
+                        <div class="social">
+                            <a href=""><i class="bi bi-facebook"></i></a>
+                            <a href=""><i class="bi bi-instagram"></i></a>
+                            <a href=""><i class="bi bi-linkedin"></i></a>
+                            <a href=""><i class="bi bi-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-lg-4 col-md-6">
+                    <div class="member register_card">
+                        <img src="assets/img/team/team2.jpg" class="img-fluid" alt="Grace Storm" />
+                        <div class="member-info">
+                            <h4> Grace Storm </h4>
+                            <span>Product Manager</span>
+                        </div>
+                        <div class="social">
+                            <a href=""><i class="bi bi-facebook"></i></a>
+                            <a href=""><i class="bi bi-instagram"></i></a>
+                            <a href=""><i class="bi bi-linkedin"></i></a>
+                            <a href=""><i class="bi bi-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-lg-4 col-md-6">
+                    <div class="member register_card">
+                        <img src="assets/img/team/team3.jpg" class="img-fluid" alt="Dr. William Anderson" />
+                        <div class="member-info">
+                            <h4> Dr. William Anderson </h4>
+                            <span>CTO</span>
+                        </div>
+                        <div class="social">
+                            <a href=""><i class="bi bi-facebook"></i></a>
+                            <a href=""><i class="bi bi-instagram"></i></a>
+                            <a href=""><i class="bi bi-linkedin"></i></a>
+                            <a href=""><i class="bi bi-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-lg-4 col-md-6">
+                    <div class="member register_card">
+                        <img src="assets/img/team/team4.jpg" class="img-fluid" alt="" />
+                        <div class="member-info">
+                            <h4> Dr. Amanda Jepson </h4>
+                            <span>Dean</span>
+                        </div>
+                        <div class="social">
+                            <a href=""><i class="bi bi-facebook"></i></a>
+                            <a href=""><i class="bi bi-instagram"></i></a>
+                            <a href=""><i class="bi bi-linkedin"></i></a>
+                            <a href=""><i class="bi bi-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Teams Section -->
+
+    <!-- Cta Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="text-center">
+                <h3> Call To Action </h3>
+                <p> Need Furthe Details?</p>
+                <a class="cta-btn" href="#">Contact Us</a>
+            </div>
+        </div>
+    </section>
+    <!-- End Cta Section -->
+
+</main>
 <!-- ===== End Main Body ===== -->
 
-<!-- Footer -->
+<!-- ===== Footer ===== -->
 <jsp:include page="assets/footer/footer.jsp"></jsp:include>
-<!-- End Footer -->
+<!-- ===== End Footer ===== -->
 
 <script type="text/javascript" src="assets/js/main.js"></script>
 <script type="text/javascript">
