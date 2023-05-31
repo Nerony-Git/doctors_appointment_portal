@@ -161,16 +161,17 @@
 .navbar a:focus {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
     padding: 10px 0 10px 30px;
     font-family: "Roboto", sans-serif;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 500;
-    color: #637f7b;
+    color: #fff;
     white-space: nowrap;
     transition: 0.3s;
     letter-spacing: 0.3px;
     text-transform: uppercase;
+    text-decoration: none;
 }
 
 .navbar a i,
@@ -184,7 +185,8 @@
 .navbar .active,
 .navbar .active:focus,
 .navbar li:hover>a {
-    color: #1bbca3;
+    color: #fff;
+    font-weight: bold;
 }
 
 .navbar .getstarted,
@@ -226,6 +228,7 @@
     font-size: 13px;
     font-weight: 500;
     text-transform: none;
+    color: #1ed2b6;
 }
 
 .navbar .dropdown ul a i {
@@ -235,7 +238,7 @@
 .navbar .dropdown ul a:hover,
 .navbar .dropdown ul .active:hover,
 .navbar .dropdown ul li:hover>a {
-    color: #1bbca3;
+    color: #fb058a;
 }
 
 .navbar .dropdown:hover>ul {
@@ -334,7 +337,7 @@
 .navbar-mobile a:hover,
 .navbar-mobile .active,
 .navbar-mobile li:hover>a {
-    color: #1bbca3;
+    color: #fb058a;
 }
 
 .navbar-mobile .getstarted,
@@ -369,7 +372,7 @@
 .navbar-mobile .dropdown ul a:hover,
 .navbar-mobile .dropdown ul .active:hover,
 .navbar-mobile .dropdown ul li:hover>a {
-    color: #1bbca3;
+    color: #fb058a;
 }
 
 .navbar-mobile .dropdown>.dropdown-active {
@@ -637,5 +640,38 @@ section {
 
 .counts .count-box a:hover {
     color: #fb058a;
+}
+
+/*--------------------------------------------------------------
+# Back to top button
+--------------------------------------------------------------*/
+.back-to-top {
+    position: fixed;
+    visibility: hidden;
+    opacity: 0;
+    right: 15px;
+    bottom: 15px;
+    z-index: 99999;
+    background: #1bbca3;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    transition: all 0.4s;
+}
+
+.back-to-top i {
+    font-size: 24px;
+    color: #fff;
+    line-height: 0;
+}
+
+.back-to-top:hover {
+    background: #fb058a;
+    color: #fff;
+}
+
+.back-to-top.active {
+    visibility: visible;
+    opacity: 1;
 }
 

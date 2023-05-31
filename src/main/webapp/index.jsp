@@ -15,7 +15,6 @@
     <title>DPA Portal - User Login</title>
     <jsp:include page="assets/head/head.jsp"></jsp:include>
     <link rel="stylesheet" href="assets/css/main.css"/>
-    <script type="text/javascript" src="assets/js/main.js"></script>
 
 </head>
 <body>
@@ -198,6 +197,16 @@
 <!-- Footer -->
 <jsp:include page="assets/footer/footer.jsp"></jsp:include>
 <!-- End Footer -->
+
+<script type="text/javascript" src="assets/js/main.js"></script>
+<script type="text/javascript">
+
+    /**
+     * Initiate Pure Counter
+     */
+    new PureCounter();
+
+</script>
 
 </body>
 </html>
