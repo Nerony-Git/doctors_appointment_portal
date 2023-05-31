@@ -10,7 +10,7 @@
     <div class="container d-flex align-items-center justify-content-between">
         <div class="logo">
             <h1 class="text-light">
-                <a class="navbar-brand" href="/hello-servlet">
+                <a class="navbar-brand" href="<%= request.getContextPath() %>/">
                     <i class="fa-sharp fa-solid fa-hospital"></i>
                     <span><strong>DPA </strong> Portal</span>
                 </a>
@@ -19,12 +19,19 @@
 
         <nav id="navbar" class="navbar">
             <ul>
-                <li><a class="nav-link active" href="/hello-servlet"><i class="fa-sharp fa-solid fa-hospital"></i> &nbsp; Home </a> </li>
+                <li><a class="nav-link active" href="<%= request.getContextPath() %>/"><i class="fa-sharp fa-solid fa-hospital"></i> &nbsp; Home </a> </li>
                 <li class="dropdown"><a href="#"><i class="fas fa-sign-in-alt"></i> <span> &nbsp; Logins</span> <i class="bi bi-chevron-down"></i> </a>
                     <ul>
                         <li><a class="nav-link" href=""><i class="fas fa-sign-in-alt"></i> &nbsp; Customer Login </a> </li>
                         <li><a class="nav-link" href=""><i class="fas fa-sign-in-alt"></i> &nbsp; Doctor Login </a> </li>
                         <li><a class="nav-link" href=""><i class="fas fa-sign-in-alt"></i> &nbsp; Admin Login </a> </li>
+                    </ul>
+                </li>
+                <li class="dropdown"><a href="#"><i class="fas fa-sign-in-alt"></i> <span> &nbsp; Signup </span> <i class="bi bi-chevron-down"></i> </a>
+                    <ul>
+                        <li><a class="nav-link" href=""><i class="fa-solid fa-user-plus"></i> &nbsp; Customer Signup </a> </li>
+                        <li><a class="nav-link" href=""><i class="fa-solid fa-user-doctor"></i> &nbsp; Doctor Signup </a> </li>
+                        <li><a class="nav-link" href=""><i class="fa-solid fa-user-gear"></i> &nbsp; Admin Signup </a> </li>
                     </ul>
                 </li>
             </ul>
@@ -34,7 +41,7 @@
 </header>
 <%--<nav class="navbar navbar-expand-lg navbar-dark bg_color">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/hello-servlet"><i class="fa-sharp fa-solid fa-hospital"></i> <strong>DPA </strong> &nbsp; Portal </a>
+        <a class="navbar-brand" href="<%= request.getContextPath() %>/"><i class="fa-sharp fa-solid fa-hospital"></i> <strong>DPA </strong> &nbsp; Portal </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
