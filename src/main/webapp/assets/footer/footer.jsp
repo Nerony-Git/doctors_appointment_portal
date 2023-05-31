@@ -9,7 +9,7 @@
 
 <footer class="text-center text-white mt-5 bg_color">
   <div class="container p-4 pb-0">
-    <section class="mb-4">
+    <div class="mb-4">
       <a class="btn btn-outline-light btn-floating m-1" href="" role="button">
         <i class="fab fa-instagram"></i>
       </a>
@@ -22,7 +22,7 @@
       <!--<a class="btn btn-outline-light btn-floating m-1" href="" role="button">
         <i class="fab fa-facebook-f"></i>
       </a>-->
-    </section>
+    </div>
   </div>
 
   <div class="text-center p-3" style="background-color: black;">
@@ -31,3 +31,6 @@
     Portal. All rights reserved.
   </div>
 </footer>
+
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
