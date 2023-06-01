@@ -52,7 +52,7 @@
                             <!-- End Error Message -->
 
                             <!-- Form -->
-                            <form action="<%=request.getContextPath()%>/hello-servlet" method="post">
+                            <form action="<%=request.getContextPath()%>/user_authenticate" method="post">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="uName"><i class="fa fa-tags"></i></span>
                                     <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="uName" required />
