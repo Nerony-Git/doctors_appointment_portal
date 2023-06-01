@@ -14,7 +14,7 @@
     <meta charset="ISO-8859-1">
     <title>DPA Portal - User Login</title>
     <jsp:include page="assets/head/head.jsp"></jsp:include>
-    <link rel="stylesheet" href="assets/css/main.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/main.css"/>
 
 </head>
 <body>
@@ -198,12 +198,14 @@
             </div>
 
             <div class="row">
-                <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="col-lg-3 col-md-6 d-md-flex">
                     <div class="member register_card">
                         <img src="assets/img/team/team1.jpg" class="img-fluid" alt="Dr. Kpese White" />
                         <div class="member-info">
-                            <h4> Dr. Kpese White </h4>
-                            <span>Chief Executive Officer</span>
+                            <div class="member-info-content">
+                                <h4> Dr. Kpese White </h4>
+                                <span>Chief Executive Officer</span>
+                            </div>
                         </div>
                         <div class="social">
                             <a href=""><i class="bi bi-facebook"></i></a>
@@ -214,12 +216,14 @@
                     </div>
                 </div>
 
-                <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="col-lg-3 col-md-6 d-md-flex">
                     <div class="member register_card">
                         <img src="assets/img/team/team2.jpg" class="img-fluid" alt="Grace Storm" />
                         <div class="member-info">
-                            <h4> Grace Storm </h4>
-                            <span>Product Manager</span>
+                            <div class="member-info-content">
+                                <h4> Grace Storm </h4>
+                                <span>Product Manager</span>
+                            </div>
                         </div>
                         <div class="social">
                             <a href=""><i class="bi bi-facebook"></i></a>
@@ -230,12 +234,14 @@
                     </div>
                 </div>
 
-                <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="col-lg-3 col-md-6 d-md-flex">
                     <div class="member register_card">
                         <img src="assets/img/team/team3.jpg" class="img-fluid" alt="Dr. William Anderson" />
                         <div class="member-info">
-                            <h4> Dr. William Anderson </h4>
-                            <span>CTO</span>
+                            <div class="member-info-content">
+                                <h4> Dr. William Anderson </h4>
+                                <span>CTO</span>
+                            </div>
                         </div>
                         <div class="social">
                             <a href=""><i class="bi bi-facebook"></i></a>
@@ -246,12 +252,14 @@
                     </div>
                 </div>
 
-                <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="col-lg-3 col-md-6 d-md-flex">
                     <div class="member register_card">
                         <img src="assets/img/team/team4.jpg" class="img-fluid" alt="" />
                         <div class="member-info">
-                            <h4> Dr. Amanda Jepson </h4>
-                            <span>Dean</span>
+                            <div class="member-info-content">
+                                <h4> Dr. Amanda Jepson </h4>
+                                <span>Dean</span>
+                            </div>
                         </div>
                         <div class="social">
                             <a href=""><i class="bi bi-facebook"></i></a>
