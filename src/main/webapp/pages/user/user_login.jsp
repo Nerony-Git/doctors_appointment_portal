@@ -18,11 +18,14 @@
         <script type="text/javascript" src="assets/js/view_password.js"></script>
 
     </head>
-    <body>
-        <!-- Navbar -->
-        <jsp:include page="../../assets/header/header.jsp"></jsp:include>
-        <!-- End Navbar -->
+    <body style="min-height: 100vh; display: flex; flex-direction: column">
 
+    <!-- ===== Header ===== -->
+    <jsp:include page="../../assets/header/header.jsp"></jsp:include>
+    <!-- ===== End Header ===== -->
+
+    <!-- ===== Main Body ===== -->
+    <main id="main">
         <div class="container p-5">
             <div class="row">
                 <div class="col-md-6 offset-md-3">
@@ -70,6 +73,14 @@
                 </div>
             </div>
         </div>
+    </main>
+    <!-- ===== End Main Body ===== -->
+
+    <!-- ===== Footer ===== -->
+    <jsp:include page="../../assets/footer/footer.jsp"></jsp:include>
+    <!-- ===== End Footer ===== -->
+
+    <script type="text/javascript" src="assets/js/main.js"></script>
 
     </body>
 </html>
