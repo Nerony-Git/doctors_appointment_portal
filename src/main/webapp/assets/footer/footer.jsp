@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<footer class="text-center text-white mt-5 bg_color">
+<footer class="text-center text-white bg_color">
   <div class="container p-4 pb-0">
     <div class="mb-4">
       <a class="btn btn-outline-light btn-floating m-1" href="" role="button">
