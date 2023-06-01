@@ -13,14 +13,14 @@
     <head>
         <meta charset="ISO-8859-1">
         <title> DPA Portal - Admin Register</title>
-        <jsp:include page="../assets/head/head.jsp"></jsp:include>
-        <link rel="stylesheet" href="../assets/css/main.css"/>
-        <script type="text/javascript" src="../assets/js/view_password.js"></script>
+        <jsp:include page="../../assets/head/head.jsp"></jsp:include>
+        <link rel="stylesheet" href="../../assets/css/main.css"/>
+        <script type="text/javascript" src="../../assets/js/view_password.js"></script>
     </head>
 
     <body>
         <!-- Navbar -->
-        <jsp:include page="../assets/header/header.jsp"></jsp:include>
+        <jsp:include page="../../assets/header/header.jsp"></jsp:include>
         <!-- End Navbar -->
 
         <div class="container p-5">
