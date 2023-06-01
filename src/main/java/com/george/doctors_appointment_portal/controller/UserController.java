@@ -17,7 +17,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Enumeration;
 
-@WebServlet({"/user_login", "/user_logout", "/user_register"})
+@WebServlet({"/user_login", "/user_logout", "/user_register", "/user_authenticate", "/user_dashboard"})
 public class UserController extends HttpServlet {
     private UserDao userDao;
 
@@ -39,7 +39,7 @@ public class UserController extends HttpServlet {
                 case "/user_logout":
                     userLogout(request, response);
                     break;
-                case "/dashboard":
+                case "/user_dashboard":
                     userDashboard(request, response);
                     break;
                 case "/user_login":
@@ -47,6 +47,9 @@ public class UserController extends HttpServlet {
                     break;
                 case "/user_register":
                     userRegister(request, response);
+                    break;
+                case "/user_authenticate":
+                    userAuthenticate(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/user/user_login.jsp");
@@ -102,34 +105,27 @@ public class UserController extends HttpServlet {
     }
 
     private void userLogout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         HttpSession session = request.getSession();
         session.removeAttribute("user");
         session.setAttribute("successMsg", "Successfully Logout");
-        response.sendRedirect("pages/user/user_login.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/user_login");
+        dispatcher.forward(request, response);
     }
 
-    private void authenticate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void userAuthenticate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
         try {
             User user = userDao.validateUser(username, password);
-            String destPage = "pages/user/user_login.jsp";
+            String destPage = "/user_login";
+            HttpSession session = request.getSession();
 
             if (user != null) {
-                HttpSession session = request.getSession();
                 session.setAttribute("user", user);
-                Enumeration<String> attributeNames = session.getAttributeNames();
-                while (attributeNames.hasMoreElements()){
-                    String attributeName = attributeNames.nextElement();
-                    Object attributeValue = session.getAttribute(attributeName);
-                    System.out.println(attributeName + ": " + attributeValue);
-                }
-                destPage = "pages/user/dashboard.jsp";
+                destPage = "/user_dashboard";
             }else {
-                String message = "Invalid username or password";
-                request.setAttribute("message", message);
+                session.setAttribute("errorMsg", "Invalid username or password");
             }
 
             RequestDispatcher dispatcher = request.getRequestDispatcher(destPage);
