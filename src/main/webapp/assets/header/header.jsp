@@ -29,7 +29,7 @@
                 <li class="dropdown"><a href="#"><i class="fa-solid fa-address-book"></i> <span> &nbsp; Signup </span> <i class="bi bi-chevron-down"></i> </a>
                     <ul>
                         <li><a class="nav-link" href="<%=request.getContextPath()%>/user_register"><i class="fa-solid fa-user-plus"></i> &nbsp; Customer Signup </a> </li>
-                        <li><a class="nav-link" href="<%=request.getContextPath()%>/doctor_login"><i class="fa-solid fa-user-doctor"></i> &nbsp; Doctor Signup </a> </li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/doctor_register"><i class="fa-solid fa-user-doctor"></i> &nbsp; Doctor Signup </a> </li>
                         <li><a class="nav-link" href=""><i class="fa-solid fa-user-gear"></i> &nbsp; Admin Signup </a> </li>
                     </ul>
                 </li>
