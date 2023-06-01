@@ -14,13 +14,13 @@
     
     <meta charset="ISO-8859-1">
     <title>DPA Portal - Dashboard</title>
-    <jsp:include page="../assets/head/head.jsp"></jsp:include>
-    <link rel="stylesheet" href="../assets/css/main.css"/>
+    <jsp:include page="../../assets/head/head.jsp"></jsp:include>
+    <link rel="stylesheet" href="../../assets/css/main.css"/>
 
 </head>
 <body>
     <!-- ===== Header ===== -->
-    <jsp:include page="../assets/navbar/user_navbar.jsp"></jsp:include>
+    <jsp:include page="../../assets/navbar/user_navbar.jsp"></jsp:include>
     <!-- ===== End Header ===== -->
 
     <!-- ===== Main Body ===== -->
@@ -67,7 +67,7 @@
     <!-- ===== End Main Body ===== -->
 
     <!-- ===== Footer ===== -->
-    <jsp:include page="../assets/footer/footer.jsp"></jsp:include>
+    <jsp:include page="../../assets/footer/footer.jsp"></jsp:include>
     <!-- ===== End Footer ===== -->
 </body>
 </html>

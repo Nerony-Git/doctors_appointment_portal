@@ -13,14 +13,14 @@
     <head>
         <meta charset="ISO-8859-1">
         <title>DPA Portal - User Login</title>
-        <jsp:include page="../assets/head/head.jsp"></jsp:include>
-        <link rel="stylesheet" href="../assets/css/main.css"/>
-        <script type="text/javascript" src="../assets/js/view_password.js"></script>
+        <jsp:include page="../../assets/head/head.jsp"></jsp:include>
+        <link rel="stylesheet" href="assets/css/main.css"/>
+        <script type="text/javascript" src="assets/js/view_password.js"></script>
 
     </head>
     <body>
         <!-- Navbar -->
-        <jsp:include page="../assets/header/header.jsp"></jsp:include>
+        <jsp:include page="../../assets/header/header.jsp"></jsp:include>
         <!-- End Navbar -->
 
         <div class="container p-5">
@@ -64,7 +64,7 @@
                             </form>
                             <!-- End Form -->
                             <br/>
-                            <p>Not registered yet? <a href="" class="text-decoration-none">Register</a></p>
+                            <p>Not registered yet? <a href="<%=request.getContextPath()%>/user_register" class="text-decoration-none">Register</a></p>
                         </div>
                     </div>
                 </div>
