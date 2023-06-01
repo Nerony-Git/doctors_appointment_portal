@@ -15,6 +15,14 @@
     color: #fb058a;
 }
 
+.dash a {
+    text-decoration: none;
+}
+
+.dash a:hover {
+    color: #fb058a;
+}
+
 /*
 !*--------------------------------------------------------------
   # Slider Section
@@ -802,4 +810,13 @@ section {
 .cta .cta-btn:hover {
     background: #fb058a;
     border: 2px solid #fb058a;
+}
+
+/*--------------------------------------------------------------
+# Breadcrumbs
+--------------------------------------------------------------*/
+.breadcrumbs {
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 5px;
 }
