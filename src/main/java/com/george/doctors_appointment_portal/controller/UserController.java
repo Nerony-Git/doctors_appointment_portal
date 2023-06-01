@@ -49,7 +49,7 @@ public class UserController extends HttpServlet {
                     userRegister(request, response);
                     break;
                 default:
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("pages/user/user_login.jsp");
                     dispatcher.forward(request, response);
                     break;
             }
