@@ -18,7 +18,7 @@
     <script type="text/javascript" src="assets/js/view_password.js"></script>
 
 </head>
-<body>
+<body style="min-height: 100vh; display: flex; flex-direction: column">
     <!-- ===== Header ===== -->
     <jsp:include page="../../assets/header/header.jsp"></jsp:include>
     <!-- ===== End Header ===== -->
