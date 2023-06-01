@@ -17,7 +17,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Enumeration;
 
-@WebServlet("/users")
+@WebServlet({"/user_login", "/user_logout", "/user_register"})
 public class UserController extends HttpServlet {
     private UserDao userDao;
 
@@ -31,7 +31,7 @@ public class UserController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getServletPath();
-
+        try {
             switch (action) {
                 case "/new_user":
                     new_user(request, response);
@@ -39,11 +39,23 @@ public class UserController extends HttpServlet {
                 case "/user_logout":
                     userLogout(request, response);
                     break;
+                case "/dashboard":
+                    userDashboard(request, response);
+                    break;
+                case "/user_login":
+                    userLogin(request, response);
+                    break;
+                case "/user_register":
+                    userRegister(request, response);
+                    break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
                     dispatcher.forward(request, response);
                     break;
             }
+        } catch (Exception ex) {
+            throw new ServletException(ex);
+        }
     }
 
     private void new_user(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -94,16 +106,16 @@ public class UserController extends HttpServlet {
         HttpSession session = request.getSession();
         session.removeAttribute("user");
         session.setAttribute("successMsg", "Successfully Logout");
-        response.sendRedirect("");
+        response.sendRedirect("pages/user/user_login.jsp");
     }
 
-    private void authenticate(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    private void authenticate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
         try {
             User user = userDao.validateUser(username, password);
-            String destPage = "pages/user_login.jsp";
+            String destPage = "pages/user/user_login.jsp";
 
             if (user != null) {
                 HttpSession session = request.getSession();
@@ -114,7 +126,7 @@ public class UserController extends HttpServlet {
                     Object attributeValue = session.getAttribute(attributeName);
                     System.out.println(attributeName + ": " + attributeValue);
                 }
-                destPage = "user/dashboard.jsp";
+                destPage = "pages/user/dashboard.jsp";
             }else {
                 String message = "Invalid username or password";
                 request.setAttribute("message", message);
@@ -126,5 +138,20 @@ public class UserController extends HttpServlet {
             throw new ServletException(ex);
         }
 
+    }
+
+    private void userDashboard(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/user/dashboard.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void userLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ServletException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/user/user_login.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void userRegister(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ServletException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/user/user_register.jsp");
+        dispatcher.forward(request, response);
     }
 }
