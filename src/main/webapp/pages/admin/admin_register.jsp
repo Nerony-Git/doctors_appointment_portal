@@ -82,7 +82,7 @@
                                 </form>
                                 <!-- End Form -->
                                 <br/>
-                                <p>Already have an account? <a href="" class="text-decoration-none">Login</a></p>
+                                <p>Already have an account? <a href="<%=request.getContextPath()%>/admin_login" class="text-decoration-none">Login</a></p>
                             </div>
                         </div>
                     </div>
