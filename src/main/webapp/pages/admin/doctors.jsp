@@ -13,12 +13,12 @@
     <head>
         <meta charset="ISO-8859-1">
         <title>DPA Portal - List of Doctors</title>
-        <jsp:include page="../assets/head/head.jsp"></jsp:include>
-        <link rel="stylesheet" href="../assets/css/main.css"/>
+        <jsp:include page="../../assets/head/head.jsp"></jsp:include>
+        <link rel="stylesheet" href="../../assets/css/main.css"/>
     </head>
     <body>
         <!-- Navbar -->
-        <jsp:include page="../assets/navbar/admin_navbar.jsp"></jsp:include>
+        <jsp:include page="../../assets/navbar/admin_navbar.jsp"></jsp:include>
         <!-- End Navbar -->
 
         <div class="container-fluid p-3">
