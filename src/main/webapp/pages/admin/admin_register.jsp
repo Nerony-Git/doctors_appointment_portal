@@ -56,6 +56,7 @@
                                         <span class="input-group-text" id="fName"><i class="fa fa-user"></i></span>
                                         <input type="text" name="firstName" class="form-control" placeholder="First Name" aria-label="First Name" aria-describedby="fName" required />
                                     </div>
+                                    <input type="hidden" name="userID" class="form-control" />
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="lName"><i class="fa fa-user"></i></span>
                                         <input type="text" name="lastName" class="form-control" placeholder="Last Name" aria-label="Last Name" aria-describedby="lName" required />
@@ -69,11 +70,19 @@
                                         <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="uName" required />
                                     </div>
                                     <div class="input-group mb-3">
+                                        <span class="input-group-text" id="uDob"><i class="fa-solid fa-calendar-days"></i></span>
+                                        <input type="date" name="dob" class="form-control" aria-label="Date of Birth" aria-describedby="uDob" required />
+                                    </div>
+                                    <div class="input-group mb-3">
                                         <span class="input-group-text" id="eMail"><i class="fa-solid fa-envelope"></i></span>
                                         <input type="email" name="userEmail" class="form-control" placeholder="Email Address" aria-label="Email Address" aria-describedby="eMail" required />
                                     </div>
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text" id="pass"><i class="fa-solid fa-lock-keyhole"></i></span>
+                                        <span class="input-group-text" id="uContact"><i class="fa-solid fa-phone"></i></span>
+                                        <input type="number" name="contact" maxlength="11" class="form-control" placeholder="Contact" aria-label="Phone Number" aria-describedby="uContact" required />
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="pass"><i class="fa-solid fa-lock"></i></span>
                                         <input type="text" name="password" id="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="pass" required />
                                         <i class=" view_password input-group-text bi bi-eye-slash" id="togglePassword"></i>
                                     </div>
