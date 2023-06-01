@@ -54,8 +54,8 @@
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="fName"><i class="fa fa-user"></i></span>
                                     <input type="text" name="firstName" class="form-control" placeholder="First Name" aria-label="First Name" aria-describedby="fName" required />
-                                    <input type="hidden" name="userID" class="form-control" />
                                 </div>
+                                <input type="hidden" name="userID" class="form-control" />
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="lName"><i class="fa fa-user"></i></span>
                                     <input type="text" name="lastName" class="form-control" placeholder="Last Name" aria-label="Last Name" aria-describedby="lName" required />
