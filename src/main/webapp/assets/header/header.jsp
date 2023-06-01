@@ -22,14 +22,14 @@
                 <li class="dropdown"><a href="#"><i class="fas fa-sign-in-alt"></i> <span> &nbsp; Logins</span> <i class="bi bi-chevron-down"></i> </a>
                     <ul>
                         <li><a class="nav-link" href="<%=request.getContextPath()%>/user_login"><i class="fas fa-sign-in-alt"></i> &nbsp; Customer Login </a> </li>
-                        <li><a class="nav-link" href=""><i class="fas fa-sign-in-alt"></i> &nbsp; Doctor Login </a> </li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/doctor_login"><i class="fas fa-sign-in-alt"></i> &nbsp; Doctor Login </a> </li>
                         <li><a class="nav-link" href=""><i class="fas fa-sign-in-alt"></i> &nbsp; Admin Login </a> </li>
                     </ul>
                 </li>
                 <li class="dropdown"><a href="#"><i class="fa-solid fa-address-book"></i> <span> &nbsp; Signup </span> <i class="bi bi-chevron-down"></i> </a>
                     <ul>
                         <li><a class="nav-link" href="<%=request.getContextPath()%>/user_register"><i class="fa-solid fa-user-plus"></i> &nbsp; Customer Signup </a> </li>
-                        <li><a class="nav-link" href=""><i class="fa-solid fa-user-doctor"></i> &nbsp; Doctor Signup </a> </li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/doctor_login"><i class="fa-solid fa-user-doctor"></i> &nbsp; Doctor Signup </a> </li>
                         <li><a class="nav-link" href=""><i class="fa-solid fa-user-gear"></i> &nbsp; Admin Signup </a> </li>
                     </ul>
                 </li>
