@@ -66,7 +66,7 @@
                                 </form>
                                 <!-- End Form -->
                                 <br/>
-                                <p>Not registered yet? <a href="" class="text-decoration-none">Register</a></p>
+                                <p>Not registered yet? <a href="<%=request.getContextPath()%>/admin_register" class="text-decoration-none">Register</a></p>
                             </div>
                         </div>
                     </div>
