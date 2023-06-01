@@ -15,38 +15,60 @@
     <meta charset="ISO-8859-1">
     <title>DPA Portal - Dashboard</title>
     <jsp:include page="../../assets/head/head.jsp"></jsp:include>
-    <link rel="stylesheet" href="../../assets/css/main.css"/>
+    <link rel="stylesheet" href="assets/css/main.css"/>
 
 </head>
-<body>
+<body style="min-height: 100vh; display: flex; flex-direction: column">
+    <c:if test="${empty user}">
+        <c:redirect url="/user_login"></c:redirect>
+    </c:if>
+
     <!-- ===== Header ===== -->
     <jsp:include page="../../assets/navbar/user_navbar.jsp"></jsp:include>
     <!-- ===== End Header ===== -->
 
     <!-- ===== Main Body ===== -->
     <main id="main">
-        <div class="container p-5">
-            <p class="text-center fs-3">Dashboard</p>
-
+        <div class="container">
             <div class="row">
+                <div class="breadcrumbs">
+                    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item active" aria-current="page"><i class="fa-solid fa-gauge"></i> &nbsp;Home</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="container p-5">
+            <%--<p class="text-center fs-3">Dashboard</p>--%>
+            <div class="row dash">
                 <div class="col-md-4 offset-md-2">
-                    <div class="card register_card">
-                        <div class="card-body text-center">
-                            <i class="fa-solid fa-calendar-plus"></i>
-                            <br/>
-                            <p class="fs-4 text-center"> Book an Appointment</p>
+                    <a href="<%=request.getContextPath()%>/user_dashboard">
+                        <div class="card register_card">
+                            <div class="card-body text-center">
+                                <br/>
+                                <i class="fa-solid fa-calendar-plus fa-3x"></i>
+                                <br/>
+                                <br/>
+                                <p class="fs-4 text-center"> Book <br/> Appointment</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
                 <div class="col-md-4">
-                    <div class="card register_card">
-                        <div class="card-body text-center">
-                            <i class="fa-solid fa-calendar-check"></i>
-                            <br/>
-                            <p class="fs-4 text-center"> My Appointments</p>
+                    <a href="">
+                        <div class="card register_card">
+                            <div class="card-body text-center">
+                                <br/>
+                                <i class="fa-solid fa-calendar-check fa-3x"></i>
+                                <br/>
+                                <br/>
+                                <p class="fs-4 text-center"> My <br/> Appointments</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
