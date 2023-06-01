@@ -10,19 +10,21 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="ISO-8859-1">
-        <title> DPA Portal - Admin Register</title>
-        <jsp:include page="../../assets/head/head.jsp"></jsp:include>
-        <link rel="stylesheet" href="assets/css/main.css"/>
-        <script type="text/javascript" src="assets/js/view_password.js"></script>
-    </head>
+<head>
+    <meta charset="ISO-8859-1">
+    <title> DPA Portal - Admin Register</title>
+    <jsp:include page="../../assets/head/head.jsp"></jsp:include>
+    <link rel="stylesheet" href="assets/css/main.css"/>
+    <script type="text/javascript" src="assets/js/view_password.js"></script>
+</head>
 
-    <body>
-        <!-- Navbar -->
-        <jsp:include page="../../assets/header/header.jsp"></jsp:include>
-        <!-- End Navbar -->
+<body style="min-height: 100vh; display: flex; flex-direction: column">
+    <!-- ===== Header ===== -->
+    <jsp:include page="../../assets/header/header.jsp"></jsp:include>
+    <!-- ===== End Header ===== -->
 
+    <!-- ===== Main Body ===== -->
+    <main id="main">
         <div class="container p-5">
             <div class="row">
                 <div class="col-md-6 offset-md-3">
@@ -79,14 +81,14 @@
                                     <input type="number" name="contact" maxlength="11" class="form-control" placeholder="Contact" aria-label="Phone Number" aria-describedby="uContact" required />
                                 </div>
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text" id="uSpeciality"><i class="fa-solid fa-books-medical"></i></span>
+                                    <span class="input-group-text" id="uSpeciality"><i class="fa-solid fa-stethoscope"></i></span>
                                     <select name="speciality" class="form-control" required>
                                         <option selected="selected" disabled="disabled">---Select Speciality---</option>
                                         <option value="<c:out value='${todo.todoDate}' />"><c:out value='${todo.todoDate}' /></option>
                                     </select>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text" id="uQualification"></span>
+                                    <span class="input-group-text" id="uQualification"><i class="fa-solid fa-user-graduate"></i></span>
                                     <input type="text" name="qualification" class="form-control" placeholder="Qualification" aria-label="Qualification" aria-describedby="uQualification" required />
                                 </div>
                                 <div class="input-group mb-3">
@@ -105,5 +107,15 @@
                 </div>
             </div>
         </div>
-    </body>
+    </main>
+    <!-- ===== End Main Body ===== -->
+
+
+    <!-- ===== Footer ===== -->
+    <jsp:include page="../../assets/footer/footer.jsp"></jsp:include>
+    <!-- ===== End Footer ===== -->
+
+    <script type="text/javascript" src="assets/js/main.js"></script>
+
+</body>
 </html>
