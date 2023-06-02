@@ -17,7 +17,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Enumeration;
 
-@WebServlet({"/user_login", "/user_logout", "/user_register", "/user_authenticate", "/user_dashboard", "/book_appointment", "/user_edit"})
+@WebServlet({"/user_login", "/user_logout", "/user_register", "/user_authenticate", "/user_dashboard", "/book_appointment", "/user_edit", "/user_update"})
 public class UserController extends HttpServlet {
     private UserDao userDao;
 
@@ -176,13 +176,14 @@ public class UserController extends HttpServlet {
         String lastName = request.getParameter("lastName");
         String otherName = request.getParameter("otherName");
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate dob = LocalDate.parse(request.getParameter("dob"));
+        LocalDate dob = LocalDate.parse(request.getParameter("dob"), df);
         String contact = request.getParameter("contact");
         String address = request.getParameter("address");
         String postalAddress = request.getParameter("postalAddress");
         String email = request.getParameter("email");
 
         User updateUser = new User(userID, firstName, lastName, otherName, dob, contact, address, postalAddress, email);
+        System.out.println(updateUser.getUserID());
         boolean u = userDao.updateUser(updateUser);
         HttpSession session = request.getSession();
 
