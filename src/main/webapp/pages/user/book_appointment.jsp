@@ -58,7 +58,7 @@
                                 <c:remove var="errorMsg" scope="session" />
                             </c:if>
 
-                            <form class="row g-3" action="" method="post">
+                            <form class="row g-3" action="<%=request.getContextPath()%>/book" method="post">
                                 <input type="hidden" name="userID" value="${user.userID}">
 
                                 <div class="col-md-6 input-group">
