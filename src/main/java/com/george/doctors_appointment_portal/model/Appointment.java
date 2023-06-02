@@ -12,6 +12,16 @@ public class Appointment {
     private String status;
     private String response;
 
+    public Appointment(String userID, String specialityID, LocalDate appointmentDate, String description, String status) {
+        super();
+        this.userID = userID;
+        this.specialityID = specialityID;
+        this.appointmentDate = appointmentDate;
+        this.description = description;
+        this.status = status;
+
+    }
+
     public Long getAppointmentID() {
         return appointmentID;
     }
