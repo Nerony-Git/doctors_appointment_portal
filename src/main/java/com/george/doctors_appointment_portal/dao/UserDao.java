@@ -10,8 +10,15 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class UserDao {
+
+    private static final String INSERT_USERS_SQL = "INSERT INTO users (userID, firstName, lastName, otherName, username, dob, contact, address, postalAddress, email, password) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+    private static final String LOGIN_SQL = "SELECT * FROM users WHERE username = ? and password = ?";
+    private static final String OLD_PASSWORD_SQL = "SELECT * FROM users WHERE userID = ? and password = ?";
+    private static final String UPDATE_PASSWORD_SQL = "UPDATE users SET password = ? WHERE userID = ?";
+    private static final String UPDATE_USER_SQL = "UPDATE users SET firstName = ?, lastName = ?, otherName = ?, dob = ?, contact = ?, address = ?, postalAddress = ?, email = ? WHERE userID =?";
+
     public int registerUser(User users) throws ClassNotFoundException {
-        String INSERT_USERS_SQL = "INSERT INTO users (userID, firstName, lastName, otherName, username, dob, contact, address, postalAddress, email, password) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+
         int result = 0;
         try (Connection connection = JDBCUtils.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
@@ -37,7 +44,6 @@ public class UserDao {
 
     public User validateUser(String username, String password) throws SQLException, ClassNotFoundException{
         User user = null;
-        String LOGIN_SQL = "SELECT * FROM users WHERE username = ? and password =?";
 
         Class.forName("org.postgresql.ds.PGConnectionPoolDataSource");
         try (Connection connection = JDBCUtils.getConnection();
@@ -65,4 +71,25 @@ public class UserDao {
         }
         return user;
     }
+
+    public boolean validateUserOldPassword(String userID, String oldPassword) throws SQLException {
+        boolean o = false;
+
+        try (Connection connection = JDBCUtils.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(OLD_PASSWORD_SQL)) {
+                preparedStatement.setString(1, userID);
+                preparedStatement.setString(2, oldPassword);
+
+                System.out.println(preparedStatement);
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                while (resultSet.next()) {
+                    o = true;
+                }
+        } catch (SQLException e) {
+            JDBCUtils.printSQLException(e);
+        }
+        return o;
+    }
+
 }
