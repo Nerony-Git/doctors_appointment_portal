@@ -95,7 +95,7 @@
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text" id="uContact"><i class="fa-solid fa-phone"></i></span>
-              <input type="number" name="contact" maxlength="11" class="form-control" placeholder="Contact" aria-label="Phone Number" aria-describedby="uContact" readonly value="<c:out value="${user.contact}" />" />
+              <input type="text" name="contact" maxlength="11" class="form-control" placeholder="Contact" aria-label="Phone Number" aria-describedby="uContact" readonly value="<c:out value="${user.contact}" />" />
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text" id="uAddress"><i class="fa-solid fa-location-dot"></i></span>
