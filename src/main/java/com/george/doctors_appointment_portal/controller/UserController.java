@@ -21,7 +21,7 @@ import java.util.Enumeration;
         {
                 "/user_login", "/user_logout", "/user_register", "/user_authenticate",
                 "/user_dashboard", "/book_appointment", "/user_edit", "/user_update",
-                "/user_password", "/user_change"
+                "/user_password", "/user_change", "/user_view"
         }
 )
 public class UserController extends HttpServlet {
@@ -71,6 +71,9 @@ public class UserController extends HttpServlet {
                     break;
                 case "/user_change":
                     userChangePass(request, response);
+                    break;
+                case "/user_view":
+                    viewUser(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/user/user_login.jsp");
@@ -178,6 +181,11 @@ public class UserController extends HttpServlet {
 
     private void editUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/user/edit_user.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void viewUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/user/user_view.jsp");
         dispatcher.forward(request, response);
     }
 
