@@ -57,6 +57,9 @@ public class UserController extends HttpServlet {
                 case "/user_edit":
                     editUser(request, response);
                     break;
+                case "/user_update":
+                    updateUser(request, response);
+                    break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/user/user_login.jsp");
                     dispatcher.forward(request, response);
@@ -147,24 +150,42 @@ public class UserController extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    private void userLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ServletException {
+    private void userLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/user/user_login.jsp");
         dispatcher.forward(request, response);
     }
 
-    private void userRegister(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ServletException {
+    private void userRegister(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/user/user_register.jsp");
         dispatcher.forward(request, response);
     }
 
-    private void userAppointment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ServletException {
+    private void userAppointment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/user/book_appointment.jsp");
         dispatcher.forward(request, response);
     }
 
-    private void editUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ServletException {
+    private void editUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/user/edit_user.jsp");
         dispatcher.forward(request, response);
+    }
+
+    private void updateUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        String userID = request.getParameter("userID");
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String otherName = request.getParameter("otherName");
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate dob = LocalDate.parse(request.getParameter("dob"));
+        String contact = request.getParameter("contact");
+        String address = request.getParameter("address");
+        String postalAddress = request.getParameter("postalAddress");
+        String email = request.getParameter("email");
+
+        User updateUser = new User(userID, firstName, lastName, otherName, dob, contact, address, postalAddress, email);
+        userDao.updateUser(updateUser);
+
+        response.sendRedirect("user_dashboard");
     }
 
 }
