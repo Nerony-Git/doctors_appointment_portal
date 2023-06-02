@@ -19,6 +19,9 @@
 
 </head>
 <body>
+    <c:if test="${empty user}">
+        <c:redirect url="/user_login"></c:redirect>
+    </c:if>
     <!-- ===== Header ===== -->
     <jsp:include page="../../assets/navbar/user_navbar.jsp"></jsp:include>
     <!-- ===== End Header ===== -->
@@ -65,8 +68,13 @@
                                 </div>
                                 <div class="col-md-6 input-group">
                                     <%--<label class="form-label">Full Name</label>--%>
-                                    <span class="input-group-text" id="fullName"><i class="fa-solid fa-user-tag"></i></span>
-                                    <input type="text" name="fullname" class="form-control" aria-label="Full Name" aria-describedby="fullName" readonly />
+                                    <span class="input-group-text" id="uID"><i class="fa-solid fa-user-tag"></i></span>
+                                    <input type="text" name="userID" class="form-control" aria-label="User ID" aria-describedby="uID" readonly value="<c:out value="${user.userID}" />" />
+                                </div>
+                                <div class="col-md-6 input-group">
+                                    <%--<label class="form-label">Full Name</label>--%>
+                                    <span class="input-group-text" id="fullName"><i class="fa-solid fa-user"></i></span>
+                                    <input type="text" name="fullname" class="form-control" aria-label="Full Name" aria-describedby="fullName" readonly value="<c:out value="${user.firstName} ${user.otherName} ${user.lastName}" />" />
                                 </div>
                                 <div class="col-md-6 input-group">
                                     <%--<label class="form-label">Speciality</label>--%>
