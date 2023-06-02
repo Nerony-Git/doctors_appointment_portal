@@ -3,8 +3,7 @@ package com.george.doctors_appointment_portal.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class User implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class User {
     private String userID;
     private String firstName;
     private String lastName;
@@ -16,6 +15,38 @@ public class User implements Serializable {
     private String postalAddress;
     private String email;
     private String password;
+
+    public User() {
+
+    }
+
+    public User(String userID, String firstName, String lastName, String otherName, LocalDate dob, String contact, String address, String postalAddress, String email) {
+        super();
+        this.userID = userID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.otherName = otherName;
+        this.dob = dob;
+        this.contact = contact;
+        this.address = address;
+        this.postalAddress = postalAddress;
+        this.email = email;
+    }
+
+    public User(String userID, String firstName, String lastName, String otherName, String username, LocalDate dob, String contact, String address, String postalAddress, String email, String password) {
+        super();
+        this.userID = userID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.otherName = otherName;
+        this.username = username;
+        this.dob = dob;
+        this.contact = contact;
+        this.address = address;
+        this.postalAddress = postalAddress;
+        this.email = email;
+        this.password = password;
+    }
 
     public String getFirstName() {
         return firstName;
