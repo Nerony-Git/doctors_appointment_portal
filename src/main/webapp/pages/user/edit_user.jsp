@@ -34,7 +34,7 @@
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><i class="fa-solid fa-gauge"></i> &nbsp;<a href="<%=request.getContextPath()%>/user_dashboard">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">View Profile</li>
+            <li class="breadcrumb-item active" aria-current="page">Edit Profile</li>
           </ol>
         </nav>
       </div>
