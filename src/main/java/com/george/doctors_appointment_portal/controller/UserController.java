@@ -1,6 +1,8 @@
 package com.george.doctors_appointment_portal.controller;
 
+import com.george.doctors_appointment_portal.dao.AppointmentDao;
 import com.george.doctors_appointment_portal.dao.UserDao;
+import com.george.doctors_appointment_portal.model.Appointment;
 import com.george.doctors_appointment_portal.model.User;
 import com.george.doctors_appointment_portal.dao.SpecialityDao;
 import com.george.doctors_appointment_portal.model.Speciality;
@@ -24,12 +26,14 @@ import java.util.List;
         {
                 "/user_login", "/user_logout", "/user_register", "/user_authenticate",
                 "/user_dashboard", "/book_appointment", "/user_edit", "/user_update",
-                "/user_password", "/user_change", "/user_view"
+                "/user_password", "/user_change", "/user_view", "/book"
         }
 )
 public class UserController extends HttpServlet {
     private UserDao userDao;
     private SpecialityDao specialityDao = new SpecialityDao();
+    private AppointmentDao appointmentDao = new AppointmentDao();
+    private static final DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public void init() {
         userDao = new UserDao();
@@ -79,6 +83,9 @@ public class UserController extends HttpServlet {
                 case "/user_view":
                     viewUser(request, response);
                     break;
+                case "/book":
+                    addAppointment(request, response);
+                    break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/user/user_login.jsp");
                     dispatcher.forward(request, response);
@@ -95,7 +102,6 @@ public class UserController extends HttpServlet {
         String lastName = request.getParameter("lastName");
         String otherName = request.getParameter("otherName");
         String username = request.getParameter("username");
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate dob = LocalDate.parse(request.getParameter("dob"), df);
         String contact = request.getParameter("contact");
         String address = request.getParameter("address");
@@ -204,7 +210,6 @@ public class UserController extends HttpServlet {
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String otherName = request.getParameter("otherName");
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate dob = LocalDate.parse(request.getParameter("dob"), df);
         String contact = request.getParameter("contact");
         String address = request.getParameter("address");
@@ -264,5 +269,30 @@ public class UserController extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    private void addAppointment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String userID = request.getParameter("userID");
+        String specialityID = request.getParameter("specialityID");
+        LocalDate appointmentDate = LocalDate.parse(request.getParameter("appointmentDate"), df);
+        String description = request.getParameter("description");
+        String status = request.getParameter("status");
+
+        Appointment appointment = new Appointment(userID, specialityID, appointmentDate, description, status);
+
+        HttpSession session = request.getSession();
+        try {
+            boolean a = appointmentDao.insertAppointment(appointment);
+
+            if (a) {
+                session.setAttribute("successMsg", "Appointment booked successfully.");
+                response.sendRedirect("book_appointment");
+            } else {
+                session.setAttribute("errorMsg", "Failed to book Appointment.");
+                response.sendRedirect("book_appointment");
+            }
+        } catch (SQLException e){
+            throw new ServletException(e);
+        }
+
+    }
 
 }
