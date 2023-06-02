@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AppointmentDao {
-    private static final String INSERT_APPOINTMENT_SQL = "INSERT INTO appointment (userid, speciality_id, doctor_id, appointment_date, description, status, response) VALUES (?,?,?,?,?,?,?)";
+    private static final String INSERT_APPOINTMENT_SQL = "INSERT INTO appointment (userid, speciality_id, appointment_date, description, status) VALUES (?,?,?,?,?)";
     private static final String SELECT_ALL_APPOINTMENT_SQL = "SELECT * FROM appointment";
     private static final String SELECT_USER_APPOINTMENT_SQL = "SELECT * FROM appointment WHERE userid = ?";
     private static final String SELECT_DOCTOR_APPOINTMENT_SQL = "SELECT * FROM appointment WHERE doctor_id = ?";
@@ -27,11 +27,9 @@ public class AppointmentDao {
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_APPOINTMENT_SQL)) {
             preparedStatement.setString(1, appointment.getUserID());
             preparedStatement.setString(2, appointment.getSpecialityID());
-            preparedStatement.setString(3, appointment.getDoctorID());
-            preparedStatement.setDate(4, JDBCUtils.getSQLDate(appointment.getAppointmentDate()));
-            preparedStatement.setString(5, appointment.getDescription());
-            preparedStatement.setString(6, appointment.getStatus());
-            preparedStatement.setString(7, appointment.getResponse());
+            preparedStatement.setDate(3, JDBCUtils.getSQLDate(appointment.getAppointmentDate()));
+            preparedStatement.setString(4, appointment.getDescription());
+            preparedStatement.setString(5, appointment.getStatus());
 
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
