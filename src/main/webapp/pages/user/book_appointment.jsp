@@ -79,9 +79,12 @@
                                 <div class="col-md-6 input-group">
                                     <%--<label class="form-label">Speciality</label>--%>
                                     <span class="input-group-text" id="uSpeciality"><i class="fa-solid fa-stethoscope"></i></span>
-                                    <select name="specialityID" class="form-control" required>
+                                    <select name="specialityID" class="form-select" required>
                                         <option selected="selected" disabled="disabled">---Select Speciality---</option>
-                                        <option value="<c:out value='${todo.todoDate}' />"><c:out value='${todo.todoDate}' /></option>
+                                        <!-- for (Speciality speciality: specialities) { -->
+                                        <c:forEach var="speciality" items="${listSpeciality}">
+                                            <option value="<c:out value="${speciality.sID}"/>"><c:out value="${speciality.specialityName}"/></option>
+                                        </c:forEach>
                                     </select>
                                 </div>
                                 <div class="col-md-6 input-group">
