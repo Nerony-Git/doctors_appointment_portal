@@ -86,8 +86,6 @@ public class UserDao {
                 while (resultSet.next()) {
                     o = true;
                 }
-        } catch (SQLException e) {
-            JDBCUtils.printSQLException(e);
         }
         return o;
     }
@@ -104,14 +102,12 @@ public class UserDao {
                 if (resultSet.next()){
                     n = true;
                 }
-        } catch (SQLException e) {
-            JDBCUtils.printSQLException(e);
         }
         return n;
     }
 
     public boolean updateUser(User user) throws SQLException {
-        boolean u = false;
+        boolean u;
 
         try (Connection connection = JDBCUtils.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER_SQL)){
