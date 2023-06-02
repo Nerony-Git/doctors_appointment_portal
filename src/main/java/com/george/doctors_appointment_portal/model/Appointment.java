@@ -10,6 +10,7 @@ public class Appointment {
     private LocalDate appointmentDate;
     private String description;
     private String status;
+    private String response;
 
     public Long getAppointmentID() {
         return appointmentID;
@@ -65,5 +66,13 @@ public class Appointment {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getResponse() {
+        return response;
+    }
+
+    public void setResponse(String response) {
+        this.response = response;
     }
 }
