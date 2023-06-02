@@ -65,11 +65,12 @@
             <!-- End Error Message -->
 
             <!-- Form -->
-            <form action="" method="post">
+            <form action="<%=request.getContextPath()%>/user_update" method="post">
               <div class="input-group mb-3">
                 <span class="input-group-text" id="uID"><i class="fa-solid fa-user-tag"></i></span>
-                <input type="text" name="userID" class="form-control" aria-label="User ID" aria-describedby="uID" readonly value="<c:out value="${user.userID}" />" />
+                <input type="text" class="form-control" aria-label="User ID" aria-describedby="uID" readonly value="<c:out value="${user.userID}" />" />
               </div>
+              <input type="hidden" name="userID" value="<c:out value="${user.userID}"/>">
               <div class="input-group mb-3">
                 <span class="input-group-text" id="fName"><i class="fa fa-user"></i></span>
                 <input type="text" name="firstName" class="form-control" placeholder="First Name" aria-label="First Name" aria-describedby="fName" required value="<c:out value="${user.firstName}" />"/>
