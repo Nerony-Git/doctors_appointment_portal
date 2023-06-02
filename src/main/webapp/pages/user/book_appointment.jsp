@@ -64,12 +64,12 @@
                                 <div class="col-md-6 input-group">
                                     <%--<label class="form-label">Appointment ID</label>--%>
                                     <span class="input-group-text" id="appointID"><i class="fa-solid fa-tags"></i></span>
-                                    <input type="text" name="appointmentID" class="form-control" aria-label="Appointment ID" aria-describedby="appointID" readonly />
+                                    <input type="text" name="appointmentID" class="form-control" aria-label="Appointment ID" aria-describedby="appointID" readonly value="DAPT/000" />
                                 </div>
                                 <div class="col-md-6 input-group">
                                     <%--<label class="form-label">Full Name</label>--%>
                                     <span class="input-group-text" id="uID"><i class="fa-solid fa-user-tag"></i></span>
-                                    <input type="text" name="userID" class="form-control" aria-label="User ID" aria-describedby="uID" readonly value="<c:out value="${user.userID}" />" />
+                                    <input type="text" class="form-control" aria-label="User ID" aria-describedby="uID" readonly value="<c:out value="${user.userID}" />" />
                                 </div>
                                 <div class="col-md-6 input-group">
                                     <%--<label class="form-label">Full Name</label>--%>
