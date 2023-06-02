@@ -92,4 +92,22 @@ public class UserDao {
         return o;
     }
 
+    public boolean changeUserPassword(String userID, String newPassword) throws SQLException {
+        boolean n = false;
+
+        try (Connection connection = JDBCUtils.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PASSWORD_SQL)){
+                preparedStatement.setString(1, newPassword);
+                preparedStatement.setString(2, userID);
+
+                ResultSet resultSet = preparedStatement.executeQuery();
+                if (resultSet.next()){
+                    n = true;
+                }
+        } catch (SQLException e) {
+            JDBCUtils.printSQLException(e);
+        }
+        return n;
+    }
+
 }
