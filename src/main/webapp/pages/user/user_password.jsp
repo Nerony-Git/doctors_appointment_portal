@@ -66,7 +66,7 @@
                         <!-- End Error Message -->
 
                         <!-- Form -->
-                        <form action="<%=request.getContextPath()%>/" method="post">
+                        <form action="<%=request.getContextPath()%>/user_change" method="post">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="uID"><i class="fa-solid fa-user-tag"></i></span>
                                 <input type="text" class="form-control" aria-label="User ID" aria-describedby="uID" readonly value="<c:out value="${user.userID}" />" />
