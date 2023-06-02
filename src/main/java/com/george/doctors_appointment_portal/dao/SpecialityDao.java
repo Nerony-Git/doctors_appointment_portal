@@ -13,7 +13,19 @@ import java.util.List;
 public class SpecialityDao {
 
     private static final String SELECT_ALL_SPECIALITY = "SELECT * FROM speciality";
+    private static final String INSERT_SPECIALITY = "INSERT INTO speciality (sid, speciality_name) VALUES (?, ?)";
 
+    public void insertSpeciality(Speciality speciality) throws SQLException {
+        try (Connection connection = JDBCUtils.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SPECIALITY)){
+            preparedStatement.setString(1, speciality.getsID());
+            preparedStatement.setString(2, speciality.getSpecialityName());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException exception) {
+            JDBCUtils.printSQLException(exception);
+        }
+    }
 
     public List<Speciality> getAllSpeciality() {
 
