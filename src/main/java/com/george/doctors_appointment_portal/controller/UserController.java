@@ -183,9 +183,18 @@ public class UserController extends HttpServlet {
         String email = request.getParameter("email");
 
         User updateUser = new User(userID, firstName, lastName, otherName, dob, contact, address, postalAddress, email);
-        userDao.updateUser(updateUser);
+        boolean u = userDao.updateUser(updateUser);
+        HttpSession session = request.getSession();
 
-        response.sendRedirect("user_dashboard");
+        if (u == true) {
+            User updateUserObject = userDao.getUserByID(userID);
+            session.setAttribute("successMsg", "Profile details updated successfully");
+            session.setAttribute("user", updateUserObject);
+            response.sendRedirect("user_edit");
+        } else {
+            session.setAttribute("errorMsg", "Profile details failed to update");
+            response.sendRedirect("user_edit");
+        }
     }
 
 }
