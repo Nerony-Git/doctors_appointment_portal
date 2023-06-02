@@ -2,6 +2,8 @@ package com.george.doctors_appointment_portal.controller;
 
 import com.george.doctors_appointment_portal.dao.UserDao;
 import com.george.doctors_appointment_portal.model.User;
+import com.george.doctors_appointment_portal.dao.SpecialityDao;
+import com.george.doctors_appointment_portal.model.Speciality;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,6 +18,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Enumeration;
+import java.util.List;
 
 @WebServlet(
         {
@@ -26,6 +29,7 @@ import java.util.Enumeration;
 )
 public class UserController extends HttpServlet {
     private UserDao userDao;
+    private SpecialityDao specialityDao = new SpecialityDao();
 
     public void init() {
         userDao = new UserDao();
@@ -175,8 +179,9 @@ public class UserController extends HttpServlet {
     }
 
     private void userAppointment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/user/book_appointment.jsp");
-        dispatcher.forward(request, response);
+        /*RequestDispatcher dispatcher = request.getRequestDispatcher("pages/user/book_appointment.jsp");
+        dispatcher.forward(request, response);*/
+        listSpeciality(request, response);
     }
 
     private void editUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -251,5 +256,13 @@ public class UserController extends HttpServlet {
             ex.printStackTrace();
         }
     }
+
+    private void listSpeciality(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Speciality> listSpeciality = specialityDao.getAllSpeciality();
+        request.setAttribute("listSpeciality", listSpeciality);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/user/book_appointment.jsp");
+        dispatcher.forward(request, response);
+    }
+
 
 }
