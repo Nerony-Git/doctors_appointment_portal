@@ -17,7 +17,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Enumeration;
 
-@WebServlet({"/user_login", "/user_logout", "/user_register", "/user_authenticate", "/user_dashboard", "/book_appointment", "/user_edit", "/user_update", "/user_password"})
+@WebServlet(
+        {
+                "/user_login", "/user_logout", "/user_register", "/user_authenticate",
+                "/user_dashboard", "/book_appointment", "/user_edit", "/user_update",
+                "/user_password", "/user_change"
+        }
+)
 public class UserController extends HttpServlet {
     private UserDao userDao;
 
@@ -62,6 +68,9 @@ public class UserController extends HttpServlet {
                     break;
                 case "/user_password":
                     userPassword(request, response);
+                    break;
+                case "/user_change":
+                    userChangePass(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/user/user_login.jsp");
@@ -120,8 +129,7 @@ public class UserController extends HttpServlet {
         HttpSession session = request.getSession();
         session.removeAttribute("user");
         session.setAttribute("successMsg", "Successfully Logout");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/user_login");
-        dispatcher.forward(request, response);
+        response.sendRedirect("user_login");
     }
 
     private void userAuthenticate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -203,6 +211,36 @@ public class UserController extends HttpServlet {
         } else {
             session.setAttribute("errorMsg", "Profile details failed to update");
             response.sendRedirect("user_edit");
+        }
+    }
+
+    private void userChangePass(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        String userID = request.getParameter("userID");
+        String newPassword = request.getParameter("password");
+        String oldPassword = request.getParameter("password2");
+
+        try {
+            HttpSession session = request.getSession();
+
+            if (userDao.validateUserOldPassword(userID, oldPassword)) {
+
+                if (userDao.changeUserPassword(userID, newPassword)) {
+
+                    session.setAttribute("successMsg", "Password successfully changed.");
+                    session.removeAttribute("user");
+                    response.sendRedirect("user_login");
+
+                } else {
+                    session.setAttribute("errorMsg", "Password change failed.");
+                    response.sendRedirect("user_password");
+                }
+
+            } else {
+                session.setAttribute("errorMsg", "Previous password does not match.");
+                response.sendRedirect("user_password");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
