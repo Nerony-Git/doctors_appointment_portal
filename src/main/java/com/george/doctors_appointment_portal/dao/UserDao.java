@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class UserDao {
     public int registerUser(User users) throws ClassNotFoundException {
@@ -48,8 +49,16 @@ public class UserDao {
                 ResultSet rs = preparedStatement.executeQuery();
                 if (rs.next()) {
                     user = new User();
+                    user.setUserID(rs.getString("userID"));
+                    user.setFirstName(rs.getString("firstName"));
+                    user.setLastName(rs.getString("lastName"));
+                    user.setOtherName(rs.getString("otherName"));
                     user.setUsername(rs.getString("username"));
-                    user.setFirstName(rs.getString("first_name"));
+                    user.setDob(rs.getDate("dob").toLocalDate());
+                    user.setContact(rs.getString("contact"));
+                    user.setAddress(rs.getString("address"));
+                    user.setPostalAddress(rs.getString("postalAddress"));
+                    user.setEmail(rs.getString("email"));
                 }
             } catch (SQLException e) {
                 JDBCUtils.printSQLException(e);
