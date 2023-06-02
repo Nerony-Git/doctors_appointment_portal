@@ -16,6 +16,7 @@ public class UserDao {
     private static final String OLD_PASSWORD_SQL = "SELECT * FROM users WHERE userID = ? and password = ?";
     private static final String UPDATE_PASSWORD_SQL = "UPDATE users SET password = ? WHERE userID = ?";
     private static final String UPDATE_USER_SQL = "UPDATE users SET firstName = ?, lastName = ?, otherName = ?, dob = ?, contact = ?, address = ?, postalAddress = ?, email = ? WHERE userID =?";
+    private static final String USER_BY_ID = "SELECT * FROM users WHERE userID = ?";
 
     public int registerUser(User users) throws ClassNotFoundException {
 
@@ -123,6 +124,34 @@ public class UserDao {
             u = preparedStatement.executeUpdate() > 0;
         }
         return u;
+    }
+
+    public User getUserByID(String userID) throws SQLException {
+        User user = null;
+
+        try (Connection connection = JDBCUtils.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(USER_BY_ID)){
+            preparedStatement.setString(1, userID);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                user = new User();
+
+                user.setUserID(resultSet.getString("userID"));
+                user.setFirstName(resultSet.getString("firstName"));
+                user.setLastName(resultSet.getString("lastName"));
+                user.setOtherName(resultSet.getString("otherName"));
+                user.setUsername(resultSet.getString("username"));
+                user.setDob(resultSet.getDate("dob").toLocalDate());
+                user.setContact(resultSet.getString("contact"));
+                user.setAddress(resultSet.getString("address"));
+                user.setPostalAddress(resultSet.getString("postalAddress"));
+                user.setEmail(resultSet.getString("email"));
+
+            }
+        }
+        return user;
     }
 
 }
