@@ -4,6 +4,12 @@ public class Speciality {
     private String sID;
     private String specialityName;
 
+    public Speciality(String sID, String specialityName) {
+        super();
+        this.sID = sID;
+        this.specialityName = specialityName;
+    }
+
     public String getsID() {
         return sID;
     }
