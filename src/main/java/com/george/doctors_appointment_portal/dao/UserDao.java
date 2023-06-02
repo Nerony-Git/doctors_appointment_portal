@@ -99,10 +99,10 @@ public class UserDao {
                 preparedStatement.setString(1, newPassword);
                 preparedStatement.setString(2, userID);
 
-                ResultSet resultSet = preparedStatement.executeQuery();
-                if (resultSet.next()){
-                    n = true;
-                }
+                preparedStatement.executeUpdate();
+                n = true;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return n;
     }
