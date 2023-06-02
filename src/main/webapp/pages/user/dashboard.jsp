@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="assets/css/main.css"/>
 
 </head>
-<body style="min-height: 100vh; display: flex; flex-direction: column">
+<body style="min-height: 100vh; display: flex; flex-direction: column" class="appoint">
     <c:if test="${empty user}">
         <c:redirect url="/user_login"></c:redirect>
     </c:if>
@@ -44,7 +44,7 @@
             <%--<p class="text-center fs-3">Dashboard</p>--%>
             <div class="row dash">
                 <div class="col-md-4 offset-md-2">
-                    <a href="<%=request.getContextPath()%>/user_dashboard">
+                    <a href="<%=request.getContextPath()%>/book_appointment">
                         <div class="card register_card">
                             <div class="card-body text-center">
                                 <br/>
