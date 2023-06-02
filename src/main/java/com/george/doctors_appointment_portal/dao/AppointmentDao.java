@@ -12,17 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AppointmentDao {
-    private static final String INSERT_APPOINTMENT_SQL = "INSERT INTO appointment (userid, speciality_id, appointment_date, description, status) VALUES (?,?,?,?,?)";
-    private static final String SELECT_ALL_APPOINTMENT_SQL = "SELECT * FROM appointment";
-    private static final String SELECT_USER_APPOINTMENT_SQL = "SELECT * FROM appointment WHERE userid = ?";
-    private static final String SELECT_DOCTOR_APPOINTMENT_SQL = "SELECT * FROM appointment WHERE doctor_id = ?";
-    private static final String SELECT_SPECIALITY_APPOINTMENT_SQL = "SELECT * FROM appointment WHERE speciality_id = ?";
-    private static final String SELECT_APPOINTMENT_BY_ID_SQL = "SELECT * FROM appointment WHERE sn = ?";
-    private static final String DELETE_APPOINTMENT_BY_ID_SQL = "DELETE FROM appointment WHERE sn = ?";
-    private static final String UPDATE_APPOINTMENT_BY_ID_SQL = "UPDATE appointment SET userid = ?, speciality_id = ?, doctor_id = ?, appointment_date = ?, description = ?, status = ?, response = ? WHERE sn = ?";
+    private static final String INSERT_APPOINTMENT_SQL = "INSERT INTO appointments (userid, speciality_id, appointment_date, description, status) VALUES (?,?,?,?,?)";
+    private static final String SELECT_ALL_APPOINTMENT_SQL = "SELECT * FROM appointments";
+    private static final String SELECT_USER_APPOINTMENT_SQL = "SELECT * FROM appointments WHERE userid = ?";
+    private static final String SELECT_DOCTOR_APPOINTMENT_SQL = "SELECT * FROM appointments WHERE doctor_id = ?";
+    private static final String SELECT_SPECIALITY_APPOINTMENT_SQL = "SELECT * FROM appointments WHERE speciality_id = ?";
+    private static final String SELECT_APPOINTMENT_BY_ID_SQL = "SELECT * FROM appointments WHERE sn = ?";
+    private static final String DELETE_APPOINTMENT_BY_ID_SQL = "DELETE FROM appointments WHERE sn = ?";
+    private static final String UPDATE_APPOINTMENT_BY_ID_SQL = "UPDATE appointments SET userid = ?, speciality_id = ?, doctor_id = ?, appointment_date = ?, description = ?, status = ?, response = ? WHERE sn = ?";
 
-    public void insertAppointment(Appointment appointment) throws SQLException {
+    public boolean insertAppointment(Appointment appointment) throws SQLException {
         System.out.println(INSERT_APPOINTMENT_SQL);
+        boolean a = false;
         try (Connection connection = JDBCUtils.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_APPOINTMENT_SQL)) {
             preparedStatement.setString(1, appointment.getUserID());
@@ -33,9 +34,11 @@ public class AppointmentDao {
 
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
+            a = true;
         } catch (SQLException exception) {
             JDBCUtils.printSQLException(exception);
         }
+        return a;
     }
 
     public List<Appointment> selectAllAppointments() {
