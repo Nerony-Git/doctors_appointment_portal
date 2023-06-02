@@ -94,7 +94,7 @@
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="pass"><i class="fa-solid fa-lock"></i></span>
                                     <input type="text" name="password" id="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="pass" required />
-                                    <i class=" view_password input-group-text bi bi-eye-slash" id="togglePassword"></i>
+                                    <i class=" view_password input-group-text bi bi-eye-slash" id="togglePassword" onclick="showPassword('password', 'togglePassword')"></i>
                                 </div>
 
                                 <button type="submit" class="btn bg_color text-white col-md-12"><i class="fa-solid fa-user-plus"></i> &nbsp; Register </button>
