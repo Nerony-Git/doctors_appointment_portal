@@ -17,7 +17,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Enumeration;
 
-@WebServlet({"/user_login", "/user_logout", "/user_register", "/user_authenticate", "/user_dashboard", "/book_appointment", "/user_edit", "/user_update"})
+@WebServlet({"/user_login", "/user_logout", "/user_register", "/user_authenticate", "/user_dashboard", "/book_appointment", "/user_edit", "/user_update", "/user_password"})
 public class UserController extends HttpServlet {
     private UserDao userDao;
 
@@ -59,6 +59,9 @@ public class UserController extends HttpServlet {
                     break;
                 case "/user_update":
                     updateUser(request, response);
+                    break;
+                case "/user_password":
+                    userPassword(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/user/user_login.jsp");
@@ -167,6 +170,11 @@ public class UserController extends HttpServlet {
 
     private void editUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/user/edit_user.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void userPassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/user/user_password.jsp");
         dispatcher.forward(request, response);
     }
 
