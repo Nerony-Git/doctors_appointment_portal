@@ -1,15 +1,14 @@
 
-
-// Wait for the DOM to be fully loaded
-document.addEventListener('DOMContentLoaded', () => {
-// Show Password Script
-    const togglePassword = document.querySelector('#togglePassword');
-    const password = document.querySelector('#password');
-    togglePassword.addEventListener('click', function () {
-        // Toggle the type attribute using getAttribute() method
-        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-        password.setAttribute('type', type);
-        // Toggle the eye and bi-eye icon
-        this.classList.toggle('bi-eye');
-    });
-});
+function showPassword(targetID, iconID) {
+    var x = document.getElementById(targetID);
+    var y = document.getElementById(iconID)
+    if (x.type === "password"){
+        x.type = "text";
+        y.classList.remove('bi-eye-slash');
+        y.classList.add('bi-eye');
+    } else {
+        x.type = "password";
+        y.classList.remove('bi-eye');
+        y.classList.add('bi-eye-slash');
+    }
+}
