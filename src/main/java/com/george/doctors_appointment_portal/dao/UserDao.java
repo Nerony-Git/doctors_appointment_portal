@@ -11,12 +11,12 @@ import java.time.LocalDate;
 
 public class UserDao {
 
-    private static final String INSERT_USERS_SQL = "INSERT INTO users (userID, firstName, lastName, otherName, username, dob, contact, address, postalAddress, email, password) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+    private static final String INSERT_USERS_SQL = "INSERT INTO users (userid, first_name, last_name, other_name, username, dob, contact, address, postal_address, email, password) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
     private static final String LOGIN_SQL = "SELECT * FROM users WHERE username = ? and password = ?";
     private static final String OLD_PASSWORD_SQL = "SELECT * FROM users WHERE userID = ? and password = ?";
-    private static final String UPDATE_PASSWORD_SQL = "UPDATE users SET password = ? WHERE userID = ?";
-    private static final String UPDATE_USER_SQL = "UPDATE users SET firstName = ?, lastName = ?, otherName = ?, dob = ?, contact = ?, address = ?, postalAddress = ?, email = ? WHERE userID =?";
-    private static final String USER_BY_ID = "SELECT * FROM users WHERE userID = ?";
+    private static final String UPDATE_PASSWORD_SQL = "UPDATE users SET password = ? WHERE userid = ?";
+    private static final String UPDATE_USER_SQL = "UPDATE users SET first_name = ?, last_name = ?, other_name = ?, dob = ?, contact = ?, address = ?, postal_address = ?, email = ? WHERE userid = ?";
+    private static final String USER_BY_ID = "SELECT * FROM users WHERE userid = ?";
 
     public int registerUser(User users) throws ClassNotFoundException {
 
@@ -56,15 +56,15 @@ public class UserDao {
                 ResultSet rs = preparedStatement.executeQuery();
                 if (rs.next()) {
                     user = new User();
-                    user.setUserID(rs.getString("userID"));
-                    user.setFirstName(rs.getString("firstName"));
-                    user.setLastName(rs.getString("lastName"));
-                    user.setOtherName(rs.getString("otherName"));
+                    user.setUserID(rs.getString("userid"));
+                    user.setFirstName(rs.getString("first_name"));
+                    user.setLastName(rs.getString("last_name"));
+                    user.setOtherName(rs.getString("other_name"));
                     user.setUsername(rs.getString("username"));
                     user.setDob(rs.getDate("dob").toLocalDate());
                     user.setContact(rs.getString("contact"));
                     user.setAddress(rs.getString("address"));
-                    user.setPostalAddress(rs.getString("postalAddress"));
+                    user.setPostalAddress(rs.getString("postal_address"));
                     user.setEmail(rs.getString("email"));
                 }
             } catch (SQLException e) {
@@ -121,6 +121,7 @@ public class UserDao {
             preparedStatement.setString(7, user.getPostalAddress());
             preparedStatement.setString(8, user.getEmail());
             preparedStatement.setString(9, user.getUserID());
+            System.out.println(preparedStatement);
             u = preparedStatement.executeUpdate() > 0;
         }
         return u;
@@ -138,15 +139,15 @@ public class UserDao {
             if (resultSet.next()) {
                 user = new User();
 
-                user.setUserID(resultSet.getString("userID"));
-                user.setFirstName(resultSet.getString("firstName"));
-                user.setLastName(resultSet.getString("lastName"));
-                user.setOtherName(resultSet.getString("otherName"));
+                user.setUserID(resultSet.getString("userid"));
+                user.setFirstName(resultSet.getString("first_name"));
+                user.setLastName(resultSet.getString("last_name"));
+                user.setOtherName(resultSet.getString("other_name"));
                 user.setUsername(resultSet.getString("username"));
                 user.setDob(resultSet.getDate("dob").toLocalDate());
                 user.setContact(resultSet.getString("contact"));
                 user.setAddress(resultSet.getString("address"));
-                user.setPostalAddress(resultSet.getString("postalAddress"));
+                user.setPostalAddress(resultSet.getString("postal_address"));
                 user.setEmail(resultSet.getString("email"));
 
             }
