@@ -110,4 +110,23 @@ public class UserDao {
         return n;
     }
 
+    public boolean updateUser(User user) throws SQLException {
+        boolean u = false;
+
+        try (Connection connection = JDBCUtils.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER_SQL)){
+            preparedStatement.setString(1, user.getFirstName());
+            preparedStatement.setString(2, user.getLastName());
+            preparedStatement.setString(3, user.getOtherName());
+            preparedStatement.setDate(4, JDBCUtils.getSQLDate(user.getDob()));
+            preparedStatement.setString(5, user.getContact());
+            preparedStatement.setString(6, user.getAddress());
+            preparedStatement.setString(7, user.getPostalAddress());
+            preparedStatement.setString(8, user.getEmail());
+            preparedStatement.setString(9, user.getUserID());
+            u = preparedStatement.executeUpdate() > 0;
+        }
+        return u;
+    }
+
 }
