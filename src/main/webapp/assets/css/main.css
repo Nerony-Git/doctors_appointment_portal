@@ -23,6 +23,17 @@
     color: #fb058a;
 }
 
+.appoint {
+    background: linear-gradient(rgba(66, 84, 81, 0.5), rgba(43, 56, 54, 0.5)), url("../img/slide/slide4.jpg") fixed center center;
+    background-size: cover;
+    /*padding: 60px 0;*/
+}
+
+.eq_height {
+    display: flex;
+    flex-direction: column;
+}
+
 /*
 !*--------------------------------------------------------------
   # Slider Section
@@ -184,7 +195,7 @@
 
 .navbar a i,
 .navbar a:focus i {
-    font-size: 12px;
+    /*font-size: 12px;*/
     line-height: 0;
     margin-left: 5px;
 }
@@ -819,4 +830,14 @@ section {
     display: flex;
     justify-content: flex-start;
     padding-top: 5px;
+    background: white;
+    opacity: 40%;
+}
+
+.breadcrumbs a {
+    text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+    color: #fb058a;
 }
