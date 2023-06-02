@@ -21,9 +21,9 @@
 
         <nav id="navbar" class="navbar">
             <ul>
-                <li class="dropdown"><a href="#"><i class="fa-solid fa-circle-user fa-2x"></i> <span> &nbsp; ${user.username} </span> <i class="bi bi-chevron-down"></i> </a>
+                <li class="dropdown"><a href="#"><i class="fa-solid fa-circle-user fa-2x"></i> <span> &nbsp; ${user.firstName} ${user.lastName} </span> <i class="bi bi-chevron-down"></i> </a>
                     <ul>
-                        <li><a class="nav-link" href=""><i class="fa-solid fa-id-card"></i> &nbsp; View Profile </a> </li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/user_edit"><i class="fa-solid fa-id-card"></i> &nbsp; View Profile </a> </li>
                         <li><a class="nav-link" href=""><i class="fa-solid fa-key"></i> &nbsp; Change Password </a> </li>
                         <li><a class="nav-link" href="<%= request.getContextPath() %>/user_logout"><i class="fas fa-sign-in-alt"></i> &nbsp; Logout </a> </li>
                     </ul>
