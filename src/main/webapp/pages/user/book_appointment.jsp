@@ -97,6 +97,7 @@
                                     <span class="input-group-text" id="rAppoint"><i class="fa-solid fa-file-pen"></i></span>
                                     <textarea name="description" class="form-control" rows="5" required placeholder="Reason for Appointment"></textarea>
                                 </div>
+                                <input type="hidden" name="status" value="Awaiting">
                                 <div class="col-md-12">
                                     <button type="submit" class="btn bg_color text-white col-md-12"><i class="fa-solid fa-paper-plane"></i>&nbsp; Book</button>
                                 </div>
