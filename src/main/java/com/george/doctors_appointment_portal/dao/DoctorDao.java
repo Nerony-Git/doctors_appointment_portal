@@ -12,12 +12,22 @@ public class DoctorDao {
 
     private static final String INSERT_DOCTOR_SQL = "INSERT INTO doctors (userid, first_name, last_name, other_name, email, username, password, contact, dob, speciality, qualification) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
     private static final String GET_DOCTOR_NAME = "SELECT first_name, last_name, other_name FROM doctors WHERE userid = ?";
+    private static final String GET_LAST_USER_ID = "SELECT userid FROM doctors ORDER BY userid DESC LIMIT 1";
     public int registerDoctor(Doctor doctor) throws ClassNotFoundException {
 
         int result = 0;
         try (Connection connection = JDBCUtils.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_DOCTOR_SQL)) {
-            preparedStatement.setString(1, doctor.getUserID());
+            String lastUserID = getLastUserID();
+            String newUserID;
+            if (lastUserID == null) {
+                newUserID = "DOC0001"; // Default ID if no records exist
+            } else {
+                int id = Integer.parseInt(lastUserID.substring(3)) + 1;
+                newUserID = "DOC" + String.format("%04d", id);
+            }
+
+            preparedStatement.setString(1, newUserID);
             preparedStatement.setString(2, doctor.getFirstName());
             preparedStatement.setString(3, doctor.getLastName());
             preparedStatement.setString(4, doctor.getOtherName());
@@ -25,7 +35,7 @@ public class DoctorDao {
             preparedStatement.setString(6, doctor.getUsername());
             preparedStatement.setString(7, doctor.getPassword());
             preparedStatement.setString(8, doctor.getContact());
-            preparedStatement.setString(9, doctor.getDob());
+            preparedStatement.setDate(9, JDBCUtils.getSQLDate(doctor.getDob()));
             preparedStatement.setString(10, doctor.getSpeciality());
             preparedStatement.setString(11, doctor.getQualification());
 
@@ -84,4 +94,19 @@ public class DoctorDao {
         }
         return doctorName;
     }
+
+    public String getLastUserID() throws SQLException {
+        String lastUserID = null;
+
+        try (Connection connection = JDBCUtils.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(GET_LAST_USER_ID)){
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()){
+                lastUserID = resultSet.getString("userid");
+            }
+        }
+        return lastUserID;
+    }
+
 }
