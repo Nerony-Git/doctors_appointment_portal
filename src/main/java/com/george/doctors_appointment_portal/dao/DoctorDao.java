@@ -14,6 +14,8 @@ public class DoctorDao {
     private static final String INSERT_DOCTOR_SQL = "INSERT INTO doctors (userid, first_name, last_name, other_name, email, username, password, contact, dob, speciality, qualification) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
     private static final String GET_DOCTOR_NAME = "SELECT first_name, last_name, other_name FROM doctors WHERE userid = ?";
     private static final String GET_LAST_USER_ID = "SELECT userid FROM doctors ORDER BY userid DESC LIMIT 1";
+    private static final String OLD_PASSWORD_SQL = "SELECT * FROM doctors WHERE userid = ? and password = ?";
+    private static final String UPDATE_PASSWORD_SQL = "UPDATE doctors SET password = ? WHERE userid = ?";
     public int registerDoctor(Doctor doctor) throws ClassNotFoundException {
 
         int result = 0;
@@ -115,6 +117,40 @@ public class DoctorDao {
             }
         }
         return lastUserID;
+    }
+
+    public boolean validateDoctorOldPassword(String userID, String oldPassword) throws SQLException {
+        boolean o = false;
+
+        try (Connection connection = JDBCUtils.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(OLD_PASSWORD_SQL)) {
+            preparedStatement.setString(1, userID);
+            preparedStatement.setString(2, oldPassword);
+
+            System.out.println(preparedStatement);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                o = true;
+            }
+        }
+        return o;
+    }
+
+    public boolean changeDoctorPassword(String userID, String newPassword) throws SQLException {
+        boolean n = false;
+
+        try (Connection connection = JDBCUtils.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PASSWORD_SQL)){
+            preparedStatement.setString(1, newPassword);
+            preparedStatement.setString(2, userID);
+
+            preparedStatement.executeUpdate();
+            n = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return n;
     }
 
 }
