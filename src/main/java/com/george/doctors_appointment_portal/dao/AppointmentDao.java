@@ -21,6 +21,9 @@ public class AppointmentDao {
     private static final String DELETE_APPOINTMENT_BY_ID_SQL = "DELETE FROM appointments WHERE sn = ?";
     private static final String UPDATE_APPOINTMENT_BY_ID_SQL = "UPDATE appointments SET userid = ?, speciality_id = ?, doctor_id = ?, appointment_date = ?, description = ?, status = ?, response = ? WHERE sn = ?";
 
+    private SpecialityDao specialityDao = new SpecialityDao();
+    private DoctorDao doctorDao = new DoctorDao();
+    private UserDao userDao = new UserDao();
     public boolean insertAppointment(Appointment appointment) throws SQLException {
         System.out.println(INSERT_APPOINTMENT_SQL);
         boolean a = false;
@@ -139,28 +142,35 @@ public class AppointmentDao {
         return specialityAppointments;
     }
 
-    public List<Appointment> selectAppointment(String aid) {
-        List<Appointment> appointmentID = new ArrayList<>();
+    public Appointment getAppointment(long aid) {
+        Appointment appointment = null;
+
         try (Connection connection = JDBCUtils.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_APPOINTMENT_BY_ID_SQL)) {
-            preparedStatement.setString(1, aid);
+            preparedStatement.setLong(1, aid);
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
+
                 long id = rs.getLong("sn");
                 String userID = rs.getString("userid");
+                userID = userDao.getUsersName(userID);
                 String specialityID = rs.getString("speciality_id");
+                specialityID = specialityDao.getSpecialityName(specialityID);
                 String doctorID = rs.getString("doctor_id");
+                doctorID = doctorDao.getDoctorName(doctorID);
                 LocalDate appointmentDate = rs.getDate("appointment_date").toLocalDate();
                 String description = rs.getString("description");
                 String status = rs.getString("status");
                 String response = rs.getString("response");
+
+                appointment = new Appointment(id, userID, specialityID, doctorID, appointmentDate, description, status, response);
             }
         } catch (SQLException exception) {
             JDBCUtils.printSQLException(exception);
         }
-        return appointmentID;
+        return appointment;
     }
 
     public boolean deleteAppointment(int id) throws SQLException {
