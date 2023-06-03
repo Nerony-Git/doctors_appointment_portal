@@ -22,6 +22,19 @@ public class Appointment {
 
     }
 
+    public Appointment(long id, String userID, String specialityID, String doctorID, LocalDate appointmentDate, String description, String status, String response) {
+        super();
+        this.appointmentID = id;
+        this.userID = userID;
+        this.specialityID = specialityID;
+        this.doctorID = doctorID;
+        this.appointmentDate = appointmentDate;
+        this.description = description;
+        this.status = status;
+        this.response = response;
+
+    }
+
     public Long getAppointmentID() {
         return appointmentID;
     }
