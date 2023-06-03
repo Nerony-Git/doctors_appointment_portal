@@ -53,13 +53,15 @@
 
                             <!-- Form -->
                             <form action="<%=request.getContextPath()%>/user_authenticate" method="post">
+                                <label class="form-label">Username</label>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="uName"><i class="fa fa-tags"></i></span>
-                                    <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="uName" required />
+                                    <input type="text" name="username" class="form-control" placeholder="Enter Username" aria-label="Username" aria-describedby="uName" required />
                                 </div>
+                                <label class="form-label">Password</label>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="pass"><i class="fa-solid fa-lock"></i></span>
-                                    <input type="password" name="password" id="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="pass" required />
+                                    <input type="password" name="password" id="password" class="form-control" placeholder="Enter Password" aria-label="Password" aria-describedby="pass" required />
                                     <i class=" view_password input-group-text bi bi-eye-slash" id="togglePassword" onclick="showPassword('password', 'togglePassword')"></i>
                                 </div>
 
