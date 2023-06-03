@@ -90,7 +90,7 @@
                                 <label class="form-label">Specialty</label>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="uSpeciality"><i class="fa-solid fa-stethoscope"></i></span>
-                                    <select name="speciality" class="form-control" required>
+                                    <select name="speciality" class="form-select" required>
                                         <option selected="selected" disabled="disabled">---Select Speciality---</option>
                                         <c:forEach var="speciality" items="${listSpeciality}">
                                             <option value="<c:out value="${speciality.sID}"/>"><c:out value="${speciality.specialityName}"/></option>
