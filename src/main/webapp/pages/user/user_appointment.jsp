@@ -90,7 +90,7 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </td>
-                                <td><a href="" class="btn btn-sm btn-primary"><i class="fa-solid fa-eye"></i>&nbsp; View</a> </td>
+                                <td><a href="user_view_appointment?id=<c:out value="${appointment.appointmentID}"/>" class="btn btn-sm btn-primary"><i class="fa-solid fa-eye"></i>&nbsp; View</a> </td>
                             </tr>
                         </c:forEach>
 
