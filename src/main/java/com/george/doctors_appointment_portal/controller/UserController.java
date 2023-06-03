@@ -26,7 +26,8 @@ import java.util.List;
         {
                 "/user_login", "/user_logout", "/user_register", "/user_authenticate",
                 "/user_dashboard", "/book_appointment", "/user_edit", "/user_update",
-                "/user_password", "/user_change", "/user_view", "/book", "/user_appointment"
+                "/user_password", "/user_change", "/user_view", "/book", "/user_appointment",
+                "/user_view_appointment"
         }
 )
 public class UserController extends HttpServlet {
@@ -88,6 +89,9 @@ public class UserController extends HttpServlet {
                     break;
                 case "/user_appointment":
                     usersAppointment(request, response);
+                    break;
+                case "/user_view_appointment":
+                    viewUserAppointment(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/user/user_login.jsp");
@@ -306,5 +310,14 @@ public class UserController extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/user/user_appointment.jsp");
         dispatcher.forward(request, response);
     }
+
+    private void viewUserAppointment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int appointmentID = Integer.parseInt(request.getParameter("id"));
+        Appointment appointment = appointmentDao.getAppointment(appointmentID);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/user/view_appointment.jsp");
+        request.setAttribute("appointment", appointment);
+        dispatcher.forward(request, response);
+    }
+
 
 }
