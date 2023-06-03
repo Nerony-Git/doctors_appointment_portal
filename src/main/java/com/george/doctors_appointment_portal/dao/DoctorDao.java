@@ -9,8 +9,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DoctorDao {
+
+    private static final String INSERT_DOCTOR_SQL = "INSERT INTO doctors (userid, first_name, last_name, other_name, email, username, password, contact, dob, speciality, qualification) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+    private static final String GET_DOCTOR_NAME = "SELECT first_name, last_name, other_name FROM doctors WHERE userid = ?";
     public int registerDoctor(Doctor doctor) throws ClassNotFoundException {
-        String INSERT_DOCTOR_SQL = "INSERT INTO doctors (userID, firstName, lastName, otherName, email, username, password, contact, dob, speciality, qualification) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+
         int result = 0;
         try (Connection connection = JDBCUtils.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_DOCTOR_SQL)) {
@@ -50,11 +53,35 @@ public class DoctorDao {
                 if (rs.next()) {
                     doctor = new Doctor();
                     doctor.setUsername(rs.getString("username"));
-                    doctor.setFirstName(rs.getString("firstName"));
+                    doctor.setFirstName(rs.getString("first_name"));
                 }
             } catch (SQLException e) {
             JDBCUtils.printSQLException(e);
         }
         return doctor;
+    }
+
+    public String getDoctorName(String id) throws SQLException {
+        String doctorName = null;
+        if (id != null && !id.isEmpty()){
+
+            try (Connection connection = JDBCUtils.getConnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement(GET_DOCTOR_NAME)){
+                preparedStatement.setString(1, id);
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                while (resultSet.next()){
+                    String firstName = resultSet.getString("first_name");
+                    String lastName = resultSet.getString("last_name");
+                    String otherName = resultSet.getString("other_name");
+
+                    doctorName = firstName + " " + otherName + " " + lastName;
+                    System.out.println(doctorName);
+                }
+            }
+        }else {
+            doctorName = "Not yet Assigned";
+        }
+        return doctorName;
     }
 }
