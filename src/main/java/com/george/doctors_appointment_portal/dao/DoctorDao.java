@@ -10,6 +10,7 @@ import java.sql.SQLException;
 
 public class DoctorDao {
 
+    private static final String LOGIN_DOCTOR = "SELECT * FROM doctors WHERE username = ? and password = ?";
     private static final String INSERT_DOCTOR_SQL = "INSERT INTO doctors (userid, first_name, last_name, other_name, email, username, password, contact, dob, speciality, qualification) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
     private static final String GET_DOCTOR_NAME = "SELECT first_name, last_name, other_name FROM doctors WHERE userid = ?";
     private static final String GET_LAST_USER_ID = "SELECT userid FROM doctors ORDER BY userid DESC LIMIT 1";
@@ -50,7 +51,6 @@ public class DoctorDao {
 
     public Doctor validateDoctor(String username, String password) throws SQLException, ClassNotFoundException{
         Doctor doctor = null;
-        String LOGIN_DOCTOR = "SELECT * FROM doctors WHERE username = ? and password = ?";
 
         Class.forName("org.postgresql.ds.PGConnectionPoolDataSource");
         try (Connection connection = JDBCUtils.getConnection();
@@ -62,8 +62,16 @@ public class DoctorDao {
                 ResultSet rs = preparedStatement.executeQuery();
                 if (rs.next()) {
                     doctor = new Doctor();
-                    doctor.setUsername(rs.getString("username"));
+                    doctor.setUserID(rs.getString("userid"));
                     doctor.setFirstName(rs.getString("first_name"));
+                    doctor.setLastName(rs.getString("last_name"));
+                    doctor.setOtherName(rs.getString("other_name"));
+                    doctor.setUsername(rs.getString("username"));
+                    doctor.setDob(rs.getDate("dob").toLocalDate());
+                    doctor.setContact(rs.getString("contact"));
+                    doctor.setSpeciality(rs.getString("speciality"));
+                    doctor.setQualification(rs.getString("qualification"));
+                    doctor.setEmail(rs.getString("email"));
                 }
             } catch (SQLException e) {
             JDBCUtils.printSQLException(e);
