@@ -44,7 +44,7 @@
             <p class="fs-2"></p>
             <div class="row">
                 <div class="col-md-6 d-flex">
-                    <div class="card register_card">
+                    <div class="card register_card col-md-12">
                         <div class="card-body">
                             <p class="text-center fs-3">Book an Appointment</p>
 
@@ -58,44 +58,51 @@
                                 <c:remove var="errorMsg" scope="session" />
                             </c:if>
 
-                            <form class="row g-3" action="<%=request.getContextPath()%>/book" method="post">
+                            <form action="<%=request.getContextPath()%>/book" method="post">
                                 <input type="hidden" name="userID" value="${user.userID}">
 
-                                <div class="col-md-6 input-group">
+
+                                <label class="form-label">Appointment ID</label>
+                                <div class="input-group mb-3">
                                     <%--<label class="form-label">Appointment ID</label>--%>
                                     <span class="input-group-text" id="appointID"><i class="fa-solid fa-tags"></i></span>
                                     <input type="text" name="appointmentID" class="form-control" aria-label="Appointment ID" aria-describedby="appointID" readonly value="DAPT/000" />
                                 </div>
-                                <div class="col-md-6 input-group">
+                                <label class="form-label">ID</label>
+                                <div class="input-group mb-3">
                                     <%--<label class="form-label">Full Name</label>--%>
                                     <span class="input-group-text" id="uID"><i class="fa-solid fa-user-tag"></i></span>
                                     <input type="text" class="form-control" aria-label="User ID" aria-describedby="uID" readonly value="<c:out value="${user.userID}" />" />
                                 </div>
-                                <div class="col-md-6 input-group">
+                                <label class="form-label">Name</label>
+                                <div class="input-group mb-3">
                                     <%--<label class="form-label">Full Name</label>--%>
                                     <span class="input-group-text" id="fullName"><i class="fa-solid fa-user"></i></span>
                                     <input type="text" name="fullname" class="form-control" aria-label="Full Name" aria-describedby="fullName" readonly value="<c:out value="${user.firstName} ${user.otherName} ${user.lastName}" />" />
                                 </div>
-                                <div class="col-md-6 input-group">
+                                <label class="form-label">Specialty</label>
+                                <div class="input-group mb-3">
                                     <%--<label class="form-label">Speciality</label>--%>
                                     <span class="input-group-text" id="uSpeciality"><i class="fa-solid fa-stethoscope"></i></span>
                                     <select name="specialityID" class="form-select" required>
-                                        <option selected="selected" disabled="disabled">---Select Speciality---</option>
+                                        <option selected="selected" disabled="disabled">---Select Specialty---</option>
                                         <!-- for (Speciality speciality: specialities) { -->
                                         <c:forEach var="speciality" items="${listSpeciality}">
                                             <option value="<c:out value="${speciality.sID}"/>"><c:out value="${speciality.specialityName}"/></option>
                                         </c:forEach>
                                     </select>
                                 </div>
-                                <div class="col-md-6 input-group">
+                                <label class="form-label">Appointment Date</label>
+                                <div class="input-group mb-3">
                                     <%--<label class="form-label">Appointment Date</label>--%>
                                     <span class="input-group-text" id="uDob"><i class="fa-solid fa-calendar-days"></i></span>
                                     <input type="date" name="appointmentDate" class="form-control" aria-label="Appointment Date" aria-describedby="uDob" placeholder="Appointment Date" required />
                                 </div>
-                                <div class="col-md-6 input-group">
+                                <label class="form-label">Purpose of Appointment</label>
+                                <div class="input-group mb-3">
                                     <%--<label class="form-label">Reason for Appointment</label>--%>
                                     <span class="input-group-text" id="rAppoint"><i class="fa-solid fa-file-pen"></i></span>
-                                    <textarea name="description" class="form-control" rows="5" required placeholder="Reason for Appointment"></textarea>
+                                    <textarea name="description" class="form-control" rows="5" required placeholder="Type the purpose for the appointment here..."></textarea>
                                 </div>
                                 <input type="hidden" name="status" value="Awaiting">
                                 <div class="col-md-12">
