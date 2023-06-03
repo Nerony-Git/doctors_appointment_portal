@@ -73,7 +73,7 @@ public class AppointmentDao {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                long id = rs.getLong("sn");
+                long appointmentID = rs.getLong("sn");
                 String userID = rs.getString("userid");
                 String specialityID = rs.getString("speciality_id");
                 String doctorID = rs.getString("doctor_id");
@@ -81,6 +81,9 @@ public class AppointmentDao {
                 String description = rs.getString("description");
                 String status = rs.getString("status");
                 String response = rs.getString("response");
+
+                userAppointments.add(new Appointment(appointmentID, userID, specialityID, doctorID, appointmentDate, description, status, response));
+                System.out.println(userAppointments);
             }
         } catch (SQLException exception) {
             JDBCUtils.printSQLException(exception);
