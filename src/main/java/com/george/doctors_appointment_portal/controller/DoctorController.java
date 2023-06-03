@@ -52,6 +52,9 @@ public class DoctorController extends HttpServlet {
                 case "/new_doctor":
                     new_doctor(request, response);
                     break;
+                case "/doctor_dashboard":
+                    doctorDashboard(request, response);
+                    break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/doctor/doctor_login.jsp");
                     dispatcher.forward(request, response);
@@ -110,6 +113,11 @@ public class DoctorController extends HttpServlet {
 
     private void doctorLogin(HttpServletRequest request, HttpServletResponse response) throws  ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/doctor/doctor_login.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void doctorDashboard(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/doctor/dashboard/jsp");
         dispatcher.forward(request, response);
     }
 
