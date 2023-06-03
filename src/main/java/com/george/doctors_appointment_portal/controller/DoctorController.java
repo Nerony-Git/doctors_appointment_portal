@@ -21,7 +21,7 @@ import java.util.List;
 
 @WebServlet({
         "/doctor_login", "/doctor_logout", "/doctor_register", "/new_doctor", "/doctor_dashboard",
-        "/doctor_authenticate"
+        "/doctor_authenticate", "/doctor_change"
 })
 public class DoctorController extends HttpServlet {
     private DoctorDao doctorDao;
@@ -59,6 +59,9 @@ public class DoctorController extends HttpServlet {
                     break;
                 case "/doctor_dashboard":
                     doctorDashboard(request, response);
+                    break;
+                case "/doctor_change":
+                    doctorChangePass(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/doctor/doctor_login.jsp");
@@ -159,6 +162,36 @@ public class DoctorController extends HttpServlet {
         request.setAttribute("listSpeciality", listSpeciality);
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/doctor/doctor_register.jsp");
         dispatcher.forward(request, response);
+    }
+
+    private void doctorChangePass(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        String userID = request.getParameter("userID");
+        String newPassword = request.getParameter("password");
+        String oldPassword = request.getParameter("password2");
+
+        try {
+            HttpSession session = request.getSession();
+
+            if (doctorDao.validateDoctorOldPassword(userID, oldPassword)) {
+
+                if (doctorDao.changeDoctorPassword(userID, newPassword)) {
+
+                    session.setAttribute("successMsg", "Password successfully changed.");
+                    session.removeAttribute("doctor");
+                    response.sendRedirect("doctor_login");
+
+                } else {
+                    session.setAttribute("errorMsg", "Password change failed.");
+                    response.sendRedirect("doctor_password");
+                }
+
+            } else {
+                session.setAttribute("errorMsg", "Previous password does not match.");
+                response.sendRedirect("doctor_password");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
 }
