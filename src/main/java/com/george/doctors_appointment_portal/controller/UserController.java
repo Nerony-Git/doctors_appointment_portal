@@ -27,7 +27,7 @@ import java.util.List;
                 "/user_login", "/user_logout", "/user_register", "/user_authenticate",
                 "/user_dashboard", "/book_appointment", "/user_edit", "/user_update",
                 "/user_password", "/user_change", "/user_view", "/book", "/user_appointment",
-                "/user_view_appointment"
+                "/user_view_appointment", "/new_user"
         }
 )
 public class UserController extends HttpServlet {
@@ -104,7 +104,6 @@ public class UserController extends HttpServlet {
     }
 
     private void new_user(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String userID = request.getParameter("userID");
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String otherName = request.getParameter("otherName");
@@ -119,7 +118,6 @@ public class UserController extends HttpServlet {
         HttpSession session = request.getSession();
 
         User newUser = new User();
-        newUser.setUserID(userID);
         newUser.setFirstName(firstName);
         newUser.setLastName(lastName);
         newUser.setOtherName(otherName);
@@ -135,7 +133,7 @@ public class UserController extends HttpServlet {
             int result = userDao.registerUser(newUser);
             if (result == 1) {
                 session.setAttribute("successMsg", "Registered Successfully");
-                response.sendRedirect("");
+                response.sendRedirect("user_login");
             } else {
                 session.setAttribute("errorMsg", "Registration Failed. Try Again");
             }
