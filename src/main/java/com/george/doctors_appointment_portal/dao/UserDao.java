@@ -17,6 +17,7 @@ public class UserDao {
     private static final String UPDATE_PASSWORD_SQL = "UPDATE users SET password = ? WHERE userid = ?";
     private static final String UPDATE_USER_SQL = "UPDATE users SET first_name = ?, last_name = ?, other_name = ?, dob = ?, contact = ?, address = ?, postal_address = ?, email = ? WHERE userid = ?";
     private static final String USER_BY_ID = "SELECT * FROM users WHERE userid = ?";
+    private static final String GET_USERS_NAME = "SELECT first_name, last_name, other_name FROM users WHERE userid = ?";
 
     public int registerUser(User users) throws ClassNotFoundException {
 
@@ -153,6 +154,27 @@ public class UserDao {
             }
         }
         return user;
+    }
+
+    public String getUsersName(String id) throws SQLException {
+        String usersName = null;
+
+        try (Connection connection = JDBCUtils.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(GET_USERS_NAME)){
+            preparedStatement.setString(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                String firstName = resultSet.getString("first_name");
+                String lastName = resultSet.getString("last_name");
+                String otherName = resultSet.getString("other_name");
+
+                usersName = firstName + " " + otherName + " " + lastName;
+            }
+
+        }
+        return usersName;
     }
 
 }
