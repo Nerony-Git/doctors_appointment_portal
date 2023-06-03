@@ -66,45 +66,55 @@
 
             <!-- Form -->
             <form action="<%=request.getContextPath()%>/user_update" method="post">
+              <label class="form-label">ID</label>
               <div class="input-group mb-3">
                 <span class="input-group-text" id="uID"><i class="fa-solid fa-user-tag"></i></span>
                 <input type="text" class="form-control" aria-label="User ID" aria-describedby="uID" readonly value="<c:out value="${user.userID}" />" />
               </div>
               <input type="hidden" name="userID" value="<c:out value="${user.userID}"/>">
+              <label class="form-label">First Name</label>
               <div class="input-group mb-3">
                 <span class="input-group-text" id="fName"><i class="fa fa-user"></i></span>
                 <input type="text" name="firstName" class="form-control" placeholder="First Name" aria-label="First Name" aria-describedby="fName" required value="<c:out value="${user.firstName}" />"/>
               </div>
+              <label class="form-label">Last Name</label>
               <div class="input-group mb-3">
                 <span class="input-group-text" id="lName"><i class="fa fa-user"></i></span>
                 <input type="text" name="lastName" class="form-control" placeholder="Last Name" aria-label="Last Name" aria-describedby="lName" required value="<c:out value="${user.lastName}" />" />
               </div>
+              <label class="form-label">Other Name</label>
               <div class="input-group mb-3">
                 <span class="input-group-text" id="oName"><i class="fa fa-user"></i></span>
                 <input type="text" name="otherName" class="form-control" placeholder="Other Name" aria-label="Other Name" aria-describedby="oName" value="<c:out value="${user.otherName}" />" />
               </div>
+              <label class="form-label">Username</label>
               <div class="input-group mb-3">
                 <span class="input-group-text" id="uName"><i class="fa fa-tags"></i></span>
                 <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="uName" readonly value="<c:out value="${user.username}" />" />
               </div>
+              <label class="form-label">Date of Birth</label>
               <div class="input-group mb-3">
                 <span class="input-group-text" id="uDob"><i class="fa-solid fa-calendar-days"></i></span>
                 <input type="date" name="dob" class="form-control" aria-label="Date of Birth" aria-describedby="uDob" required value="<c:out value="${user.dob}" />" />
               </div>
+              <label class="form-label">Email</label>
               <div class="input-group mb-3">
                 <span class="input-group-text" id="eMail"><i class="fa-solid fa-envelope"></i></span>
                 <input type="email" name="email" class="form-control" placeholder="Email Address" aria-label="Email Address" aria-describedby="eMail" required value="<c:out value="${user.email}" />" />
               </div>
+              <label class="form-label">Phone Number</label>
               <div class="input-group mb-3">
                 <span class="input-group-text" id="uContact"><i class="fa-solid fa-phone"></i></span>
                 <input type="number" name="contact" maxlength="11" class="form-control" placeholder="Contact" aria-label="Phone Number" aria-describedby="uContact" required value="<c:out value="${user.contact}" />" />
               </div>
+              <label class="form-label">Address</label>
               <div class="input-group mb-3">
                 <span class="input-group-text" id="uAddress"><i class="fa-solid fa-location-dot"></i></span>
                 <input type="text" name="address" class="form-control" placeholder="Address" aria-label="Address" aria-describedby="uAddress" required  value="<c:out value="${user.address}" />"/>
               </div>
+              <label class="form-label">Post Code</label>
               <div class="input-group mb-3">
-                <span class="input-group-text" id="uPostal"><i class="fa-solid fa-map-location-dot"></i></span>
+                <span class="input-group-text" id="uPostal"><i class="fa-solid fa-street-view"></i></span>
                 <input type="text" name="postalAddress" class="form-control" placeholder="Postal Address" aria-label="Postal Address" aria-describedby="uAddress" required value="<c:out value="${user.postalAddress}" />" />
               </div>
 
