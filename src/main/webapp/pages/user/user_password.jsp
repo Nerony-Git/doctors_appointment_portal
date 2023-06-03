@@ -75,14 +75,16 @@
                             <div class="input-group mb-3">
                                 &nbsp;
                             </div>
+                            <label class="form-label">Old Password</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="pass"><i class="fa-solid fa-lock"></i></span>
-                                <input type="password" name="password2" id="password2" class="form-control" placeholder="Old Password" aria-label="Old Password" aria-describedby="pass" required />
+                                <input type="password" name="password2" id="password2" class="form-control" placeholder="Enter your old password here..." aria-label="Old Password" aria-describedby="pass" required />
                                 <i class=" view_password input-group-text bi bi-eye-slash" id="togglePassword2" onclick="showPassword('password2', 'togglePassword2')"></i>
                             </div>
+                            <label class="form-label">New Password</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="passed"><i class="fa-solid fa-lock"></i></span>
-                                <input type="password" name="password" id="password" class="form-control" placeholder="New Password" aria-label="New Password" aria-describedby="passed" required />
+                                <input type="password" name="password" id="password" class="form-control" placeholder="Enter your new password here..." aria-label="New Password" aria-describedby="passed" required />
                                 <i class=" view_password input-group-text bi bi-eye-slash" id="togglePassword" onclick="showPassword('password', 'togglePassword')"></i>
                             </div>
 
