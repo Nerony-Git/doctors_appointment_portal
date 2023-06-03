@@ -14,12 +14,14 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @WebServlet({
-        "/doctor_login", "/doctor_logout", "/doctor_register", "/new_doctor"
+        "/doctor_login", "/doctor_logout", "/doctor_register", "/new_doctor", "/doctor_dashboard",
+        "/doctor_authenticate"
 })
 public class DoctorController extends HttpServlet {
     private DoctorDao doctorDao;
@@ -42,6 +44,9 @@ public class DoctorController extends HttpServlet {
             switch (action) {
                 case "/doctor_login":
                     doctorLogin(request, response);
+                    break;
+                case "/doctor_authenticate":
+                    doctorAuthenticate(request, response);
                     break;
                 case "/doctor_register":
                     doctorRegister(request, response);
@@ -116,8 +121,32 @@ public class DoctorController extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    private void doctorAuthenticate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+
+        try {
+            Doctor doctor = doctorDao.validateDoctor(username, password);
+            String destPage = "/doctor_login";
+            HttpSession session = request.getSession();
+
+            if (doctor != null) {
+                session.setAttribute("doctor", doctor);
+                destPage = "/doctor_dashboard";
+            }else {
+                session.setAttribute("errorMsg", "Invalid username or password");
+            }
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher(destPage);
+            dispatcher.forward(request, response);
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new ServletException(ex);
+        }
+
+    }
+
     private void doctorDashboard(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/doctor/dashboard/jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/doctor/dashboard.jsp");
         dispatcher.forward(request, response);
     }
 
