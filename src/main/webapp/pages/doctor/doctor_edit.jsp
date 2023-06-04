@@ -53,14 +53,14 @@
                     <div class="card-body">
                         <!-- Success Message -->
                         <c:if test="${not empty successMsg}">
-                            <p class="text-center text-success fs-3">${successMsg}</p>
+                            <p class="text-center text-success fs-5">${successMsg}</p>
                             <c:remove var="successMsg" scope="session" />
                         </c:if>
                         <!-- End Success Message -->
 
                         <!-- Error Message -->
                         <c:if test="${not empty errorMsg}">
-                            <p class="text-center text-danger fs-3">${errorMsg}</p>
+                            <p class="text-center text-danger fs-5">${errorMsg}</p>
                             <c:remove var="errorMsg" scope="session" />
                         </c:if>
                         <!-- End Error Message -->
