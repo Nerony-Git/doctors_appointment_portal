@@ -20,6 +20,7 @@ public class AppointmentDao {
     private static final String SELECT_APPOINTMENT_BY_ID_SQL = "SELECT * FROM appointments WHERE sn = ?";
     private static final String DELETE_APPOINTMENT_BY_ID_SQL = "DELETE FROM appointments WHERE sn = ?";
     private static final String UPDATE_APPOINTMENT_BY_ID_SQL = "UPDATE appointments SET userid = ?, speciality_id = ?, doctor_id = ?, appointment_date = ?, description = ?, status = ?, response = ? WHERE sn = ?";
+    private static final String UPDATE_APPOINTMENT_BY_DOCTOR_SQL = "UPDATE appointments SET status = ?, response =? WHERE sn = ?";
 
     private SpecialityDao specialityDao = new SpecialityDao();
     private DoctorDao doctorDao = new DoctorDao();
@@ -204,6 +205,19 @@ public class AppointmentDao {
             rowUpdated = preparedStatement.executeUpdate() > 0;
         }
         return rowUpdated;
+    }
+
+    public boolean doctorUpdateAppointment(Appointment appointment) throws SQLException {
+        boolean doctorUpdated;
+        try (Connection connection = JDBCUtils.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_APPOINTMENT_BY_DOCTOR_SQL)){
+            preparedStatement.setString(1, appointment.getStatus());
+            preparedStatement.setString(2, appointment.getResponse());
+            preparedStatement.setLong(3, appointment.getAppointmentID());
+            System.out.println(preparedStatement);
+            doctorUpdated = preparedStatement.executeUpdate() > 0;
+        }
+        return doctorUpdated;
     }
 
 }
