@@ -1,7 +1,9 @@
 package com.george.doctors_appointment_portal.controller;
 
+import com.george.doctors_appointment_portal.dao.AppointmentDao;
 import com.george.doctors_appointment_portal.dao.DoctorDao;
 import com.george.doctors_appointment_portal.dao.SpecialityDao;
+import com.george.doctors_appointment_portal.model.Appointment;
 import com.george.doctors_appointment_portal.model.Doctor;
 import com.george.doctors_appointment_portal.model.Speciality;
 import com.george.doctors_appointment_portal.model.User;
@@ -22,11 +24,12 @@ import java.util.List;
 @WebServlet({
         "/doctor_login", "/doctor_logout", "/doctor_register", "/new_doctor", "/doctor_dashboard",
         "/doctor_authenticate", "/doctor_change", "/doctor_update", "/doctor_view", "/doctor_edit",
-        "/doctor_password"
+        "/doctor_password", "/doctor_appointment"
 })
 public class DoctorController extends HttpServlet {
     private DoctorDao doctorDao;
     private SpecialityDao specialityDao = new SpecialityDao();
+    private AppointmentDao appointmentDao = new AppointmentDao();
     private static final DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public void init() {
@@ -75,6 +78,9 @@ public class DoctorController extends HttpServlet {
                     break;
                 case "/doctor_password":
                     doctorPassword(request, response);
+                    break;
+                case "/doctor_appointment":
+                    doctorsAppointment(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/doctor/doctor_login.jsp");
@@ -246,6 +252,15 @@ public class DoctorController extends HttpServlet {
             session.setAttribute("errorMsg", "Profile details failed to update");
             response.sendRedirect("doctor_edit");
         }
+    }
+
+    private void doctorsAppointment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Doctor doctor = (Doctor) request.getSession().getAttribute("doctor");
+        String userID = doctor.getUserID();
+        List<Appointment> appointmentList = appointmentDao.selectDoctorAppointments(userID);
+        request.setAttribute("appointmentList", appointmentList);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/doctor/doctor_appointment.jsp");
+        dispatcher.forward(request, response);
     }
 
 }
