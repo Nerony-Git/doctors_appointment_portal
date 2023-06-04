@@ -16,6 +16,7 @@ public class AppointmentDao {
     private static final String SELECT_ALL_APPOINTMENT_SQL = "SELECT * FROM appointments";
     private static final String SELECT_USER_APPOINTMENT_SQL = "SELECT * FROM appointments WHERE userid = ?";
     private static final String SELECT_DOCTOR_APPOINTMENT_SQL = "SELECT * FROM appointments WHERE doctor_id = ?";
+    private static final String SELECT_DOCTOR_APPOINTMENTS_SQL = "SELECT * FROM appointments WHERE doctor_id = ? AND status = ?";
     private static final String SELECT_SPECIALITY_APPOINTMENT_SQL = "SELECT * FROM appointments WHERE speciality_id = ?";
     private static final String SELECT_APPOINTMENT_BY_ID_SQL = "SELECT * FROM appointments WHERE sn = ?";
     private static final String DELETE_APPOINTMENT_BY_ID_SQL = "DELETE FROM appointments WHERE sn = ?";
@@ -100,6 +101,38 @@ public class AppointmentDao {
         try (Connection connection = JDBCUtils.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_DOCTOR_APPOINTMENT_SQL)) {
             preparedStatement.setString(1, doctor);
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                long appointmentID = rs.getLong("sn");
+                String userID = rs.getString("userid");
+                userID = userDao.getUsersName(userID);
+                String specialityID = rs.getString("speciality_id");
+                specialityID = specialityDao.getSpecialityName(specialityID);
+                String doctorID = rs.getString("doctor_id");
+                doctorID = doctorDao.getDoctorName(doctorID);
+                LocalDate appointmentDate = rs.getDate("appointment_date").toLocalDate();
+                String description = rs.getString("description");
+                String status = rs.getString("status");
+                String response = rs.getString("response");
+
+                doctorAppointments.add(new Appointment(appointmentID, userID, specialityID, doctorID, appointmentDate, description, status, response));
+
+            }
+        } catch (SQLException exception) {
+            JDBCUtils.printSQLException(exception);
+        }
+        return doctorAppointments;
+    }
+
+    public List<Appointment> selectDoctorAppointment(String doctor) {
+        List<Appointment> doctorAppointments = new ArrayList<>();
+        String stat = "Pending";
+        try (Connection connection = JDBCUtils.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_DOCTOR_APPOINTMENTS_SQL)) {
+            preparedStatement.setString(1, doctor);
+            preparedStatement.setString(2, stat);
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
 
