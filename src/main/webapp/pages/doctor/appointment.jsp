@@ -34,7 +34,7 @@
             <div class="breadcrumbs">
                 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><i class="fa-solid fa-gauge"></i> &nbsp;<a href="<%=request.getContextPath()%>/dashboard">Home</a></li>
+                        <li class="breadcrumb-item"><i class="fa-solid fa-gauge"></i> &nbsp;<a href="<%=request.getContextPath()%>/doctor_dashboard">Home</a></li>
                         <li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/doctor_appointment">Assigned Appointment</a></li>
                         <li class="breadcrumb-item active" aria-current="page"> Appointments Details</li>
                     </ol>
@@ -63,14 +63,15 @@
                         <c:remove var="errorMsg" scope="session" />
                     </c:if>
 
-                    <form action="<%=request.getContextPath()%>/" method="post">
+                    <form action="<%=request.getContextPath()%>/appointment_update" method="post">
                     <div class="row">
                         <div class="col-md-6">
                             <label class="form-label">Appointment ID</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="aID"><i class="fa-solid fa-tags"></i></span>
-                                <input type="text" name="appointmentID" class="form-control" aria-label="Appointment" aria-describedby="aID" readonly value="DAPT/<c:out value="${appointment.appointmentID}"/>" />
+                                <input type="text" class="form-control" aria-label="Appointment" aria-describedby="aID" readonly value="DAPT/<c:out value="${appointment.appointmentID}"/>" />
                             </div>
+                            <input type="hidden" name="appointmentID" value="<c:out value="${appointment.appointmentID}"/>">
                             <div class="input-group">&nbsp;</div>
                             <label class="form-label">Customer ID</label>
                             <div class="input-group">
@@ -119,7 +120,7 @@
                             <label class="form-label">Comment</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="res"><i class="fa-solid fa-file-medical"></i></span>
-                                <textarea name="response" class="form-control" rows="5" aria-label="Response" aria-describedby="res" required placeholder="Enter your comments here..."></textarea>
+                                <textarea name="response" class="form-control" rows="5" aria-label="Response" aria-describedby="res" required placeholder="Enter your comments here..."><c:out value="${appointment.response}"/></textarea>
                             </div>
                             <div class="input-group">&nbsp;</div>
                             <div class="input-group">
