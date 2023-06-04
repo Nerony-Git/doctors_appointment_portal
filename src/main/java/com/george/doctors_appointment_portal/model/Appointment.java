@@ -35,6 +35,13 @@ public class Appointment {
 
     }
 
+    public Appointment(long appointmentID, String status, String responses) {
+        super();
+        this.appointmentID = appointmentID;
+        this.status = status;
+        this.response = responses;
+    }
+
     public Long getAppointmentID() {
         return appointmentID;
     }
