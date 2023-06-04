@@ -21,7 +21,8 @@ import java.util.List;
 
 @WebServlet({
         "/doctor_login", "/doctor_logout", "/doctor_register", "/new_doctor", "/doctor_dashboard",
-        "/doctor_authenticate", "/doctor_change", "/doctor_update"
+        "/doctor_authenticate", "/doctor_change", "/doctor_update", "/doctor_view", "/doctor_edit",
+        "/doctor_password"
 })
 public class DoctorController extends HttpServlet {
     private DoctorDao doctorDao;
@@ -65,6 +66,15 @@ public class DoctorController extends HttpServlet {
                     break;
                 case "/doctor_update":
                     updateDoctor(request, response);
+                    break;
+                case "/doctor_view":
+                    doctorView(request, response);
+                    break;
+                case "/doctor_edit":
+                    doctorEdit(request, response);
+                    break;
+                case "/doctor_password":
+                    doctorPassword(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/doctor/doctor_login.jsp");
@@ -117,7 +127,7 @@ public class DoctorController extends HttpServlet {
 
     private void doctorLogout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        session.removeAttribute("user");
+        session.removeAttribute("doctor");
         session.setAttribute("successMsg", "Successfully Logout");
         response.sendRedirect("pages/doctor/doctor_login.jsp");
     }
@@ -153,6 +163,21 @@ public class DoctorController extends HttpServlet {
 
     private void doctorDashboard(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/doctor/dashboard.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void doctorView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/doctor/doctor_view.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void doctorEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/doctor/doctor_edit.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void doctorPassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/doctor/doctor_password.jsp");
         dispatcher.forward(request, response);
     }
 
