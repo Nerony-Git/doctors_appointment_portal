@@ -35,7 +35,7 @@
             <div class="breadcrumbs">
                 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><i class="fa-solid fa-gauge"></i> &nbsp;<a href="<%=request.getContextPath()%>/user_dashboard">Home</a></li>
+                        <li class="breadcrumb-item"><i class="fa-solid fa-gauge"></i> &nbsp;<a href="<%=request.getContextPath()%>/doctor_dashboard">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Change Password</li>
                     </ol>
                 </nav>
