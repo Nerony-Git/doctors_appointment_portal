@@ -103,14 +103,20 @@ public class AppointmentDao {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                long id = rs.getLong("sn");
+                long appointmentID = rs.getLong("sn");
                 String userID = rs.getString("userid");
+                userID = userDao.getUsersName(userID);
                 String specialityID = rs.getString("speciality_id");
+                specialityID = specialityDao.getSpecialityName(specialityID);
                 String doctorID = rs.getString("doctor_id");
+                doctorID = doctorDao.getDoctorName(doctorID);
                 LocalDate appointmentDate = rs.getDate("appointment_date").toLocalDate();
                 String description = rs.getString("description");
                 String status = rs.getString("status");
                 String response = rs.getString("response");
+
+                doctorAppointments.add(new Appointment(appointmentID, userID, specialityID, doctorID, appointmentDate, description, status, response));
+
             }
         } catch (SQLException exception) {
             JDBCUtils.printSQLException(exception);
