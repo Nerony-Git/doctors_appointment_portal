@@ -20,6 +20,9 @@ public class DoctorDao {
     private static final String UPDATE_PASSWORD_SQL = "UPDATE doctors SET password = ? WHERE userid = ?";
     private static final String UPDATE_DOCTOR_SQL = "UPDATE doctors SET first_name = ?, last_name = ?, other_name = ?, dob = ?, contact = ?, qualification = ?, email = ? WHERE userid = ?";
     private static final String DOCTOR_BY_ID = "SELECT * FROM doctors WHERE userid = ?";
+
+    private SpecialityDao specialityDao = new SpecialityDao();
+
     public int registerDoctor(Doctor doctor) throws ClassNotFoundException {
 
         int result = 0;
@@ -75,7 +78,9 @@ public class DoctorDao {
                     doctor.setUsername(rs.getString("username"));
                     doctor.setDob(rs.getDate("dob").toLocalDate());
                     doctor.setContact(rs.getString("contact"));
-                    doctor.setSpeciality(rs.getString("speciality"));
+                    String speciality = rs.getString("speciality");
+                    speciality = specialityDao.getSpecialityName(speciality);
+                    doctor.setSpeciality(speciality);
                     doctor.setQualification(rs.getString("qualification"));
                     doctor.setEmail(rs.getString("email"));
                 }
@@ -167,10 +172,9 @@ public class DoctorDao {
             preparedStatement.setString(3, doctor.getOtherName());
             preparedStatement.setDate(4, JDBCUtils.getSQLDate(doctor.getDob()));
             preparedStatement.setString(5, doctor.getContact());
-            preparedStatement.setString(6, doctor.getSpeciality());
-            preparedStatement.setString(7, doctor.getQualification());
-            preparedStatement.setString(8, doctor.getEmail());
-            preparedStatement.setString(9, doctor.getUserID());
+            preparedStatement.setString(6, doctor.getQualification());
+            preparedStatement.setString(7, doctor.getEmail());
+            preparedStatement.setString(8, doctor.getUserID());
             System.out.println(preparedStatement);
             u = preparedStatement.executeUpdate() > 0;
         }
