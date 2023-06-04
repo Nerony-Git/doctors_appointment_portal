@@ -1,8 +1,10 @@
 package com.george.doctors_appointment_portal.dao;
 
 import com.george.doctors_appointment_portal.model.Doctor;
+import com.george.doctors_appointment_portal.model.User;
 import com.george.doctors_appointment_portal.utils.JDBCUtils;
 
+import javax.print.Doc;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +18,8 @@ public class DoctorDao {
     private static final String GET_LAST_USER_ID = "SELECT userid FROM doctors ORDER BY userid DESC LIMIT 1";
     private static final String OLD_PASSWORD_SQL = "SELECT * FROM doctors WHERE userid = ? and password = ?";
     private static final String UPDATE_PASSWORD_SQL = "UPDATE doctors SET password = ? WHERE userid = ?";
+    private static final String UPDATE_DOCTOR_SQL = "UPDATE doctors SET first_name = ?, last_name = ?, other_name = ?, dob = ?, contact = ?, qualification = ?, email = ? WHERE userid = ?";
+    private static final String DOCTOR_BY_ID = "SELECT * FROM doctors WHERE userid = ?";
     public int registerDoctor(Doctor doctor) throws ClassNotFoundException {
 
         int result = 0;
@@ -151,6 +155,53 @@ public class DoctorDao {
             e.printStackTrace();
         }
         return n;
+    }
+
+    public boolean updateDoctor(Doctor doctor) throws SQLException {
+        boolean u;
+
+        try (Connection connection = JDBCUtils.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_DOCTOR_SQL)){
+            preparedStatement.setString(1, doctor.getFirstName());
+            preparedStatement.setString(2, doctor.getLastName());
+            preparedStatement.setString(3, doctor.getOtherName());
+            preparedStatement.setDate(4, JDBCUtils.getSQLDate(doctor.getDob()));
+            preparedStatement.setString(5, doctor.getContact());
+            preparedStatement.setString(6, doctor.getSpeciality());
+            preparedStatement.setString(7, doctor.getQualification());
+            preparedStatement.setString(8, doctor.getEmail());
+            preparedStatement.setString(9, doctor.getUserID());
+            System.out.println(preparedStatement);
+            u = preparedStatement.executeUpdate() > 0;
+        }
+        return u;
+    }
+
+    public Doctor getDoctorByID(String userID) throws SQLException {
+        Doctor doctor = null;
+
+        try (Connection connection = JDBCUtils.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DOCTOR_BY_ID)){
+            preparedStatement.setString(1, userID);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                doctor = new Doctor();
+
+                doctor.setUserID(resultSet.getString("userid"));
+                doctor.setFirstName(resultSet.getString("first_name"));
+                doctor.setLastName(resultSet.getString("last_name"));
+                doctor.setOtherName(resultSet.getString("other_name"));
+                doctor.setUsername(resultSet.getString("username"));
+                doctor.setDob(resultSet.getDate("dob").toLocalDate());
+                doctor.setContact(resultSet.getString("contact"));
+                doctor.setQualification(resultSet.getString("qualification"));
+                doctor.setEmail(resultSet.getString("email"));
+
+            }
+        }
+        return doctor;
     }
 
 }
