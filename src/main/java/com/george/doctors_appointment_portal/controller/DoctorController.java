@@ -24,7 +24,7 @@ import java.util.List;
 @WebServlet({
         "/doctor_login", "/doctor_logout", "/doctor_register", "/new_doctor", "/doctor_dashboard",
         "/doctor_authenticate", "/doctor_change", "/doctor_update", "/doctor_view", "/doctor_edit",
-        "/doctor_password", "/doctor_appointment", "/appointment"
+        "/doctor_password", "/doctor_appointment", "/appointment", "/appointment_update"
 })
 public class DoctorController extends HttpServlet {
     private DoctorDao doctorDao;
@@ -84,6 +84,9 @@ public class DoctorController extends HttpServlet {
                     break;
                 case "/appointment":
                     viewUserAppointment(request, response);
+                    break;
+                case "/appointment_update":
+                    doctorUpdateAppointment(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/doctor/doctor_login.jsp");
@@ -272,6 +275,29 @@ public class DoctorController extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/doctor/appointment.jsp");
         request.setAttribute("appointment", appointment);
         dispatcher.forward(request, response);
+    }
+
+    private void doctorUpdateAppointment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String status = request.getParameter("status");
+        String responses = request.getParameter("response");
+        int appointmentID = Integer.parseInt(request.getParameter("appointmentID"));
+
+        Appointment appointment = new Appointment(appointmentID, status, responses);
+        HttpSession session = request.getSession();
+
+        try {
+            boolean d = appointmentDao.doctorUpdateAppointment(appointment);
+
+            if (d) {
+                session.setAttribute("successMsg", "Appointment details updated successfully.");
+                response.sendRedirect("appointment?id=" + appointmentID);
+            } else {
+                session.setAttribute("errorMsg", "Failed to update appointment details.");
+                response.sendRedirect("appointment?id=" + appointmentID);
+            }
+        } catch (SQLException e){
+            throw new ServletException(e);
+        }
     }
 
 }
