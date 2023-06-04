@@ -24,7 +24,8 @@ import java.util.List;
 @WebServlet({
         "/doctor_login", "/doctor_logout", "/doctor_register", "/new_doctor", "/doctor_dashboard",
         "/doctor_authenticate", "/doctor_change", "/doctor_update", "/doctor_view", "/doctor_edit",
-        "/doctor_password", "/doctor_appointment", "/appointment", "/appointment_update", "/appointments"
+        "/doctor_password", "/doctor_appointment", "/appointment", "/appointment_update", "/appointments",
+        "/doctor_appointments"
 })
 public class DoctorController extends HttpServlet {
     private DoctorDao doctorDao;
@@ -81,6 +82,9 @@ public class DoctorController extends HttpServlet {
                     break;
                 case "/doctor_appointment":
                     doctorsAppointment(request, response);
+                    break;
+                case "/doctor_appointments":
+                    doctorsAppointments(request, response);
                     break;
                 case "/appointment":
                     viewUserAppointment(request, response);
@@ -269,6 +273,15 @@ public class DoctorController extends HttpServlet {
         List<Appointment> appointmentList = appointmentDao.selectDoctorAppointments(userID);
         request.setAttribute("appointmentList", appointmentList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/doctor/doctor_appointment.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void doctorsAppointments(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Doctor doctor = (Doctor) request.getSession().getAttribute("doctor");
+        String userID = doctor.getUserID();
+        List<Appointment> appointmentList = appointmentDao.selectDoctorAppointments(userID);
+        request.setAttribute("appointmentList", appointmentList);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/doctor/doctor_appointments.jsp");
         dispatcher.forward(request, response);
     }
 
