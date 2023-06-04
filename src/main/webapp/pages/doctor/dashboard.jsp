@@ -44,14 +44,14 @@
     <%--<p class="text-center fs-3">Dashboard</p>--%>
     <div class="row dash">
       <div class="col-md-4 offset-md-2">
-        <a href="<%=request.getContextPath()%>/book_appointment">
+        <a href="<%=request.getContextPath()%>/doctor_appointment">
           <div class="card register_card">
             <div class="card-body text-center">
               <br/>
-              <i class="fa-solid fa-calendar-plus fa-3x"></i>
+              <i class="fa-solid fa-calendar-day fa-3x"></i>
               <br/>
               <br/>
-              <p class="fs-4 text-center"> Book <br/> Appointment</p>
+              <p class="fs-4 text-center"> Assigned <br/> Appointment</p>
             </div>
           </div>
         </a>
@@ -62,10 +62,10 @@
           <div class="card register_card">
             <div class="card-body text-center">
               <br/>
-              <i class="fa-solid fa-calendar-check fa-3x"></i>
+              <i class="fa-solid fa-calendar-days fa-3x"></i>
               <br/>
               <br/>
-              <p class="fs-4 text-center"> My <br/> Appointments</p>
+              <p class="fs-4 text-center"> Appointments <br/> History </p>
             </div>
           </div>
         </a>
