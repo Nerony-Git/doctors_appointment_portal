@@ -129,7 +129,7 @@ public class DoctorController extends HttpServlet {
         HttpSession session = request.getSession();
         session.removeAttribute("doctor");
         session.setAttribute("successMsg", "Successfully Logout");
-        response.sendRedirect("pages/doctor/doctor_login.jsp");
+        response.sendRedirect("doctor_login");
     }
 
     private void doctorLogin(HttpServletRequest request, HttpServletResponse response) throws  ServletException, IOException {
@@ -241,10 +241,10 @@ public class DoctorController extends HttpServlet {
             Doctor updateUserObject = doctorDao.getDoctorByID(userID);
             session.setAttribute("successMsg", "Profile details updated successfully");
             session.setAttribute("user", updateUserObject);
-            response.sendRedirect("user_edit");
+            response.sendRedirect("doctor_edit");
         } else {
             session.setAttribute("errorMsg", "Profile details failed to update");
-            response.sendRedirect("user_edit");
+            response.sendRedirect("doctor_edit");
         }
     }
 
