@@ -24,7 +24,7 @@ import java.util.List;
 @WebServlet({
         "/doctor_login", "/doctor_logout", "/doctor_register", "/new_doctor", "/doctor_dashboard",
         "/doctor_authenticate", "/doctor_change", "/doctor_update", "/doctor_view", "/doctor_edit",
-        "/doctor_password", "/doctor_appointment", "/appointment", "/appointment_update"
+        "/doctor_password", "/doctor_appointment", "/appointment", "/appointment_update", "/appointments"
 })
 public class DoctorController extends HttpServlet {
     private DoctorDao doctorDao;
@@ -87,6 +87,9 @@ public class DoctorController extends HttpServlet {
                     break;
                 case "/appointment_update":
                     doctorUpdateAppointment(request, response);
+                    break;
+                case "/appointments":
+                    userAppointment(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/doctor/doctor_login.jsp");
@@ -277,6 +280,14 @@ public class DoctorController extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    private void userAppointment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int appointmentID = Integer.parseInt(request.getParameter("id"));
+        Appointment appointment = appointmentDao.getAppointment(appointmentID);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/doctor/view_appointment.jsp");
+        request.setAttribute("appointment", appointment);
+        dispatcher.forward(request, response);
+    }
+
     private void doctorUpdateAppointment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String status = request.getParameter("status");
         String responses = request.getParameter("response");
@@ -290,7 +301,7 @@ public class DoctorController extends HttpServlet {
 
             if (d) {
                 session.setAttribute("successMsg", "Appointment details updated successfully.");
-                response.sendRedirect("appointment?id=" + appointmentID);
+                response.sendRedirect("appointments?id=" + appointmentID);
             } else {
                 session.setAttribute("errorMsg", "Failed to update appointment details.");
                 response.sendRedirect("appointment?id=" + appointmentID);
