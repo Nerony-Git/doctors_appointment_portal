@@ -108,15 +108,15 @@
                                 <span class="input-group-text" id="uContact"><i class="fa-solid fa-phone"></i></span>
                                 <input type="number" name="contact" maxlength="11" class="form-control" placeholder="Contact" aria-label="Phone Number" aria-describedby="uContact" required value="<c:out value="${doctor.contact}" />" />
                             </div>
-                            <label class="form-label">Address</label>
+                            <label class="form-label">Specialty</label>
                             <div class="input-group mb-3">
-                                <span class="input-group-text" id="uAddress"><i class="fa-solid fa-location-dot"></i></span>
-                                <input type="text" name="address" class="form-control" placeholder="Address" aria-label="Address" aria-describedby="uAddress" readonly  value="<c:out value="${doctor.speciality}" />"/>
+                                <span class="input-group-text" id="uAddress"><i class="fa-solid fa-stethoscope"></i></span>
+                                <input type="text" name="specialty" class="form-control" placeholder="Address" aria-label="Address" aria-describedby="uAddress" readonly  value="<c:out value="${doctor.speciality}" />"/>
                             </div>
-                            <label class="form-label">Post Code</label>
+                            <label class="form-label">Qualification</label>
                             <div class="input-group mb-3">
-                                <span class="input-group-text" id="uPostal"><i class="fa-solid fa-street-view"></i></span>
-                                <input type="text" name="postalAddress" class="form-control" placeholder="Postal Address" aria-label="Postal Address" aria-describedby="uAddress" required value="<c:out value="${doctor.qualification}" />" />
+                                <span class="input-group-text" id="uPostal"><i class="fa-solid fa-user-graduate"></i></span>
+                                <input type="text" name="qualification" class="form-control" placeholder="Postal Address" aria-label="Postal Address" aria-describedby="uAddress" required value="<c:out value="${doctor.qualification}" />" />
                             </div>
 
                             <button type="submit" class="btn bg_color text-white col-md-12"><i class="fa-solid fa-user-gear"></i> &nbsp; Update Profile </button>
