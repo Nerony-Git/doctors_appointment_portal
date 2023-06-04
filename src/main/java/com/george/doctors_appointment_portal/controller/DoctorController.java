@@ -270,7 +270,7 @@ public class DoctorController extends HttpServlet {
     private void doctorsAppointment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Doctor doctor = (Doctor) request.getSession().getAttribute("doctor");
         String userID = doctor.getUserID();
-        List<Appointment> appointmentList = appointmentDao.selectDoctorAppointments(userID);
+        List<Appointment> appointmentList = appointmentDao.selectDoctorAppointment(userID);
         request.setAttribute("appointmentList", appointmentList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/doctor/doctor_appointment.jsp");
         dispatcher.forward(request, response);
