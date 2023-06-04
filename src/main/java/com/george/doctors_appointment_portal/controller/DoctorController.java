@@ -21,7 +21,7 @@ import java.util.List;
 
 @WebServlet({
         "/doctor_login", "/doctor_logout", "/doctor_register", "/new_doctor", "/doctor_dashboard",
-        "/doctor_authenticate", "/doctor_change"
+        "/doctor_authenticate", "/doctor_change", "/doctor_update"
 })
 public class DoctorController extends HttpServlet {
     private DoctorDao doctorDao;
@@ -62,6 +62,9 @@ public class DoctorController extends HttpServlet {
                     break;
                 case "/doctor_change":
                     doctorChangePass(request, response);
+                    break;
+                case "/doctor_update":
+                    updateDoctor(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/doctor/doctor_login.jsp");
@@ -191,6 +194,32 @@ public class DoctorController extends HttpServlet {
             }
         } catch (Exception ex) {
             ex.printStackTrace();
+        }
+    }
+
+    private void updateDoctor(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        String userID = request.getParameter("userID");
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String otherName = request.getParameter("otherName");
+        LocalDate dob = LocalDate.parse(request.getParameter("dob"), df);
+        String contact = request.getParameter("contact");
+        String qualification = request.getParameter("qualification");
+        String email = request.getParameter("email");
+
+        Doctor updateUser = new Doctor(userID, firstName, lastName, otherName, dob, contact, qualification, email);
+        System.out.println(updateUser.getUserID());
+        boolean u = doctorDao.updateDoctor(updateUser);
+        HttpSession session = request.getSession();
+
+        if (u == true) {
+            Doctor updateUserObject = doctorDao.getDoctorByID(userID);
+            session.setAttribute("successMsg", "Profile details updated successfully");
+            session.setAttribute("user", updateUserObject);
+            response.sendRedirect("user_edit");
+        } else {
+            session.setAttribute("errorMsg", "Profile details failed to update");
+            response.sendRedirect("user_edit");
         }
     }
 
