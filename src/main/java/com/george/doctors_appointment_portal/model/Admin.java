@@ -1,6 +1,7 @@
 package com.george.doctors_appointment_portal.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class Admin implements Serializable {
 
@@ -9,7 +10,7 @@ public class Admin implements Serializable {
     private String firstName;
     private String lastName;
     private String otherName;
-    private String dob;
+    private LocalDate dob;
     private String email;
     private String contact;
     private String username;
@@ -47,11 +48,11 @@ public class Admin implements Serializable {
         this.otherName = otherName;
     }
 
-    public String getDob() {
+    public LocalDate getDob() {
         return dob;
     }
 
-    public void setDob(String dob) {
+    public void setDob(LocalDate dob) {
         this.dob = dob;
     }
 
