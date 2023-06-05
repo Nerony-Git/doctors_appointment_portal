@@ -84,9 +84,9 @@ public class AdminController extends HttpServlet {
 
     private void adminLogout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        session.removeAttribute("user");
+        session.removeAttribute("admin");
         session.setAttribute("successMsg", "Successfully Logout");
-        response.sendRedirect("pages/admin/admin_login.jsp");
+        response.sendRedirect("admin_login");
     }
 
     private void adminLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -233,7 +233,7 @@ public class AdminController extends HttpServlet {
         if (u == true) {
             Admin updateUserObject = adminDao.getAdminByID(userID);
             session.setAttribute("successMsg", "Profile details updated successfully");
-            session.setAttribute("user", updateUserObject);
+            session.setAttribute("admin", updateUserObject);
             response.sendRedirect("admin_edit");
         } else {
             session.setAttribute("errorMsg", "Profile details failed to update");
