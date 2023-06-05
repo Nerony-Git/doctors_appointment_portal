@@ -19,6 +19,7 @@ public class UserDao {
     private static final String USER_BY_ID = "SELECT * FROM users WHERE userid = ?";
     private static final String GET_USERS_NAME = "SELECT first_name, last_name, other_name FROM users WHERE userid = ?";
     private static final String GET_LAST_USER_ID = "SELECT userid FROM users ORDER BY userid DESC LIMIT 1";
+    private static final String COUNT_ALL_USERS_SQL = "SELECT COUNT(*) AS user_count FROM users";
 
     public int registerUser(User users) throws ClassNotFoundException {
 
@@ -200,6 +201,20 @@ public class UserDao {
             }
         }
         return lastUserID;
+    }
+
+    public int totalUsers() throws SQLException{
+        int totalUsers = 0;
+
+        try (Connection connection = JDBCUtils.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(COUNT_ALL_USERS_SQL)){
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                totalUsers = resultSet.getInt("user_count");
+            }
+        }
+        return totalUsers;
     }
 
 }
