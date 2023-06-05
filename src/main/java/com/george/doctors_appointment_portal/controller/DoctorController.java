@@ -260,7 +260,7 @@ public class DoctorController extends HttpServlet {
         if (u == true) {
             Doctor updateUserObject = doctorDao.getDoctorByID(userID);
             session.setAttribute("successMsg", "Profile details updated successfully");
-            session.setAttribute("user", updateUserObject);
+            session.setAttribute("doctor", updateUserObject);
             response.sendRedirect("doctor_edit");
         } else {
             session.setAttribute("errorMsg", "Profile details failed to update");
