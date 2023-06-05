@@ -42,8 +42,8 @@
     </div>
     <div class="container p-5">
         <%--<p class="text-center fs-3">Dashboard</p>--%>
-        <div class="row dash">
-            <div class="col-md-4 offset-md-2">
+        <div class="row dash mb-5">
+            <div class="col-md-4">
                 <a href="<%=request.getContextPath()%>">
                     <div class="card register_card">
                         <div class="card-body text-center">
@@ -51,7 +51,8 @@
                             <i class="fa-solid fa-user-doctor fa-3x"></i>
                             <br/>
                             <br/>
-                            <p class="fs-4 text-center"> Doctors <br/> 
+                            <p class="fs-4 text-center"> Doctors <br/>
+                                <i class="fa-solid fa-cash-register"></i> &nbsp;${admin.totalDoctors}
                             </p>
                         </div>
                     </div>
@@ -66,7 +67,8 @@
                             <i class="fa-solid fa-users fa-3x"></i>
                             <br/>
                             <br/>
-                            <p class="fs-4 text-center"> Customers <br/> 
+                            <p class="fs-4 text-center"> Customers <br/>
+                                <i class="fa-solid fa-cash-register"></i> &nbsp;${admin.totalUsers}
                             </p>
                         </div>
                     </div>
@@ -81,13 +83,16 @@
                             <i class="fa-solid fa-stethoscope fa-3x"></i>
                             <br/>
                             <br/>
-                            <p class="fs-4 text-center"> Specialty <br/> 
+                            <p class="fs-4 text-center"> Specialty <br/>
+                                <i class="fa-solid fa-cash-register"></i> &nbsp;${admin.totalSpeciality}
                             </p>
                         </div>
                     </div>
                 </a>
             </div>
+        </div>
 
+        <div class="row dash">
             <div class="col-md-4">
                 <a href="<%=request.getContextPath()%>">
                     <div class="card register_card">
@@ -96,7 +101,8 @@
                             <i class="fa-solid fa-calendar-day fa-3x"></i>
                             <br/>
                             <br/>
-                            <p class="fs-4 text-center"> New <br/> Appointments <br/> 
+                            <p class="fs-4 text-center"> New <br/> Appointments <br/>
+                                <i class="fa-solid fa-cash-register"></i> &nbsp;${admin.totalAppointment}
                             </p>
                         </div>
                     </div>
@@ -111,7 +117,8 @@
                             <i class="fa-solid fa-calendar-days fa-3x"></i>
                             <br/>
                             <br/>
-                            <p class="fs-4 text-center"> Appointments <br/> History <br/> 
+                            <p class="fs-4 text-center"> Appointments <br/> History <br/>
+                                <i class="fa-solid fa-cash-register"></i> &nbsp;${admin.totalAppointments}
                             </p>
                         </div>
                     </div>
