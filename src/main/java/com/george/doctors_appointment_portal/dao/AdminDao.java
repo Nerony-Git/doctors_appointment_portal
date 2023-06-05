@@ -21,6 +21,7 @@ public class AdminDao {
     private static final String OLD_PASSWORD_SQL = "SELECT * FROM admin WHERE userid = ? and password = ?";
     private static final String UPDATE_PASSWORD_SQL = "UPDATE admin SET password = ? WHERE userid = ?";
     private static final String UPDATE_ADMIN_SQL = "UPDATE admin SET first_name = ?, last_name = ?, other_name = ?, dob = ?, contact = ?, email = ? WHERE userid = ?";
+    private static final String ADMIN_BY_ID_SQL = "SELECT * FROM admin WHERE userid = ?";
 
     public int registerAdmin(Admin admin) throws ClassNotFoundException {
 
@@ -155,5 +156,41 @@ public class AdminDao {
             u = preparedStatement.executeUpdate() > 0;
         }
         return u;
+    }
+
+    public Admin getAdminByID(String userID) throws SQLException {
+        Admin admin = null;
+        int totalUsers = userDao.totalUsers();
+        int totalDoctors = doctorDao.totalDoctors();
+        int totalAppointments = appointmentDao.totalAppointments();
+        int totalAppointment = appointmentDao.totalAppointment();
+        int totalSpecialty = specialityDao.totalSpecialties();
+
+        try (Connection connection = JDBCUtils.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(ADMIN_BY_ID_SQL)){
+            preparedStatement.setString(1, userID);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                admin = new Admin();
+
+                admin.setUserID(resultSet.getString("userid"));
+                admin.setFirstName(resultSet.getString("first_name"));
+                admin.setLastName(resultSet.getString("last_name"));
+                admin.setOtherName(resultSet.getString("other_name"));
+                admin.setUsername(resultSet.getString("username"));
+                admin.setDob(resultSet.getDate("dob").toLocalDate());
+                admin.setContact(resultSet.getString("contact"));
+                admin.setEmail(resultSet.getString("email"));
+                admin.setTotalUsers(totalUsers);
+                admin.setTotalDoctors(totalDoctors);
+                admin.setTotalAppointments(totalAppointments);
+                admin.setTotalAppointment(totalAppointment);
+                admin.setTotalSpeciality(totalSpecialty);
+
+            }
+        }
+        return admin;
     }
 }
