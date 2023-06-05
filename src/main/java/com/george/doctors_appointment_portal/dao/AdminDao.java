@@ -1,6 +1,7 @@
 package com.george.doctors_appointment_portal.dao;
 
 import com.george.doctors_appointment_portal.model.Admin;
+import com.george.doctors_appointment_portal.model.Doctor;
 import com.george.doctors_appointment_portal.utils.JDBCUtils;
 
 import java.sql.Connection;
@@ -19,6 +20,7 @@ public class AdminDao {
     private static final String GET_LAST_ADMIN_ID_SQL = "SELECT userid FROM admin ORDER BY userid DESC LIMIT 1";
     private static final String OLD_PASSWORD_SQL = "SELECT * FROM admin WHERE userid = ? and password = ?";
     private static final String UPDATE_PASSWORD_SQL = "UPDATE admin SET password = ? WHERE userid = ?";
+    private static final String UPDATE_ADMIN_SQL = "UPDATE admin SET first_name = ?, last_name = ?, other_name = ?, dob = ?, contact = ?, email = ? WHERE userid = ?";
 
     public int registerAdmin(Admin admin) throws ClassNotFoundException {
 
@@ -135,5 +137,23 @@ public class AdminDao {
             e.printStackTrace();
         }
         return n;
+    }
+
+    public boolean updateAdmin(Admin admin) throws SQLException {
+        boolean u;
+
+        try (Connection connection = JDBCUtils.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ADMIN_SQL)){
+            preparedStatement.setString(1, admin.getFirstName());
+            preparedStatement.setString(2, admin.getLastName());
+            preparedStatement.setString(3, admin.getOtherName());
+            preparedStatement.setDate(4, JDBCUtils.getSQLDate(admin.getDob()));
+            preparedStatement.setString(5, admin.getContact());
+            preparedStatement.setString(6, admin.getEmail());
+            preparedStatement.setString(7, admin.getUserID());
+            System.out.println(preparedStatement);
+            u = preparedStatement.executeUpdate() > 0;
+        }
+        return u;
     }
 }
