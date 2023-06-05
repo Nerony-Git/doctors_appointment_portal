@@ -142,9 +142,10 @@ public class AdminController extends HttpServlet {
             int result = adminDao.registerAdmin(newUser);
             if (result == 1) {
                 session.setAttribute("successMsg", "Registered Successfully");
-                response.sendRedirect("doctor_login");
+                response.sendRedirect("admin_login");
             } else {
                 session.setAttribute("errorMsg", "Registration Failed. Try Again");
+                response.sendRedirect("admin_register");
             }
         } catch (Exception e) {
             //TODO Auto-genrated catch block
