@@ -13,12 +13,15 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @WebServlet({
         "/admin_login", "/admin_logout", "/admin_register", "/admin_authenticate", "/admin_dashboard"
 })
 public class AdminController extends HttpServlet {
     private AdminDao adminDao;
+    private static final DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public void init(){
         adminDao = new AdminDao();
@@ -49,6 +52,9 @@ public class AdminController extends HttpServlet {
                     break;
                 case "/admin_dashboard":
                     adminDashboard(request, response);
+                    break;
+                case "/new_admin":
+                    newAdmin(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/admin_login.jsp");
@@ -107,6 +113,42 @@ public class AdminController extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/dashboard.jsp");
         dispatcher.forward(request, response);
 
+    }
+
+    private void newAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String otherName = request.getParameter("otherName");
+        LocalDate dob = LocalDate.parse(request.getParameter("dob"), df);
+        String contact = request.getParameter("contact");
+        String email = request.getParameter("email");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+
+        HttpSession session = request.getSession();
+
+        Admin newUser = new Admin();
+        newUser.setFirstName(firstName);
+        newUser.setLastName(lastName);
+        newUser.setOtherName(otherName);
+        newUser.setDob(dob);
+        newUser.setContact(contact);
+        newUser.setEmail(email);
+        newUser.setUsername(username);
+        newUser.setPassword(password);
+
+        try {
+            int result = adminDao.registerAdmin(newUser);
+            if (result == 1) {
+                session.setAttribute("successMsg", "Registered Successfully");
+                response.sendRedirect("doctor_login");
+            } else {
+                session.setAttribute("errorMsg", "Registration Failed. Try Again");
+            }
+        } catch (Exception e) {
+            //TODO Auto-genrated catch block
+            e.printStackTrace();
+        }
     }
 
 }
