@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet({
-        "/admin_login", "/admin_logout", "/admin_register"
+        "/admin_login", "/admin_logout", "/admin_register", "/admin_authenticate", "/admin_dashboard"
 })
 public class AdminController extends HttpServlet {
     private AdminDao adminDao;
@@ -46,6 +46,9 @@ public class AdminController extends HttpServlet {
                     break;
                 case "/admin_authenticate":
                     adminAuthenticate(request, response);
+                    break;
+                case "/admin_dashboard":
+                    adminDashboard(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/admin_login.jsp");
@@ -97,6 +100,12 @@ public class AdminController extends HttpServlet {
         } catch (SQLException | ClassNotFoundException ex) {
             throw new ServletException(ex);
         }
+
+    }
+
+    private void adminDashboard(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/dashboard.jsp");
+        dispatcher.forward(request, response);
 
     }
 
