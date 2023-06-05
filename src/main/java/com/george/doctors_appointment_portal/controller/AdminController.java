@@ -17,7 +17,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @WebServlet({
-        "/admin_login", "/admin_logout", "/admin_register", "/admin_authenticate", "/admin_dashboard"
+        "/admin_login", "/admin_logout", "/admin_register", "/admin_authenticate", "/admin_dashboard",
+        "/new_admin"
 })
 public class AdminController extends HttpServlet {
     private AdminDao adminDao;
