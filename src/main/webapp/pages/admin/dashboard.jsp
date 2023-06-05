@@ -44,28 +44,75 @@
         <%--<p class="text-center fs-3">Dashboard</p>--%>
         <div class="row dash">
             <div class="col-md-4 offset-md-2">
-                <a href="<%=request.getContextPath()%>/doctor_appointment">
+                <a href="<%=request.getContextPath()%>">
                     <div class="card register_card">
                         <div class="card-body text-center">
                             <br/>
-                            <i class="fa-solid fa-calendar-day fa-3x"></i>
+                            <i class="fa-solid fa-user-doctor fa-3x"></i>
                             <br/>
                             <br/>
-                            <p class="fs-4 text-center"> Assigned <br/> Appointment</p>
+                            <p class="fs-4 text-center"> Doctors <br/> 
+                            </p>
                         </div>
                     </div>
                 </a>
             </div>
 
             <div class="col-md-4">
-                <a href="<%=request.getContextPath()%>/doctor_appointments">
+                <a href="<%=request.getContextPath()%>">
+                    <div class="card register_card">
+                        <div class="card-body text-center">
+                            <br/>
+                            <i class="fa-solid fa-users fa-3x"></i>
+                            <br/>
+                            <br/>
+                            <p class="fs-4 text-center"> Customers <br/> 
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4">
+                <a href="<%=request.getContextPath()%>">
+                    <div class="card register_card">
+                        <div class="card-body text-center">
+                            <br/>
+                            <i class="fa-solid fa-stethoscope fa-3x"></i>
+                            <br/>
+                            <br/>
+                            <p class="fs-4 text-center"> Specialty <br/> 
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4">
+                <a href="<%=request.getContextPath()%>">
+                    <div class="card register_card">
+                        <div class="card-body text-center">
+                            <br/>
+                            <i class="fa-solid fa-calendar-day fa-3x"></i>
+                            <br/>
+                            <br/>
+                            <p class="fs-4 text-center"> New <br/> Appointments <br/> 
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4">
+                <a href="<%=request.getContextPath()%>">
                     <div class="card register_card">
                         <div class="card-body text-center">
                             <br/>
                             <i class="fa-solid fa-calendar-days fa-3x"></i>
                             <br/>
                             <br/>
-                            <p class="fs-4 text-center"> Appointments <br/> History </p>
+                            <p class="fs-4 text-center"> Appointments <br/> History <br/> 
+                            </p>
                         </div>
                     </div>
                 </a>
