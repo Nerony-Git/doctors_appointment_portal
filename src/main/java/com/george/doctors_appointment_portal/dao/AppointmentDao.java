@@ -22,6 +22,7 @@ public class AppointmentDao {
     private static final String DELETE_APPOINTMENT_BY_ID_SQL = "DELETE FROM appointments WHERE sn = ?";
     private static final String UPDATE_APPOINTMENT_BY_ID_SQL = "UPDATE appointments SET userid = ?, speciality_id = ?, doctor_id = ?, appointment_date = ?, description = ?, status = ?, response = ? WHERE sn = ?";
     private static final String UPDATE_APPOINTMENT_BY_DOCTOR_SQL = "UPDATE appointments SET status = ?, response =? WHERE sn = ?";
+    private static final String COUNT_ALL_APPOINTMENTS_SQL = "SELECT COUNT(*) AS appointment_count FROM appointments";
 
     private SpecialityDao specialityDao = new SpecialityDao();
     private DoctorDao doctorDao = new DoctorDao();
@@ -251,6 +252,20 @@ public class AppointmentDao {
             doctorUpdated = preparedStatement.executeUpdate() > 0;
         }
         return doctorUpdated;
+    }
+
+    public int totalAppointments() throws SQLException{
+        int totalAppointments = 0;
+
+        try (Connection connection = JDBCUtils.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(COUNT_ALL_APPOINTMENTS_SQL)){
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                totalAppointments = resultSet.getInt("appointment_count");
+            }
+        }
+        return totalAppointments;
     }
 
 }
