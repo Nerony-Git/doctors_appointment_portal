@@ -9,8 +9,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AdminDao {
+
+    private static final String INSERT_ADMIN_SQL = "INSERT INTO admin (userid, first_name, last_name, other_name, dob, email, contact, username, password) VALUES (?,?,?,?,?,?,?,?,?);";
+    private static final String LOGIN_ADMIN_SQL = "SELECT * FROM admin WHERE username = ? and password =?";
     public int registerAdmin(Admin admin) throws ClassNotFoundException {
-        String INSERT_ADMIN_SQL = "INSERT INTO admin (userID, firstName, lastName, otherName, dob, email, contact, username, password) VALUES (?,?,?,?,?,?,?,?,?);";
+
         int result = 0;
         try (Connection connection = JDBCUtils.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_ADMIN_SQL)) {
@@ -18,7 +21,7 @@ public class AdminDao {
                 preparedStatement.setString(2, admin.getFirstName());
                 preparedStatement.setString(3, admin.getLastName());
                 preparedStatement.setString(4, admin.getOtherName());
-                preparedStatement.setString(5, admin.getDob());
+                preparedStatement.setDate(5, JDBCUtils.getSQLDate(admin.getDob()));
                 preparedStatement.setString(6, admin.getEmail());
                 preparedStatement.setString(7, admin.getContact());
                 preparedStatement.setString(8, admin.getUsername());
@@ -35,7 +38,6 @@ public class AdminDao {
 
     public Admin validateAdmin(String username, String password) throws SQLException, ClassNotFoundException {
         Admin admin = null;
-        String LOGIN_ADMIN_SQL = "SELECT * FROM admin WHERE username = ? and password =?";
 
         Class.forName("org.postgresql.ds.PGConnectPoolDataSource");
         try (Connection connection = JDBCUtils.getConnection();
@@ -47,8 +49,14 @@ public class AdminDao {
                 ResultSet rs = preparedStatement.executeQuery();
                 if (rs.next()) {
                     admin = new Admin();
+                    admin.setUsername(rs.getString("userid"));
+                    admin.setFirstName(rs.getString("first_name"));
+                    admin.setLastName(rs.getString("last_name"));
+                    admin.setOtherName(rs.getString("other_name"));
+                    admin.setDob(rs.getDate("dob").toLocalDate());
+                    admin.setEmail(rs.getString("email"));
+                    admin.setContact(rs.getString("contact"));
                     admin.setUsername(rs.getString("username"));
-                    admin.setFirstName(rs.getString("firstName"));
                 }
         } catch (SQLException e) {
             JDBCUtils.printSQLException(e);
