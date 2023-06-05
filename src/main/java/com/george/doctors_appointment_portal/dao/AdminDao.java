@@ -18,6 +18,7 @@ public class AdminDao {
     private static final String LOGIN_ADMIN_SQL = "SELECT * FROM admin WHERE username = ? and password =?";
     private static final String GET_LAST_ADMIN_ID_SQL = "SELECT userid FROM admin ORDER BY userid DESC LIMIT 1";
     private static final String OLD_PASSWORD_SQL = "SELECT * FROM admin WHERE userid = ? and password = ?";
+    private static final String UPDATE_PASSWORD_SQL = "UPDATE admin SET password = ? WHERE userid = ?";
 
     public int registerAdmin(Admin admin) throws ClassNotFoundException {
 
@@ -118,5 +119,21 @@ public class AdminDao {
             }
         }
         return o;
+    }
+
+    public boolean changeAdminPassword(String userID, String newPassword) throws SQLException {
+        boolean n = false;
+
+        try (Connection connection = JDBCUtils.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PASSWORD_SQL)){
+            preparedStatement.setString(1, newPassword);
+            preparedStatement.setString(2, userID);
+
+            preparedStatement.executeUpdate();
+            n = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return n;
     }
 }
