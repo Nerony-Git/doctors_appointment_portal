@@ -137,6 +137,7 @@ public class DoctorController extends HttpServlet {
                 response.sendRedirect("doctor_login");
             } else {
                 session.setAttribute("errorMsg", "Registration Failed. Try Again");
+                response.sendRedirect("doctor_register");
             }
         } catch (Exception e) {
             //TODO Auto-genrated catch block
