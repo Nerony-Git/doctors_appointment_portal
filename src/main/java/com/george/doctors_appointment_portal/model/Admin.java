@@ -15,6 +15,51 @@ public class Admin implements Serializable {
     private String contact;
     private String username;
     private String password;
+    private int totalUsers;
+    private int totalDoctors;
+    private int totalAppointments;
+    private int totalAppointment;
+    private int totalSpeciality;
+
+    public int getTotalSpeciality() {
+        return totalSpeciality;
+    }
+
+    public void setTotalSpeciality(int totalSpeciality) {
+        this.totalSpeciality = totalSpeciality;
+    }
+
+    public int getTotalUsers() {
+        return totalUsers;
+    }
+
+    public void setTotalUsers(int totalUsers) {
+        this.totalUsers = totalUsers;
+    }
+
+    public int getTotalDoctors() {
+        return totalDoctors;
+    }
+
+    public void setTotalDoctors(int totalDoctors) {
+        this.totalDoctors = totalDoctors;
+    }
+
+    public int getTotalAppointments() {
+        return totalAppointments;
+    }
+
+    public void setTotalAppointments(int totalAppointments) {
+        this.totalAppointments = totalAppointments;
+    }
+
+    public int getTotalAppointment() {
+        return totalAppointment;
+    }
+
+    public void setTotalAppointment(int totalAppointment) {
+        this.totalAppointment = totalAppointment;
+    }
 
     public String getUserID() {
         return userID;
