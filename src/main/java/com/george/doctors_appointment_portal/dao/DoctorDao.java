@@ -20,6 +20,7 @@ public class DoctorDao {
     private static final String UPDATE_PASSWORD_SQL = "UPDATE doctors SET password = ? WHERE userid = ?";
     private static final String UPDATE_DOCTOR_SQL = "UPDATE doctors SET first_name = ?, last_name = ?, other_name = ?, dob = ?, contact = ?, qualification = ?, email = ? WHERE userid = ?";
     private static final String DOCTOR_BY_ID = "SELECT * FROM doctors WHERE userid = ?";
+    private static final String COUNT_ALL_DOCTORS_SQL = "SELECT COUNT(*) AS doctor_count FROM doctors";
 
     private SpecialityDao specialityDao = new SpecialityDao();
 
@@ -206,6 +207,20 @@ public class DoctorDao {
             }
         }
         return doctor;
+    }
+
+    public int totalDoctors() throws SQLException{
+        int totalDoctors = 0;
+
+        try (Connection connection = JDBCUtils.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(COUNT_ALL_DOCTORS_SQL)){
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                totalDoctors = resultSet.getInt("doctor_count");
+            }
+        }
+        return totalDoctors;
     }
 
 }
