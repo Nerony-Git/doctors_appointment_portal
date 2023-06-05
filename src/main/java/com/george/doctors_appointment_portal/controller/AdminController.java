@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 
 @WebServlet({
         "/admin_login", "/admin_logout", "/admin_register", "/admin_authenticate", "/admin_dashboard",
-        "/new_admin", "/admin_view", "/admin_edit"
+        "/new_admin", "/admin_view", "/admin_edit", "/admin_password"
 })
 public class AdminController extends HttpServlet {
     private AdminDao adminDao;
@@ -62,6 +62,9 @@ public class AdminController extends HttpServlet {
                     break;
                 case "/admin_edit":
                     adminEdit(request, response);
+                    break;
+                case "/admin_password":
+                    adminPassword(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/admin_login.jsp");
@@ -167,6 +170,12 @@ public class AdminController extends HttpServlet {
 
     private void adminEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/admin_edit.jsp");
+        dispatcher.forward(request, response);
+
+    }
+
+    private void adminPassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/admin_password.jsp");
         dispatcher.forward(request, response);
 
     }
