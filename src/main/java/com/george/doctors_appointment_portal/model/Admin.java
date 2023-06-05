@@ -21,6 +21,20 @@ public class Admin implements Serializable {
     private int totalAppointment;
     private int totalSpeciality;
 
+    public Admin(){
+
+    }
+    public Admin(String userID, String firstName, String lastName, String otherName, LocalDate dob, String contact, String email) {
+        super();
+        this.userID = userID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.otherName = otherName;
+        this.dob = dob;
+        this.contact = contact;
+        this.email = email;
+    }
+
     public int getTotalSpeciality() {
         return totalSpeciality;
     }
