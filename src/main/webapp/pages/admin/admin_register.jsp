@@ -81,7 +81,7 @@
                                     <label class="form-label">Email</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="eMail"><i class="fa-solid fa-envelope"></i></span>
-                                        <input type="email" name="userEmail" class="form-control" placeholder="Email Address" aria-label="Email Address" aria-describedby="eMail" required />
+                                        <input type="email" name="email" class="form-control" placeholder="Email Address" aria-label="Email Address" aria-describedby="eMail" required />
                                     </div>
                                     <label class="form-label">Contact</label>
                                     <div class="input-group mb-3">
