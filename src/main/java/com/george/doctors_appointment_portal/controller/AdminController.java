@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 
 @WebServlet({
         "/admin_login", "/admin_logout", "/admin_register", "/admin_authenticate", "/admin_dashboard",
-        "/new_admin"
+        "/new_admin", "/admin_view"
 })
 public class AdminController extends HttpServlet {
     private AdminDao adminDao;
@@ -56,6 +56,9 @@ public class AdminController extends HttpServlet {
                     break;
                 case "/new_admin":
                     newAdmin(request, response);
+                    break;
+                case "/admin_view":
+                    adminView(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/admin_login.jsp");
@@ -151,6 +154,12 @@ public class AdminController extends HttpServlet {
             //TODO Auto-genrated catch block
             e.printStackTrace();
         }
+    }
+
+    private void adminView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/admin_view.jsp");
+        dispatcher.forward(request, response);
+
     }
 
 }
