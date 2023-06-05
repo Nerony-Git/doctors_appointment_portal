@@ -16,6 +16,7 @@ public class SpecialityDao {
     private static final String SELECT_SPECIALITY_BY_ID = "SELECT * FROM speciality WHERE sid = ?";
     private static final String GET_SPECIALITY_NAME = "SELECT speciality_name FROM speciality WHERE sid = ?";
     private static final String INSERT_SPECIALITY = "INSERT INTO speciality (sid, speciality_name) VALUES (?, ?)";
+    private static final String COUNT_ALL_SPECIALITY_SQL = "SELECT COUNT(*) AS speciality_count FROM speciality";
 
     public void insertSpeciality(Speciality speciality) throws SQLException {
         try (Connection connection = JDBCUtils.getConnection();
@@ -81,5 +82,19 @@ public class SpecialityDao {
             }
         }
         return specialityName;
+    }
+
+    public int totalSpecialties() throws SQLException{
+        int totalSpecialties = 0;
+
+        try (Connection connection = JDBCUtils.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(COUNT_ALL_SPECIALITY_SQL)){
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                totalSpecialties = resultSet.getInt("speciality_count");
+            }
+        }
+        return totalSpecialties;
     }
 }
