@@ -12,12 +12,22 @@ public class AdminDao {
 
     private static final String INSERT_ADMIN_SQL = "INSERT INTO admin (userid, first_name, last_name, other_name, dob, email, contact, username, password) VALUES (?,?,?,?,?,?,?,?,?);";
     private static final String LOGIN_ADMIN_SQL = "SELECT * FROM admin WHERE username = ? and password =?";
+    private static final String GET_LAST_ADMIN_ID_SQL = "SELECT userid FROM admin ORDER BY userid DESC LIMIT 1";
+
     public int registerAdmin(Admin admin) throws ClassNotFoundException {
 
         int result = 0;
         try (Connection connection = JDBCUtils.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_ADMIN_SQL)) {
-                preparedStatement.setString(1, admin.getUserID());
+                String lastUserID = getLastAdminID();
+                String newUserID;
+                if (lastUserID == null) {
+                    newUserID = "ADM0001"; // Default ID if no records exist
+                } else {
+                    int id = Integer.parseInt(lastUserID.substring(3)) + 1;
+                    newUserID = "ADM" + String.format("%04d", id);
+                }
+                preparedStatement.setString(1, newUserID);
                 preparedStatement.setString(2, admin.getFirstName());
                 preparedStatement.setString(3, admin.getLastName());
                 preparedStatement.setString(4, admin.getOtherName());
@@ -62,5 +72,19 @@ public class AdminDao {
             JDBCUtils.printSQLException(e);
         }
         return admin;
+    }
+
+    public String getLastAdminID() throws SQLException {
+        String lastUserID = null;
+
+        try (Connection connection = JDBCUtils.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(GET_LAST_ADMIN_ID_SQL)){
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()){
+                lastUserID = resultSet.getString("userid");
+            }
+        }
+        return lastUserID;
     }
 }
