@@ -32,7 +32,7 @@
                             <div class="card-header text-center text-white bg_color">
                                 <p class="fs-4 text-center text-white mt-2">
                                     <i class="fa fa-universal-access"></i> &nbsp;
-                                    Administrators Login
+                                    Administrator Login
                                 </p>
                             </div>
                             <div class="card-body">
@@ -51,7 +51,7 @@
                                 <!-- End Error Message -->
 
                                 <!-- Form -->
-                                <form action="" method="post">
+                                <form action="<%=request.getContextPath()%>/admin_authenticate" method="post">
                                     <label class="form-label">Username</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="uName"><i class="fa fa-tags"></i></span>
