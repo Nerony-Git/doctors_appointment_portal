@@ -10,6 +10,10 @@ import java.sql.SQLException;
 
 public class AdminDao {
 
+    private UserDao userDao = new UserDao();
+    private DoctorDao doctorDao = new DoctorDao();
+    private AppointmentDao appointmentDao = new AppointmentDao();
+    private SpecialityDao specialityDao = new SpecialityDao();
     private static final String INSERT_ADMIN_SQL = "INSERT INTO admin (userid, first_name, last_name, other_name, dob, email, contact, username, password) VALUES (?,?,?,?,?,?,?,?,?);";
     private static final String LOGIN_ADMIN_SQL = "SELECT * FROM admin WHERE username = ? and password =?";
     private static final String GET_LAST_ADMIN_ID_SQL = "SELECT userid FROM admin ORDER BY userid DESC LIMIT 1";
@@ -48,6 +52,11 @@ public class AdminDao {
 
     public Admin validateAdmin(String username, String password) throws SQLException, ClassNotFoundException {
         Admin admin = null;
+        int totalUsers = userDao.totalUsers();
+        int totalDoctors = doctorDao.totalDoctors();
+        int totalAppointments = appointmentDao.totalAppointments();
+        int totalAppointment = appointmentDao.totalAppointment();
+        int totalSpecialty = specialityDao.totalSpecialties();
 
         try (Connection connection = JDBCUtils.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(LOGIN_ADMIN_SQL)) {
@@ -66,6 +75,11 @@ public class AdminDao {
                     admin.setEmail(rs.getString("email"));
                     admin.setContact(rs.getString("contact"));
                     admin.setUsername(rs.getString("username"));
+                    admin.setTotalUsers(totalUsers);
+                    admin.setTotalDoctors(totalDoctors);
+                    admin.setTotalAppointments(totalAppointments);
+                    admin.setTotalAppointment(totalAppointment);
+                    admin.setTotalSpeciality(totalSpecialty);
                 }
         } catch (SQLException e) {
             JDBCUtils.printSQLException(e);
