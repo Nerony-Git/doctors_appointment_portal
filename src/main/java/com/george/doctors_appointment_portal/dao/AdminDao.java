@@ -72,7 +72,7 @@ public class AdminDao {
                 ResultSet rs = preparedStatement.executeQuery();
                 if (rs.next()) {
                     admin = new Admin();
-                    admin.setUsername(rs.getString("userid"));
+                    admin.setUserID(rs.getString("userid"));
                     admin.setFirstName(rs.getString("first_name"));
                     admin.setLastName(rs.getString("last_name"));
                     admin.setOtherName(rs.getString("other_name"));
