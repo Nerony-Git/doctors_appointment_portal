@@ -49,7 +49,6 @@ public class AdminDao {
     public Admin validateAdmin(String username, String password) throws SQLException, ClassNotFoundException {
         Admin admin = null;
 
-        Class.forName("org.postgresql.ds.PGConnectPoolDataSource");
         try (Connection connection = JDBCUtils.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(LOGIN_ADMIN_SQL)) {
                 preparedStatement.setString(1, username);
