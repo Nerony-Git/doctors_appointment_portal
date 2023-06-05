@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 
 @WebServlet({
         "/admin_login", "/admin_logout", "/admin_register", "/admin_authenticate", "/admin_dashboard",
-        "/new_admin", "/admin_view", "/admin_edit", "/admin_password"
+        "/new_admin", "/admin_view", "/admin_edit", "/admin_password", "/admin_change"
 })
 public class AdminController extends HttpServlet {
     private AdminDao adminDao;
@@ -65,6 +65,9 @@ public class AdminController extends HttpServlet {
                     break;
                 case "/admin_password":
                     adminPassword(request, response);
+                    break;
+                case "/admin_change":
+                    adminChangePass(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/admin_login.jsp");
@@ -178,6 +181,36 @@ public class AdminController extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/admin_password.jsp");
         dispatcher.forward(request, response);
 
+    }
+
+    private void adminChangePass(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        String userID = request.getParameter("userID");
+        String newPassword = request.getParameter("password");
+        String oldPassword = request.getParameter("password2");
+
+        try {
+            HttpSession session = request.getSession();
+
+            if (adminDao.validateAdminOldPassword(userID, oldPassword)) {
+
+                if (adminDao.changeAdminPassword(userID, newPassword)) {
+
+                    session.setAttribute("successMsg", "Password successfully changed.");
+                    session.removeAttribute("admin");
+                    response.sendRedirect("admin_login");
+
+                } else {
+                    session.setAttribute("errorMsg", "Password change failed.");
+                    response.sendRedirect("admin_password");
+                }
+
+            } else {
+                session.setAttribute("errorMsg", "Previous password does not match.");
+                response.sendRedirect("admin_password");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
 }
