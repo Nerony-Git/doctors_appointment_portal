@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 
 @WebServlet({
         "/admin_login", "/admin_logout", "/admin_register", "/admin_authenticate", "/admin_dashboard",
-        "/new_admin", "/admin_view", "/admin_edit", "/admin_password", "/admin_change"
+        "/new_admin", "/admin_view", "/admin_edit", "/admin_password", "/admin_change", "/admin_update"
 })
 public class AdminController extends HttpServlet {
     private AdminDao adminDao;
@@ -68,6 +68,9 @@ public class AdminController extends HttpServlet {
                     break;
                 case "/admin_change":
                     adminChangePass(request, response);
+                    break;
+                case "/admin_update":
+                    updateAdmin(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/admin_login.jsp");
@@ -210,6 +213,31 @@ public class AdminController extends HttpServlet {
             }
         } catch (Exception ex) {
             ex.printStackTrace();
+        }
+    }
+
+    private void updateAdmin(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        String userID = request.getParameter("userID");
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String otherName = request.getParameter("otherName");
+        LocalDate dob = LocalDate.parse(request.getParameter("dob"), df);
+        String contact = request.getParameter("contact");
+        String email = request.getParameter("email");
+
+        Admin updateUser = new Admin(userID, firstName, lastName, otherName, dob, contact, email);
+        System.out.println(updateUser.getUserID());
+        boolean u = adminDao.updateAdmin(updateUser);
+        HttpSession session = request.getSession();
+
+        if (u == true) {
+            Admin updateUserObject = adminDao.getAdminByID(userID);
+            session.setAttribute("successMsg", "Profile details updated successfully");
+            session.setAttribute("user", updateUserObject);
+            response.sendRedirect("admin_edit");
+        } else {
+            session.setAttribute("errorMsg", "Profile details failed to update");
+            response.sendRedirect("admin_edit");
         }
     }
 
