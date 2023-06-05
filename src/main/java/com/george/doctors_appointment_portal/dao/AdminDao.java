@@ -17,6 +17,7 @@ public class AdminDao {
     private static final String INSERT_ADMIN_SQL = "INSERT INTO admin (userid, first_name, last_name, other_name, dob, email, contact, username, password) VALUES (?,?,?,?,?,?,?,?,?);";
     private static final String LOGIN_ADMIN_SQL = "SELECT * FROM admin WHERE username = ? and password =?";
     private static final String GET_LAST_ADMIN_ID_SQL = "SELECT userid FROM admin ORDER BY userid DESC LIMIT 1";
+    private static final String OLD_PASSWORD_SQL = "SELECT * FROM admin WHERE userid = ? and password = ?";
 
     public int registerAdmin(Admin admin) throws ClassNotFoundException {
 
@@ -99,5 +100,23 @@ public class AdminDao {
             }
         }
         return lastUserID;
+    }
+
+    public boolean validateAdminOldPassword(String userID, String oldPassword) throws SQLException {
+        boolean o = false;
+
+        try (Connection connection = JDBCUtils.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(OLD_PASSWORD_SQL)) {
+            preparedStatement.setString(1, userID);
+            preparedStatement.setString(2, oldPassword);
+
+            System.out.println(preparedStatement);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                o = true;
+            }
+        }
+        return o;
     }
 }
