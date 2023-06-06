@@ -28,7 +28,7 @@ import java.util.List;
         "/admin_login", "/admin_logout", "/admin_register", "/admin_authenticate", "/admin_dashboard",
         "/new_admin", "/admin_view", "/admin_edit", "/admin_password", "/admin_change", "/admin_update",
         "/doctors", "/users", "/specialties", "/new_appointments", "/view_appointments", "/add_user",
-        "/add_doctor", "/add_specialty", "/add_new_user"
+        "/add_doctor", "/add_specialty", "/add_new_user", "/edit_user"
 })
 public class AdminController extends HttpServlet {
     private AdminDao adminDao = new AdminDao();
@@ -113,6 +113,9 @@ public class AdminController extends HttpServlet {
                     break;
                 case "/add_new_user":
                     addUser(request, response);
+                    break;
+                case "/edit_user":
+                    editUser(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/admin_login.jsp");
@@ -374,6 +377,14 @@ public class AdminController extends HttpServlet {
             //TODO Auto-genrated catch block
             e.printStackTrace();
         }
+    }
+
+    private void editUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        String userID = request.getParameter("id");
+        User user = userDao.getUserByID(userID);
+        request.setAttribute("user", user);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/edit_user.jsp");
+        dispatcher.forward(request, response);
     }
 
 }
