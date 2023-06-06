@@ -66,7 +66,7 @@
                             <th scope="col">Doctor Name</th>
                             <th scope="col">Phone Number</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Action</th>
+                            <th scope="col" style="text-align: center">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -78,6 +78,7 @@
                                 <td><c:out value="${doctor.email}"/></td>
                                 <td>
                                     <div class="btn-group">
+                                        <a href="view?id=<c:out value="${doctor.userID}"/>" class="btn btn-sm btn-primary"><i class="fa-solid fa-eye"></i>&nbsp; View</a> &nbsp;
                                         <a href="edit?id=<c:out value="${doctor.userID}"/>" class="btn btn-sm btn-warning"><i class="fa-solid fa-handshake-angle"></i>&nbsp; Edit</a> &nbsp;
                                         <a href="delete?id=<c:out value="${doctor.userID}"/>" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i> &nbsp; Delete</a>
                                     </div>
