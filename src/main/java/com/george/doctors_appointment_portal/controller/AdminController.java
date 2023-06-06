@@ -27,7 +27,7 @@ import java.util.List;
 @WebServlet({
         "/admin_login", "/admin_logout", "/admin_register", "/admin_authenticate", "/admin_dashboard",
         "/new_admin", "/admin_view", "/admin_edit", "/admin_password", "/admin_change", "/admin_update",
-        "/doctors", "/users", "/specialties", "/new_appointments", "/appointments"
+        "/doctors", "/users", "/specialties", "/new_appointments", "/view_appointments"
 })
 public class AdminController extends HttpServlet {
     private AdminDao adminDao = new AdminDao();
@@ -98,7 +98,7 @@ public class AdminController extends HttpServlet {
                 case "/new_appointments":
                     getNewAppointments(request, response);
                     break;
-                case "/appointments":
+                case "/view_appointments":
                     getAppointments(request, response);
                     break;
                 default:
@@ -299,7 +299,7 @@ public class AdminController extends HttpServlet {
     }
 
     private void getAppointments(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
-        List<Appointment> appointments = appointmentDao.selectAllNewAppointments();
+        List<Appointment> appointments = appointmentDao.selectAllAppointments();
         request.setAttribute("appointments", appointments);
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/appointments.jsp");
         dispatcher.forward(request, response);
