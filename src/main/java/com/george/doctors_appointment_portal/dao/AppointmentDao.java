@@ -59,7 +59,9 @@ public class AppointmentDao {
             while (rs.next()) {
                 long appointmentID = rs.getLong("sn");
                 String userID = rs.getString("userid");
+                userID = userDao.getUsersName(userID);
                 String specialityID = rs.getString("speciality_id");
+                specialityID = specialityDao.getSpecialityName(specialityID);
                 String doctorID = rs.getString("doctor_id");
                 LocalDate appointmentDate = rs.getDate("appointment_date").toLocalDate();
                 String description = rs.getString("description");
@@ -78,7 +80,7 @@ public class AppointmentDao {
         List<Appointment> appointments = new ArrayList<>();
         String stat = "Awaiting";
         try (Connection connection = JDBCUtils.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_APPOINTMENT_SQL)) {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_NEW_APPOINTMENT_SQL)) {
                 preparedStatement.setString(1, stat);
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
