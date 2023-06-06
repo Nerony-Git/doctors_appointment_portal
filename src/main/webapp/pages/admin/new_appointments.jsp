@@ -35,7 +35,7 @@
                 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><i class="fa-solid fa-gauge"></i> &nbsp;<a href="<%=request.getContextPath()%>/admin_dashboard">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"> New Appointments</li>
+                        <li class="breadcrumb-item active" aria-current="page"> New Appointments List</li>
                     </ol>
                 </nav>
             </div>
@@ -48,7 +48,7 @@
                     <a href="" class="btn btn-sm btn-primary"><i class="fa-solid fa-user-plus"></i> &nbsp; Add New</a>
                 </div>
                 <div class="card-body">
-                    <p class="fw-bold text-center text-primary fs-4"> New Appointments</p>
+                    <p class="fw-bold text-center text-primary fs-4"> New Appointments List</p>
                     <c:if test="${not empty successMsg}">
                         <p class="text-center text-success fs-5">${successMsg}</p>
                         <c:remove var="successMsg" scope="session" />
@@ -69,17 +69,16 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach var="doctor" items="${doctorList}">
+                        <c:forEach var="appointment" items="${newAppointments}">
                             <tr>
-                                <td><c:out value="${doctor.userID}"/></td>
-                                <td><c:out value="${doctor.firstName} ${doctor.otherName} ${doctor.lastName}"/></td>
-                                <td><c:out value="${doctor.contact}"/></td>
-                                <td><c:out value="${doctor.email}"/></td>
+                                <td><c:out value="${appointment.appointmentID}"/></td>
+                                <td><c:out value="${appointment.userID}"/></td>
+                                <td><c:out value="${appointment.specialityID}"/></td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="view?id=<c:out value="${doctor.userID}"/>" class="btn btn-sm btn-primary"><i class="fa-solid fa-eye"></i>&nbsp; View</a> &nbsp;
-                                        <a href="edit?id=<c:out value="${doctor.userID}"/>" class="btn btn-sm btn-warning"><i class="fa-solid fa-handshake-angle"></i>&nbsp; Edit</a> &nbsp;
-                                        <a href="delete?id=<c:out value="${doctor.userID}"/>" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i> &nbsp; Delete</a>
+                                        <a href="view?id=<c:out value="${appointment.appointmentID}"/>" class="btn btn-sm btn-primary"><i class="fa-solid fa-eye"></i>&nbsp; View</a> &nbsp;
+                                        <a href="edit?id=<c:out value="${appointment.appointmentID}"/>" class="btn btn-sm btn-warning"><i class="fa-solid fa-handshake-angle"></i>&nbsp; Edit</a> &nbsp;
+                                        <a href="delete?id=<c:out value="${appointment.appointmentID}"/>" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i> &nbsp; Delete</a>
                                     </div>
                                 </td>
                             </tr>
