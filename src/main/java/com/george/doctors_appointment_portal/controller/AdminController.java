@@ -1,6 +1,7 @@
 package com.george.doctors_appointment_portal.controller;
 
 import com.george.doctors_appointment_portal.dao.AdminDao;
+import com.george.doctors_appointment_portal.dao.DoctorDao;
 import com.george.doctors_appointment_portal.model.Admin;
 import com.george.doctors_appointment_portal.model.Doctor;
 import jakarta.servlet.RequestDispatcher;
@@ -15,13 +16,16 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @WebServlet({
         "/admin_login", "/admin_logout", "/admin_register", "/admin_authenticate", "/admin_dashboard",
-        "/new_admin", "/admin_view", "/admin_edit", "/admin_password", "/admin_change", "/admin_update"
+        "/new_admin", "/admin_view", "/admin_edit", "/admin_password", "/admin_change", "/admin_update",
+        "/doctors"
 })
 public class AdminController extends HttpServlet {
-    private AdminDao adminDao;
+    private AdminDao adminDao = new AdminDao();
+    private DoctorDao doctorDao = new DoctorDao();
     private static final DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public void init(){
@@ -71,6 +75,9 @@ public class AdminController extends HttpServlet {
                     break;
                 case "/admin_update":
                     updateAdmin(request, response);
+                    break;
+                case "/doctors":
+                    getDoctors(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/admin_login.jsp");
@@ -239,6 +246,13 @@ public class AdminController extends HttpServlet {
             session.setAttribute("errorMsg", "Profile details failed to update");
             response.sendRedirect("admin_edit");
         }
+    }
+
+    private void getDoctors(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
+        List<Doctor> doctorList = doctorDao.getAllDoctors();
+        request.setAttribute("doctorList", doctorList);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/doctors.jsp");
+        dispatcher.forward(request, response);
     }
 
 }
