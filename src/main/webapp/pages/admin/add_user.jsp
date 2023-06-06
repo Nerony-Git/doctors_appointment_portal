@@ -68,7 +68,7 @@
                         <!-- End Error Message -->
 
                         <!-- Form -->
-                        <form action="<%=request.getContextPath()%>" method="post">
+                        <form action="<%=request.getContextPath()%>/add_new_user" method="post">
                             <label class="form-label">First Name</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="fName"><i class="fa fa-user"></i></span>
