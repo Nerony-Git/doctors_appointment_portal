@@ -14,6 +14,7 @@ import java.util.List;
 public class AppointmentDao {
     private static final String INSERT_APPOINTMENT_SQL = "INSERT INTO appointments (userid, speciality_id, appointment_date, description, status) VALUES (?,?,?,?,?)";
     private static final String SELECT_ALL_APPOINTMENT_SQL = "SELECT * FROM appointments";
+    private static final String SELECT_ALL_NEW_APPOINTMENT_SQL = "SELECT * FROM appointments WHERE status = ?";
     private static final String SELECT_USER_APPOINTMENT_SQL = "SELECT * FROM appointments WHERE userid = ?";
     private static final String SELECT_DOCTOR_APPOINTMENT_SQL = "SELECT * FROM appointments WHERE doctor_id = ?";
     private static final String SELECT_DOCTOR_APPOINTMENTS_SQL = "SELECT * FROM appointments WHERE doctor_id = ? AND status = ?";
@@ -56,7 +57,7 @@ public class AppointmentDao {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                long id = rs.getLong("sn");
+                long appointmentID = rs.getLong("sn");
                 String userID = rs.getString("userid");
                 String specialityID = rs.getString("speciality_id");
                 String doctorID = rs.getString("doctor_id");
@@ -64,6 +65,35 @@ public class AppointmentDao {
                 String description = rs.getString("description");
                 String status = rs.getString("status");
                 String response = rs.getString("response");
+
+                appointments.add(new Appointment(appointmentID, userID, specialityID, doctorID, appointmentDate, description, status, response));
+            }
+        } catch (SQLException exception) {
+            JDBCUtils.printSQLException(exception);
+        }
+        return appointments;
+    }
+
+    public List<Appointment> selectAllNewAppointments() {
+        List<Appointment> appointments = new ArrayList<>();
+        String stat = "Awaiting";
+        try (Connection connection = JDBCUtils.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_APPOINTMENT_SQL)) {
+                preparedStatement.setString(1, stat);
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                long appointmentID = rs.getLong("sn");
+                String userID = rs.getString("userid");
+                String specialityID = rs.getString("speciality_id");
+                String doctorID = rs.getString("doctor_id");
+                LocalDate appointmentDate = rs.getDate("appointment_date").toLocalDate();
+                String description = rs.getString("description");
+                String status = rs.getString("status");
+                String response = rs.getString("response");
+
+                appointments.add(new Appointment(appointmentID, userID, specialityID, doctorID, appointmentDate, description, status, response));
             }
         } catch (SQLException exception) {
             JDBCUtils.printSQLException(exception);
