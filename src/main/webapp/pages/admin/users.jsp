@@ -76,7 +76,7 @@
                 <td><c:out value="${user.firstName} ${user.otherName} ${user.lastName}"/></td>
                 <td><c:out value="${user.contact}"/></td>
                 <td><c:out value="${user.email}"/></td>
-                <td>
+                <td style="text-align: center">
                   <div class="btn-group">
                     <a href="view?id=<c:out value="${user.userID}"/>" class="btn btn-sm btn-primary"><i class="fa-solid fa-eye"></i>&nbsp; View</a> &nbsp;
                     <a href="edit?id=<c:out value="${user.userID}"/>" class="btn btn-sm btn-warning"><i class="fa-solid fa-handshake-angle"></i>&nbsp; Edit</a> &nbsp;
