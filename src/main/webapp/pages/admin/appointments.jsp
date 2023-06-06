@@ -44,9 +44,6 @@
     <div class="container">
         <div class="row">
             <div class="card register_card">
-                <div class="row d-grid gap-2 justify-content-md-end">
-                    <a href="" class="btn btn-sm btn-primary"><i class="fa-solid fa-user-plus"></i> &nbsp; Add New</a>
-                </div>
                 <div class="card-body">
                     <p class="fw-bold text-center text-primary fs-4"> Appointments History List</p>
                     <c:if test="${not empty successMsg}">
@@ -71,10 +68,10 @@
                         <tbody>
                         <c:forEach var="appointment" items="${appointments}">
                             <tr>
-                                <td><c:out value="${appointment.appointmentID}"/></td>
+                                <td>DPA-APT-<c:out value="${appointment.appointmentID}"/></td>
                                 <td><c:out value="${appointment.userID}"/></td>
                                 <td><c:out value="${appointment.specialityID}"/></td>
-                                <td>
+                                <td style="text-align: center">
                                     <div class="btn-group">
                                         <a href="view?id=<c:out value="${appointment.appointmentID}"/>" class="btn btn-sm btn-primary"><i class="fa-solid fa-eye"></i>&nbsp; View</a> &nbsp;
                                         <a href="edit?id=<c:out value="${appointment.appointmentID}"/>" class="btn btn-sm btn-warning"><i class="fa-solid fa-handshake-angle"></i>&nbsp; Edit</a> &nbsp;
