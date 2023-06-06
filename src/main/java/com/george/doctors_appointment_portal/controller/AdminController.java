@@ -1,10 +1,12 @@
 package com.george.doctors_appointment_portal.controller;
 
 import com.george.doctors_appointment_portal.dao.AdminDao;
+import com.george.doctors_appointment_portal.dao.AppointmentDao;
 import com.george.doctors_appointment_portal.dao.DoctorDao;
 import com.george.doctors_appointment_portal.dao.SpecialityDao;
 import com.george.doctors_appointment_portal.dao.UserDao;
 import com.george.doctors_appointment_portal.model.Admin;
+import com.george.doctors_appointment_portal.model.Appointment;
 import com.george.doctors_appointment_portal.model.Doctor;
 import com.george.doctors_appointment_portal.model.Speciality;
 import com.george.doctors_appointment_portal.model.User;
@@ -25,13 +27,15 @@ import java.util.List;
 @WebServlet({
         "/admin_login", "/admin_logout", "/admin_register", "/admin_authenticate", "/admin_dashboard",
         "/new_admin", "/admin_view", "/admin_edit", "/admin_password", "/admin_change", "/admin_update",
-        "/doctors", "/users", "/specialties"
+        "/doctors", "/users", "/specialties", "/new_appointments"
 })
 public class AdminController extends HttpServlet {
     private AdminDao adminDao = new AdminDao();
     private DoctorDao doctorDao = new DoctorDao();
     private UserDao userDao = new UserDao();
     private SpecialityDao specialityDao = new SpecialityDao();
+    private AppointmentDao appointmentDao = new AppointmentDao();
+
     private static final DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public void init(){
@@ -90,6 +94,9 @@ public class AdminController extends HttpServlet {
                     break;
                 case "/specialties":
                     getSpecialties(request, response);
+                    break;
+                case "/new_appointments":
+                    getNewAppointments(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/admin_login.jsp");
@@ -278,6 +285,13 @@ public class AdminController extends HttpServlet {
         List<Speciality> specialityList = specialityDao.getAllSpeciality();
         request.setAttribute("specialityList", specialityList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/specialties.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void getNewAppointments(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
+        List<Appointment> newAppointments = appointmentDao.selectAllNewAppointments();
+        request.setAttribute("newAppointments", newAppointments);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/new_appointments.jsp");
         dispatcher.forward(request, response);
     }
 
