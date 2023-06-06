@@ -48,6 +48,20 @@ public class User {
         this.password = password;
     }
 
+    public User(String userID, String firstName, String lastName, String otherName, String username, LocalDate dob, String contact, String address, String postalAddress, String email) {
+        super();
+        this.userID = userID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.otherName = otherName;
+        this.username = username;
+        this.dob = dob;
+        this.contact = contact;
+        this.address = address;
+        this.postalAddress = postalAddress;
+        this.email = email;
+    }
+
     public String getFirstName() {
         return firstName;
     }
