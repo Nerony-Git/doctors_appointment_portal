@@ -76,7 +76,7 @@
             </div>
 
             <div class="col-md-4">
-                <a href="<%=request.getContextPath()%>">
+                <a href="<%=request.getContextPath()%>/specialties">
                     <div class="card register_card">
                         <div class="card-body text-center">
                             <br/>
