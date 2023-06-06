@@ -28,7 +28,7 @@ import java.util.List;
         "/admin_login", "/admin_logout", "/admin_register", "/admin_authenticate", "/admin_dashboard",
         "/new_admin", "/admin_view", "/admin_edit", "/admin_password", "/admin_change", "/admin_update",
         "/doctors", "/users", "/specialties", "/new_appointments", "/view_appointments", "/add_user",
-        "/add_doctor", "/add_specialty"
+        "/add_doctor", "/add_specialty", "/add_new_user"
 })
 public class AdminController extends HttpServlet {
     private AdminDao adminDao = new AdminDao();
@@ -110,6 +110,9 @@ public class AdminController extends HttpServlet {
                     break;
                 case "/add_specialty":
                     addNewSpecialty(request, response);
+                    break;
+                case "/add_new_user":
+                    addUser(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/admin_login.jsp");
@@ -330,6 +333,47 @@ public class AdminController extends HttpServlet {
     private void addNewSpecialty(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/add_specialty.jsp");
         dispatcher.forward(request, response);
+    }
+
+    private void addUser(HttpServletRequest request, HttpServletResponse response) throws  ServletException, IOException {
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String otherName = request.getParameter("otherName");
+        String username = request.getParameter("username");
+        LocalDate dob = LocalDate.parse(request.getParameter("dob"), df);
+        String contact = request.getParameter("contact");
+        String address = request.getParameter("address");
+        String postalAddress = request.getParameter("postalAddress");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+
+        HttpSession session = request.getSession();
+
+        User newUser = new User();
+        newUser.setFirstName(firstName);
+        newUser.setLastName(lastName);
+        newUser.setOtherName(otherName);
+        newUser.setUsername(username);
+        newUser.setDob(dob);
+        newUser.setContact(contact);
+        newUser.setAddress(address);
+        newUser.setPostalAddress(postalAddress);
+        newUser.setEmail(email);
+        newUser.setPassword(password);
+
+        try {
+            int result = userDao.registerUser(newUser);
+            if (result == 1) {
+                session.setAttribute("successMsg", "Customer successfully added");
+                response.sendRedirect("users");
+            } else {
+                session.setAttribute("errorMsg", "Failed to add customer. Try Again");
+                response.sendRedirect("add_user");
+            }
+        } catch (Exception e) {
+            //TODO Auto-genrated catch block
+            e.printStackTrace();
+        }
     }
 
 }
