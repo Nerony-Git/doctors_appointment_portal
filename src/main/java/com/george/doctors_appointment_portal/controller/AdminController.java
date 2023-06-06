@@ -2,8 +2,10 @@ package com.george.doctors_appointment_portal.controller;
 
 import com.george.doctors_appointment_portal.dao.AdminDao;
 import com.george.doctors_appointment_portal.dao.DoctorDao;
+import com.george.doctors_appointment_portal.dao.UserDao;
 import com.george.doctors_appointment_portal.model.Admin;
 import com.george.doctors_appointment_portal.model.Doctor;
+import com.george.doctors_appointment_portal.model.User;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -21,11 +23,12 @@ import java.util.List;
 @WebServlet({
         "/admin_login", "/admin_logout", "/admin_register", "/admin_authenticate", "/admin_dashboard",
         "/new_admin", "/admin_view", "/admin_edit", "/admin_password", "/admin_change", "/admin_update",
-        "/doctors"
+        "/doctors", "/users"
 })
 public class AdminController extends HttpServlet {
     private AdminDao adminDao = new AdminDao();
     private DoctorDao doctorDao = new DoctorDao();
+    private UserDao userDao = new UserDao();
     private static final DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public void init(){
@@ -78,6 +81,9 @@ public class AdminController extends HttpServlet {
                     break;
                 case "/doctors":
                     getDoctors(request, response);
+                    break;
+                case "/users":
+                    getUsers(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/admin_login.jsp");
@@ -252,6 +258,13 @@ public class AdminController extends HttpServlet {
         List<Doctor> doctorList = doctorDao.getAllDoctors();
         request.setAttribute("doctorList", doctorList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/doctors.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void getUsers(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
+        List<User> userList = userDao.getAllUsers();
+        request.setAttribute("userList", userList);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/users.jsp");
         dispatcher.forward(request, response);
     }
 
