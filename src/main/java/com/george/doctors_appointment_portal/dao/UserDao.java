@@ -1,5 +1,6 @@
 package com.george.doctors_appointment_portal.dao;
 
+import com.george.doctors_appointment_portal.model.Doctor;
 import com.george.doctors_appointment_portal.model.User;
 import com.george.doctors_appointment_portal.utils.JDBCUtils;
 
@@ -8,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDao {
 
@@ -20,6 +23,7 @@ public class UserDao {
     private static final String GET_USERS_NAME = "SELECT first_name, last_name, other_name FROM users WHERE userid = ?";
     private static final String GET_LAST_USER_ID = "SELECT userid FROM users ORDER BY userid DESC LIMIT 1";
     private static final String COUNT_ALL_USERS_SQL = "SELECT COUNT(*) AS user_count FROM users";
+    private static final String SELECT_ALL_USERS_SQL = "SELECT * FROM users ORDER BY sn ASC";
 
     public int registerUser(User users) throws ClassNotFoundException {
 
@@ -215,6 +219,31 @@ public class UserDao {
             }
         }
         return totalUsers;
+    }
+
+    public List<User> getAllUsers() throws SQLException {
+        List<User> allUser = new ArrayList<>();
+        try (Connection connection = JDBCUtils.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USERS_SQL)){
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                String userID = resultSet.getString("userid");
+                String firstName = resultSet.getString("first_name");
+                String lastName = resultSet.getString("last_name");
+                String otherName = resultSet.getString("other_name");
+                String username = resultSet.getString("username");
+                LocalDate dob = resultSet.getDate("dob").toLocalDate();
+                String contact = resultSet.getString("contact");
+                String address = resultSet.getString("address");
+                String postalAddress = resultSet.getString("postal_address");
+                String email = resultSet.getString("email");
+
+                allUser.add(new User(userID, firstName, lastName, otherName, username, dob, contact, address, postalAddress, email));
+
+            }
+        }
+        return allUser;
     }
 
 }
