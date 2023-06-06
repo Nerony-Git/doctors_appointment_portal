@@ -27,7 +27,7 @@ import java.util.List;
 @WebServlet({
         "/admin_login", "/admin_logout", "/admin_register", "/admin_authenticate", "/admin_dashboard",
         "/new_admin", "/admin_view", "/admin_edit", "/admin_password", "/admin_change", "/admin_update",
-        "/doctors", "/users", "/specialties", "/new_appointments"
+        "/doctors", "/users", "/specialties", "/new_appointments", "/appointments"
 })
 public class AdminController extends HttpServlet {
     private AdminDao adminDao = new AdminDao();
@@ -97,6 +97,9 @@ public class AdminController extends HttpServlet {
                     break;
                 case "/new_appointments":
                     getNewAppointments(request, response);
+                    break;
+                case "/appointments":
+                    getAppointments(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/admin_login.jsp");
@@ -292,6 +295,13 @@ public class AdminController extends HttpServlet {
         List<Appointment> newAppointments = appointmentDao.selectAllNewAppointments();
         request.setAttribute("newAppointments", newAppointments);
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/new_appointments.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void getAppointments(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
+        List<Appointment> appointments = appointmentDao.selectAllNewAppointments();
+        request.setAttribute("appointments", appointments);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/appointments.jsp");
         dispatcher.forward(request, response);
     }
 
