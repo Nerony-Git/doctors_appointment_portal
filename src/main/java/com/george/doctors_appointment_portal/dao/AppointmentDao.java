@@ -86,8 +86,11 @@ public class AppointmentDao {
             while (rs.next()) {
                 long appointmentID = rs.getLong("sn");
                 String userID = rs.getString("userid");
+                userID = userDao.getUsersName(userID);
                 String specialityID = rs.getString("speciality_id");
+                specialityID = specialityDao.getSpecialityName(specialityID);
                 String doctorID = rs.getString("doctor_id");
+                doctorID = doctorDao.getDoctorName(doctorID);
                 LocalDate appointmentDate = rs.getDate("appointment_date").toLocalDate();
                 String description = rs.getString("description");
                 String status = rs.getString("status");
@@ -112,8 +115,11 @@ public class AppointmentDao {
             while (rs.next()) {
                 long appointmentID = rs.getLong("sn");
                 String userID = rs.getString("userid");
+                userID = userDao.getUsersName(userID);
                 String specialityID = rs.getString("speciality_id");
+                specialityID = specialityDao.getSpecialityName(specialityID);
                 String doctorID = rs.getString("doctor_id");
+                doctorID = doctorDao.getDoctorName(doctorID);
                 LocalDate appointmentDate = rs.getDate("appointment_date").toLocalDate();
                 String description = rs.getString("description");
                 String status = rs.getString("status");
