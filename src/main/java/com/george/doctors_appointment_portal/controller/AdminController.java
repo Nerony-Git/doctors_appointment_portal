@@ -321,6 +321,8 @@ public class AdminController extends HttpServlet {
     }
 
     private void addNewDoctor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Speciality> listSpeciality = specialityDao.getAllSpeciality();
+        request.setAttribute("listSpeciality", listSpeciality);
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/add_doctor.jsp");
         dispatcher.forward(request, response);
     }
