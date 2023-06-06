@@ -28,7 +28,7 @@ import java.util.List;
         "/doctor_appointments"
 })
 public class DoctorController extends HttpServlet {
-    private DoctorDao doctorDao;
+    private DoctorDao doctorDao = new DoctorDao();
     private SpecialityDao specialityDao = new SpecialityDao();
     private AppointmentDao appointmentDao = new AppointmentDao();
     private static final DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
