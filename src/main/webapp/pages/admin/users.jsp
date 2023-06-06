@@ -45,7 +45,7 @@
     <div class="row">
       <div class="card register_card">
         <div class="row d-grid gap-2 justify-content-md-end">
-          <a href="" class="btn btn-sm btn-primary"><i class="fa-solid fa-user-plus"></i> &nbsp; Add New</a>
+          <a href="<%=request.getContextPath()%>/add_user" class="btn btn-sm btn-primary"><i class="fa-solid fa-user-plus"></i> &nbsp; Add New</a>
         </div>
         <div class="card-body">
           <p class="fw-bold text-center text-primary fs-4"> Customers List</p>
