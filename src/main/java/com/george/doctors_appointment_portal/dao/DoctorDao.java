@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DoctorDao {
 
@@ -20,6 +22,7 @@ public class DoctorDao {
     private static final String UPDATE_PASSWORD_SQL = "UPDATE doctors SET password = ? WHERE userid = ?";
     private static final String UPDATE_DOCTOR_SQL = "UPDATE doctors SET first_name = ?, last_name = ?, other_name = ?, dob = ?, contact = ?, qualification = ?, email = ? WHERE userid = ?";
     private static final String DOCTOR_BY_ID = "SELECT * FROM doctors WHERE userid = ?";
+    private static final String SELECT_ALL_DOCTORS_SQL = "SELECT * FROM doctors ORDER BY sn ASC";
     private static final String COUNT_ALL_DOCTORS_SQL = "SELECT COUNT(*) AS doctor_count FROM doctors";
 
     private SpecialityDao specialityDao = new SpecialityDao();
@@ -221,6 +224,27 @@ public class DoctorDao {
             }
         }
         return totalDoctors;
+    }
+
+    public List<Doctor> getAllDoctors() throws SQLException {
+        List<Doctor> allDoctors = new ArrayList<>();
+        try (Connection connection = JDBCUtils.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_DOCTORS_SQL)){
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                String userID = resultSet.getString("userid");
+                String firstName = resultSet.getString("first_name");
+                String lastName = resultSet.getString("last_name");
+                String otherName = resultSet.getString("other_name");
+                String contact = resultSet.getString("contact");
+                String email = resultSet.getString("email");
+
+                allDoctors.add(new Doctor(userID, firstName, lastName, otherName, contact, email));
+
+            }
+        }
+        return allDoctors;
     }
 
 }
