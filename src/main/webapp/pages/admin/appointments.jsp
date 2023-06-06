@@ -62,6 +62,7 @@
                             <th scope="col">Appointment ID</th>
                             <th scope="col">Customer Name</th>
                             <th scope="col">Specialty</th>
+                            <th scope="col" style="text-align: center">Status</th>
                             <th scope="col" style="text-align: center">Action</th>
                         </tr>
                         </thead>
@@ -72,10 +73,24 @@
                                 <td><c:out value="${appointment.userID}"/></td>
                                 <td><c:out value="${appointment.specialityID}"/></td>
                                 <td style="text-align: center">
+                                    <c:choose>
+                                        <c:when test="${appointment.status == 'Pending'}">
+                                            <span class="badge bg-primary">Pending</span>
+                                        </c:when>
+                                        <c:when test="${appointment.status == 'Completed'}">
+                                            <span class="badge bg-success">Completed</span>
+                                        </c:when>
+                                        <c:when test="${appointment.status == 'Canceled'}">
+                                            <span class="badge bg-danger">Canceled</span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <span class="badge bg-warning">Awaiting</span>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
+                                <td style="text-align: center">
                                     <div class="btn-group">
-                                        <a href="view?id=<c:out value="${appointment.appointmentID}"/>" class="btn btn-sm btn-primary"><i class="fa-solid fa-eye"></i>&nbsp; View</a> &nbsp;
-                                        <a href="edit?id=<c:out value="${appointment.appointmentID}"/>" class="btn btn-sm btn-warning"><i class="fa-solid fa-handshake-angle"></i>&nbsp; Edit</a> &nbsp;
-                                        <a href="delete?id=<c:out value="${appointment.appointmentID}"/>" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i> &nbsp; Delete</a>
+                                        <a href="view?id=<c:out value="${appointment.appointmentID}"/>" class="btn btn-sm btn-primary"><i class="fa-solid fa-eye"></i>&nbsp; View &nbsp;</a>
                                     </div>
                                 </td>
                             </tr>
