@@ -36,6 +36,7 @@
                 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><i class="fa-solid fa-gauge"></i> &nbsp;<a href="<%=request.getContextPath()%>/admin_dashboard">Home</a></li>
+                        <li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/doctors">Doctors List</a></li>
                         <li class="breadcrumb-item active" aria-current="page"> Add New Doctor </li>
                     </ol>
                 </nav>
