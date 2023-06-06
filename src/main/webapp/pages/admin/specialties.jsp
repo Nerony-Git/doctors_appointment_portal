@@ -71,8 +71,8 @@
                         <c:forEach var="specialty" items="${specialityList}">
                             <tr>
                                 <td><c:out value="${specialty.sID}"/></td>
-                                <td><c:out value="${specialty.specialtyName}"/></td>
-                                <td>
+                                <td><c:out value="${specialty.specialityName}"/></td>
+                                <td style="text-align: center">
                                     <div class="btn-group">
                                         <a href="view?id=<c:out value="${specialty.sID}"/>" class="btn btn-sm btn-primary"><i class="fa-solid fa-eye"></i>&nbsp; View</a> &nbsp;
                                         <a href="edit?id=<c:out value="${specialty.sID}"/>" class="btn btn-sm btn-warning"><i class="fa-solid fa-handshake-angle"></i>&nbsp; Edit</a> &nbsp;
