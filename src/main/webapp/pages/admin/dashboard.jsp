@@ -44,7 +44,7 @@
         <%--<p class="text-center fs-3">Dashboard</p>--%>
         <div class="row dash mb-5">
             <div class="col-md-4">
-                <a href="<%=request.getContextPath()%>">
+                <a href="<%=request.getContextPath()%>/doctors">
                     <div class="card register_card">
                         <div class="card-body text-center">
                             <br/>
