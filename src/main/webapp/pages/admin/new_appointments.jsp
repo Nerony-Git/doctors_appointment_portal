@@ -75,7 +75,7 @@
                                     <div class="btn-group">
                                         <a href="view?id=<c:out value="${appointment.appointmentID}"/>" class="btn btn-sm btn-primary"><i class="fa-solid fa-eye"></i>&nbsp; View </a> &nbsp;
                                         <a href="edit?id=<c:out value="${appointment.appointmentID}"/>" class="btn btn-sm btn-warning"><i class="fa-solid fa-hospital-user"></i>&nbsp; Assign </a> &nbsp;
-                                        <a href="delete?id=<c:out value="${appointment.appointmentID}"/>" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i> &nbsp; Delete </a>
+                                        <a href="cancel_appointment?id=<c:out value="${appointment.appointmentID}"/>" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i> &nbsp; Delete </a>
                                     </div>
                                 </td>
                             </tr>
