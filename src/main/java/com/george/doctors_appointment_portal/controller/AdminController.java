@@ -123,6 +123,9 @@ public class AdminController extends HttpServlet {
                 case "/update_user":
                     updateUser(request, response);
                     break;
+                case "/add_new_doctor":
+                    addDoctor(request, response);
+                    break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/admin_login.jsp");
                     dispatcher.forward(request, response);
@@ -425,6 +428,47 @@ public class AdminController extends HttpServlet {
         } else {
             session.setAttribute("errorMsg", "Profile details failed to update");
             response.sendRedirect("edit_user");
+        }
+    }
+
+    private void addDoctor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String otherName = request.getParameter("otherName");
+        String username = request.getParameter("username");
+        LocalDate dob = LocalDate.parse(request.getParameter("dob"), df);
+        String contact = request.getParameter("contact");
+        String specialty = request.getParameter("speciality");
+        String qualification = request.getParameter("qualification");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+
+        HttpSession session = request.getSession();
+
+        Doctor newUser = new Doctor();
+        newUser.setFirstName(firstName);
+        newUser.setLastName(lastName);
+        newUser.setOtherName(otherName);
+        newUser.setUsername(username);
+        newUser.setDob(dob);
+        newUser.setContact(contact);
+        newUser.setSpeciality(specialty);
+        newUser.setQualification(qualification);
+        newUser.setEmail(email);
+        newUser.setPassword(password);
+
+        try {
+            int result = doctorDao.registerDoctor(newUser);
+            if (result == 1) {
+                session.setAttribute("successMsg", "Doctor added successfully.");
+                response.sendRedirect("doctors");
+            } else {
+                session.setAttribute("errorMsg", "Failed to add Doctor. Try Again");
+                response.sendRedirect("add_doctor");
+            }
+        } catch (Exception e) {
+            //TODO Auto-genrated catch block
+            e.printStackTrace();
         }
     }
 
