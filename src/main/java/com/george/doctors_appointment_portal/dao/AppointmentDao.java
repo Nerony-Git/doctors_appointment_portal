@@ -20,7 +20,7 @@ public class AppointmentDao {
     private static final String SELECT_DOCTOR_APPOINTMENTS_SQL = "SELECT * FROM appointments WHERE doctor_id = ? AND status = ?";
     private static final String SELECT_SPECIALITY_APPOINTMENT_SQL = "SELECT * FROM appointments WHERE speciality_id = ?";
     private static final String SELECT_APPOINTMENT_BY_ID_SQL = "SELECT * FROM appointments WHERE sn = ?";
-    private static final String DELETE_APPOINTMENT_BY_ID_SQL = "DELETE FROM appointments WHERE sn = ?";
+    private static final String DELETE_APPOINTMENT_BY_ID_SQL = "UPDATE appointments SET status = ? WHERE sn = ?";
     private static final String UPDATE_APPOINTMENT_BY_ID_SQL = "UPDATE appointments SET userid = ?, speciality_id = ?, doctor_id = ?, appointment_date = ?, description = ?, status = ?, response = ? WHERE sn = ?";
     private static final String UPDATE_APPOINTMENT_BY_DOCTOR_SQL = "UPDATE appointments SET status = ?, response =? WHERE sn = ?";
     private static final String COUNT_ALL_APPOINTMENTS_SQL = "SELECT COUNT(*) AS appointment_count FROM appointments";
@@ -254,10 +254,13 @@ public class AppointmentDao {
     }
 
     public boolean deleteAppointment(int id) throws SQLException {
+        String status = "Canceled";
         boolean rowDeleted;
         try (Connection connection = JDBCUtils.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_APPOINTMENT_BY_ID_SQL)) {
-            preparedStatement.setInt(1, id);
+            preparedStatement.setString(1, status);
+            preparedStatement.setInt(2, id);
+
             rowDeleted = preparedStatement.executeUpdate() > 0;
         }
         return rowDeleted;
