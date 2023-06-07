@@ -28,7 +28,7 @@ import java.util.List;
         "/admin_login", "/admin_logout", "/admin_register", "/admin_authenticate", "/admin_dashboard",
         "/new_admin", "/admin_view", "/admin_edit", "/admin_password", "/admin_change", "/admin_update",
         "/doctors", "/users", "/specialties", "/new_appointments", "/view_appointments", "/add_user",
-        "/add_doctor", "/add_specialty", "/add_new_user", "/edit_user", "/view_user"
+        "/add_doctor", "/add_specialty", "/add_new_user", "/edit_user", "/view_user", "/update_user"
 })
 public class AdminController extends HttpServlet {
     private AdminDao adminDao = new AdminDao();
@@ -119,6 +119,9 @@ public class AdminController extends HttpServlet {
                     break;
                 case "/view_user":
                     viewUser(request, response);
+                    break;
+                case "/update_user":
+                    updateUser(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/admin_login.jsp");
@@ -396,6 +399,33 @@ public class AdminController extends HttpServlet {
         request.setAttribute("user", user);
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/view_user.jsp");
         dispatcher.forward(request, response);
+    }
+
+    private void updateUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        String userID = request.getParameter("userID");
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String otherName = request.getParameter("otherName");
+        LocalDate dob = LocalDate.parse(request.getParameter("dob"), df);
+        String contact = request.getParameter("contact");
+        String address = request.getParameter("address");
+        String postalAddress = request.getParameter("postalAddress");
+        String email = request.getParameter("email");
+
+        User updateUser = new User(userID, firstName, lastName, otherName, dob, contact, address, postalAddress, email);
+        System.out.println(updateUser.getUserID());
+        boolean u = userDao.updateUser(updateUser);
+        HttpSession session = request.getSession();
+
+        if (u == true) {
+            User updateUserObject = userDao.getUserByID(userID);
+            session.setAttribute("successMsg", "Profile details updated successfully");
+            session.setAttribute("user", updateUserObject);
+            response.sendRedirect("users");
+        } else {
+            session.setAttribute("errorMsg", "Profile details failed to update");
+            response.sendRedirect("edit_user");
+        }
     }
 
 }
