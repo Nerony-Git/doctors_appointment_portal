@@ -29,7 +29,7 @@ import java.util.List;
         "/new_admin", "/admin_view", "/admin_edit", "/admin_password", "/admin_change", "/admin_update",
         "/doctors", "/users", "/specialties", "/new_appointments", "/view_appointments", "/add_user",
         "/add_doctor", "/add_specialty", "/add_new_user", "/edit_user", "/view_user", "/update_user",
-        "/add_new_doctor", "/edit_doctor", "/view_doctor"
+        "/add_new_doctor", "/edit_doctor", "/view_doctor", "/update_doctor"
 })
 public class AdminController extends HttpServlet {
     private AdminDao adminDao = new AdminDao();
@@ -132,6 +132,9 @@ public class AdminController extends HttpServlet {
                     break;
                 case "/view_doctor":
                     viewDoctor(request, response);
+                    break;
+                case "/update_doctor":
+                    updateDoctor(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/admin_login.jsp");
@@ -495,6 +498,33 @@ public class AdminController extends HttpServlet {
         request.setAttribute("doctor", doctor);
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/view_doctor.jsp");
         dispatcher.forward(request, response);
+    }
+
+    private void updateDoctor(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        String userID = request.getParameter("userID");
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String otherName = request.getParameter("otherName");
+        LocalDate dob = LocalDate.parse(request.getParameter("dob"), df);
+        String contact = request.getParameter("contact");
+        String specialty = request.getParameter("speciality");
+        String qualification = request.getParameter("qualification");
+        String email = request.getParameter("email");
+
+        Doctor updateUser = new Doctor(userID, firstName, lastName, otherName, dob, contact, specialty, qualification, email);
+        System.out.println(updateUser.getUserID());
+        boolean u = doctorDao.updateDoctors(updateUser);
+        HttpSession session = request.getSession();
+
+        if (u == true) {
+            Doctor updateUserObject = doctorDao.getDoctorByID(userID);
+            session.setAttribute("successMsg", "Profile details updated successfully");
+            session.setAttribute("doctor", updateUserObject);
+            response.sendRedirect("doctors");
+        } else {
+            session.setAttribute("errorMsg", "Profile details failed to update");
+            response.sendRedirect("edit_doctor");
+        }
     }
 
 }
