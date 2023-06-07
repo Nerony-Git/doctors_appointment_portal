@@ -18,16 +18,18 @@ public class SpecialityDao {
     private static final String INSERT_SPECIALITY = "INSERT INTO speciality (sid, speciality_name) VALUES (?, ?)";
     private static final String COUNT_ALL_SPECIALITY_SQL = "SELECT COUNT(*) AS speciality_count FROM speciality";
 
-    public void insertSpeciality(Speciality speciality) throws SQLException {
+    public int insertSpeciality(Speciality speciality) throws SQLException {
+        int result = 0;
         try (Connection connection = JDBCUtils.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SPECIALITY)){
             preparedStatement.setString(1, speciality.getsID());
             preparedStatement.setString(2, speciality.getSpecialityName());
-            preparedStatement.executeUpdate();
+            result = preparedStatement.executeUpdate();
 
         } catch (SQLException exception) {
             JDBCUtils.printSQLException(exception);
         }
+        return result;
     }
 
     public List<Speciality> getAllSpeciality() {
