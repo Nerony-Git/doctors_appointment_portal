@@ -72,13 +72,13 @@
                             <label class="form-label">Specialty ID</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="lName"><i class="fa fa-tags"></i></span>
-                                <input type="text" name="sID" class="form-control" placeholder="Generated Automatically" aria-label="Last Name" aria-describedby="lName" readonly />
+                                <input type="text" name="sID" class="form-control" placeholder="Generated Automatically" aria-label="Last Name" aria-describedby="lName" readonly value="${speciality.sid}"/>
                             </div>
                             <div class="input-group mb-3">&nbsp;</div>
                             <label class="form-label">Specialty</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="uName"><i class="fa-solid fa-suitcase-medical"></i></span>
-                                <input type="text" name="specialtyName" class="form-control" placeholder="Enter Specialty Name" aria-label="Username" aria-describedby="uName" required />
+                                <input type="text" name="specialtyName" class="form-control" placeholder="Enter Specialty Name" aria-label="Username" aria-describedby="uName" required value="${speciality.specialtyName}" />
                             </div>
 
                             <button type="submit" class="btn bg_color text-white col-md-12"><i class="fa-solid fa-notes-medical"></i> &nbsp; Add New Specialty </button>
