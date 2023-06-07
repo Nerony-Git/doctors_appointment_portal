@@ -68,7 +68,7 @@
                         <!-- End Error Message -->
 
                         <!-- Form -->
-                        <form action="<%=request.getContextPath()%>" method="post">
+                        <form action="<%=request.getContextPath()%>/update_user" method="post">
                             <label class="form-label">ID</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="uID"><i class="fa-solid fa-user-tag"></i></span>
