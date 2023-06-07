@@ -30,7 +30,7 @@ import java.util.List;
         "/doctors", "/users", "/specialties", "/new_appointments", "/view_appointments", "/add_user",
         "/add_doctor", "/add_specialty", "/add_new_user", "/edit_user", "/view_user", "/update_user",
         "/add_new_doctor", "/edit_doctor", "/view_doctor", "/update_doctor", "cancel_appointment",
-        "/edit_specialty"
+        "/edit_specialty", "/add_new_specialty"
 })
 public class AdminController extends HttpServlet {
     private AdminDao adminDao = new AdminDao();
@@ -142,6 +142,9 @@ public class AdminController extends HttpServlet {
                     break;
                 case "/edit_specialty":
                     editSpecialty(request, response);
+                    break;
+                case "/add_new_specialty":
+                    addSpecialty(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/admin_login.jsp");
@@ -555,6 +558,26 @@ public class AdminController extends HttpServlet {
         request.setAttribute("speciality", speciality);
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/edit_user.jsp");
         dispatcher.forward(request, response);
+    }
+
+    private void addSpecialty(HttpServletRequest request, HttpServletResponse response) throws ServletException, SQLException, IOException {
+        String sid = request.getParameter("sID");
+        String specialtyName = request.getParameter("specialtyName");
+
+        HttpSession session = request.getSession();
+        Speciality newSpecialty = new Speciality(sid, specialtyName);
+        try {
+            int result = specialityDao.insertSpeciality(newSpecialty);
+            if (result == 1){
+                session.setAttribute("successMsg", "Specialty added successfully.");
+                response.sendRedirect("specialties");
+            } else {
+                session.setAttribute("errorMsg", "Failed to add specialty.");
+                response.sendRedirect("specialties");
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 }
