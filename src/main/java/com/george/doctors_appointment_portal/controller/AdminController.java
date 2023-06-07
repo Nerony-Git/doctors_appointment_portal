@@ -29,8 +29,8 @@ import java.util.List;
         "/new_admin", "/admin_view", "/admin_edit", "/admin_password", "/admin_change", "/admin_update",
         "/doctors", "/users", "/specialties", "/new_appointments", "/view_appointments", "/add_user",
         "/add_doctor", "/add_specialty", "/add_new_user", "/edit_user", "/view_user", "/update_user",
-        "/add_new_doctor", "/edit_doctor", "/view_doctor", "/update_doctor", "cancel_appointment",
-        "/edit_specialty", "/add_new_specialty"
+        "/add_new_doctor", "/edit_doctor", "/view_doctor", "/update_doctor", "/cancel_appointment",
+        "/edit_specialty", "/add_new_specialty", "/update_specialty"
 })
 public class AdminController extends HttpServlet {
     private AdminDao adminDao = new AdminDao();
@@ -145,6 +145,9 @@ public class AdminController extends HttpServlet {
                     break;
                 case "/add_new_specialty":
                     addSpecialty(request, response);
+                    break;
+                case "/update_specialty":
+                    updateSpecialty(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/admin_login.jsp");
@@ -553,10 +556,10 @@ public class AdminController extends HttpServlet {
     }
 
     private void editSpecialty(HttpServletRequest request, HttpServletResponse response) throws ServletException, SQLException, IOException {
-        String id = request.getParameter("id");
-        Speciality speciality = specialityDao.getSpecialityByID(id);
+        String sid = request.getParameter("id");
+        Speciality speciality = specialityDao.getSpecialityByID(sid);
         request.setAttribute("speciality", speciality);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/edit_user.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/edit_specialty.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -573,6 +576,26 @@ public class AdminController extends HttpServlet {
                 response.sendRedirect("specialties");
             } else {
                 session.setAttribute("errorMsg", "Failed to add specialty.");
+                response.sendRedirect("specialties");
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void updateSpecialty(HttpServletRequest request, HttpServletResponse response) throws ServletException, SQLException, IOException {
+        String sid = request.getParameter("sID");
+        String specialtyName = request.getParameter("specialtyName");
+
+        HttpSession session = request.getSession();
+        Speciality newSpecialty = new Speciality(sid, specialtyName);
+        try {
+            boolean result = specialityDao.updateSpecialty(newSpecialty);
+            if (result == true){
+                session.setAttribute("successMsg", "Specialty details updated successfully.");
+                response.sendRedirect("specialties");
+            } else {
+                session.setAttribute("errorMsg", "Failed to update specialty details.");
                 response.sendRedirect("specialties");
             }
         } catch (Exception e){
