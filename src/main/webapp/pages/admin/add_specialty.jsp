@@ -67,7 +67,7 @@
             <!-- End Error Message -->
 
             <!-- Form -->
-            <form action="<%=request.getContextPath()%>/" method="post">
+            <form action="<%=request.getContextPath()%>/add_new_specialty" method="post">
               <label class="form-label">Specialty ID</label>
               <div class="input-group mb-3">
                 <span class="input-group-text" id="lName"><i class="fa fa-tags"></i></span>
