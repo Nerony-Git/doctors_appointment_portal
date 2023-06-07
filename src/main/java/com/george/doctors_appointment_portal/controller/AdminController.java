@@ -126,6 +126,9 @@ public class AdminController extends HttpServlet {
                 case "/add_new_doctor":
                     addDoctor(request, response);
                     break;
+                case "/edit_doctor":
+                    editDoctor(request, response);
+                    break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/admin_login.jsp");
                     dispatcher.forward(request, response);
@@ -470,6 +473,16 @@ public class AdminController extends HttpServlet {
             //TODO Auto-genrated catch block
             e.printStackTrace();
         }
+    }
+
+    private void editDoctor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        String userID = request.getParameter("id");
+        List<Speciality> listSpeciality = specialityDao.getAllSpeciality();
+        request.setAttribute("listSpeciality", listSpeciality);
+        Doctor doctor = doctorDao.getDoctorByID(userID);
+        request.setAttribute("doctor", doctor);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/edit_doctor.jsp");
+        dispatcher.forward(request, response);
     }
 
 }
