@@ -90,7 +90,7 @@
                                 </td>
                                 <td style="text-align: center">
                                     <div class="btn-group">
-                                        <a href="view?id=<c:out value="${appointment.appointmentID}"/>" class="btn btn-sm btn-primary"><i class="fa-solid fa-eye"></i>&nbsp; View &nbsp;</a>
+                                        <a href="view_appointment?id=<c:out value="${appointment.appointmentID}"/>" class="btn btn-sm btn-primary"><i class="fa-solid fa-eye"></i>&nbsp; View &nbsp;</a>
                                     </div>
                                 </td>
                             </tr>
