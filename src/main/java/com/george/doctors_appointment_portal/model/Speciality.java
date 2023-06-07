@@ -10,6 +10,10 @@ public class Speciality {
         this.specialityName = specialityName;
     }
 
+    public Speciality() {
+
+    }
+
     public String getsID() {
         return sID;
     }
