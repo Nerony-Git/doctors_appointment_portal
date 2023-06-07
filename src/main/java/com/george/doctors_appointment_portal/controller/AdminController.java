@@ -29,7 +29,7 @@ import java.util.List;
         "/new_admin", "/admin_view", "/admin_edit", "/admin_password", "/admin_change", "/admin_update",
         "/doctors", "/users", "/specialties", "/new_appointments", "/view_appointments", "/add_user",
         "/add_doctor", "/add_specialty", "/add_new_user", "/edit_user", "/view_user", "/update_user",
-        "/add_new_doctor", "/edit_doctor", "/view_doctor", "/update_doctor"
+        "/add_new_doctor", "/edit_doctor", "/view_doctor", "/update_doctor", "cancel_appointment"
 })
 public class AdminController extends HttpServlet {
     private AdminDao adminDao = new AdminDao();
@@ -135,6 +135,9 @@ public class AdminController extends HttpServlet {
                     break;
                 case "/update_doctor":
                     updateDoctor(request, response);
+                    break;
+                case "/cancel_appointment":
+                    cancelAppointment(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/admin_login.jsp");
@@ -524,6 +527,21 @@ public class AdminController extends HttpServlet {
         } else {
             session.setAttribute("errorMsg", "Profile details failed to update");
             response.sendRedirect("edit_doctor");
+        }
+    }
+    
+    private void cancelAppointment(HttpServletRequest request, HttpServletResponse response) throws ServletException, SQLException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        boolean c = appointmentDao.deleteAppointment(id);
+        HttpSession session = request.getSession();
+
+        if (c == true) {
+            session.setAttribute("successMsg", "Appointment canceled successfully.");
+            response.sendRedirect("new_appointments");
+        } else {
+            session.setAttribute("errorMsg", "Failed to cancel appointment. Try Again.");
+            response.sendRedirect("new_appointments");
         }
     }
 
