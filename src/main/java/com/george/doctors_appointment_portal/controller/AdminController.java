@@ -29,7 +29,8 @@ import java.util.List;
         "/new_admin", "/admin_view", "/admin_edit", "/admin_password", "/admin_change", "/admin_update",
         "/doctors", "/users", "/specialties", "/new_appointments", "/view_appointments", "/add_user",
         "/add_doctor", "/add_specialty", "/add_new_user", "/edit_user", "/view_user", "/update_user",
-        "/add_new_doctor", "/edit_doctor", "/view_doctor", "/update_doctor", "cancel_appointment"
+        "/add_new_doctor", "/edit_doctor", "/view_doctor", "/update_doctor", "cancel_appointment",
+        "/edit_specialty"
 })
 public class AdminController extends HttpServlet {
     private AdminDao adminDao = new AdminDao();
@@ -138,6 +139,9 @@ public class AdminController extends HttpServlet {
                     break;
                 case "/cancel_appointment":
                     cancelAppointment(request, response);
+                    break;
+                case "/edit_specialty":
+                    editSpecialty(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/admin_login.jsp");
@@ -543,6 +547,14 @@ public class AdminController extends HttpServlet {
             session.setAttribute("errorMsg", "Failed to cancel appointment. Try Again.");
             response.sendRedirect("new_appointments");
         }
+    }
+
+    private void editSpecialty(HttpServletRequest request, HttpServletResponse response) throws ServletException, SQLException, IOException {
+        String id = request.getParameter("id");
+        Speciality speciality = specialityDao.getSpecialityByID(id);
+        request.setAttribute("speciality", speciality);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/edit_user.jsp");
+        dispatcher.forward(request, response);
     }
 
 }
