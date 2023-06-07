@@ -21,6 +21,7 @@ public class DoctorDao {
     private static final String OLD_PASSWORD_SQL = "SELECT * FROM doctors WHERE userid = ? and password = ?";
     private static final String UPDATE_PASSWORD_SQL = "UPDATE doctors SET password = ? WHERE userid = ?";
     private static final String UPDATE_DOCTOR_SQL = "UPDATE doctors SET first_name = ?, last_name = ?, other_name = ?, dob = ?, contact = ?, qualification = ?, email = ? WHERE userid = ?";
+    private static final String UPDATE_DOCTORS_SQL = "UPDATE doctors SET first_name = ?, last_name = ?, other_name = ?, dob = ?, contact = ?, speciality = ?, qualification = ?, email = ? WHERE userid = ?";
     private static final String DOCTOR_BY_ID = "SELECT * FROM doctors WHERE userid = ?";
     private static final String SELECT_ALL_DOCTORS_SQL = "SELECT * FROM doctors ORDER BY sn ASC";
     private static final String COUNT_ALL_DOCTORS_SQL = "SELECT COUNT(*) AS doctor_count FROM doctors";
@@ -185,6 +186,26 @@ public class DoctorDao {
         return u;
     }
 
+    public boolean updateDoctors(Doctor doctor) throws SQLException {
+        boolean u;
+
+        try (Connection connection = JDBCUtils.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_DOCTORS_SQL)){
+            preparedStatement.setString(1, doctor.getFirstName());
+            preparedStatement.setString(2, doctor.getLastName());
+            preparedStatement.setString(3, doctor.getOtherName());
+            preparedStatement.setDate(4, JDBCUtils.getSQLDate(doctor.getDob()));
+            preparedStatement.setString(5, doctor.getContact());
+            preparedStatement.setString(6, doctor.getSpeciality());
+            preparedStatement.setString(7, doctor.getQualification());
+            preparedStatement.setString(8, doctor.getEmail());
+            preparedStatement.setString(9, doctor.getUserID());
+            System.out.println(preparedStatement);
+            u = preparedStatement.executeUpdate() > 0;
+        }
+        return u;
+    }
+
     public Doctor getDoctorByID(String userID) throws SQLException {
         Doctor doctor = null;
 
@@ -196,6 +217,8 @@ public class DoctorDao {
 
             if (resultSet.next()) {
                 doctor = new Doctor();
+                String specialty = resultSet.getString("speciality");
+                specialty = specialityDao.getSpecialityName(specialty);
 
                 doctor.setUserID(resultSet.getString("userid"));
                 doctor.setFirstName(resultSet.getString("first_name"));
@@ -204,6 +227,7 @@ public class DoctorDao {
                 doctor.setUsername(resultSet.getString("username"));
                 doctor.setDob(resultSet.getDate("dob").toLocalDate());
                 doctor.setContact(resultSet.getString("contact"));
+                doctor.setSpeciality(specialty);
                 doctor.setQualification(resultSet.getString("qualification"));
                 doctor.setEmail(resultSet.getString("email"));
 
