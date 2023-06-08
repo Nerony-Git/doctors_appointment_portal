@@ -6,6 +6,7 @@ public class Appointment {
     private Long appointmentID;
     private String userID;
     private String specialityID;
+    private String specialtyName;
     private String doctorID;
     private LocalDate appointmentDate;
     private String description;
@@ -22,11 +23,12 @@ public class Appointment {
 
     }
 
-    public Appointment(long id, String userID, String specialityID, String doctorID, LocalDate appointmentDate, String description, String status, String response) {
+    public Appointment(long id, String userID, String specialityID, String specialityName, String doctorID, LocalDate appointmentDate, String description, String status, String response) {
         super();
         this.appointmentID = id;
         this.userID = userID;
         this.specialityID = specialityID;
+        this.specialtyName = specialityName;
         this.doctorID = doctorID;
         this.appointmentDate = appointmentDate;
         this.description = description;
@@ -40,6 +42,12 @@ public class Appointment {
         this.appointmentID = appointmentID;
         this.status = status;
         this.response = responses;
+    }
+
+    public Appointment(long appointmentID, String status) {
+        super();
+        this.appointmentID = appointmentID;
+        this.status = status;
     }
 
     public Long getAppointmentID() {
@@ -100,6 +108,14 @@ public class Appointment {
 
     public String getResponse() {
         return response;
+    }
+
+    public String getSpecialtyName() {
+        return specialtyName;
+    }
+
+    public void setSpecialtyName(String specialtyName) {
+        this.specialtyName = specialtyName;
     }
 
     public void setResponse(String response) {
