@@ -24,6 +24,7 @@ public class UserDao {
     private static final String GET_LAST_USER_ID = "SELECT userid FROM users ORDER BY userid DESC LIMIT 1";
     private static final String COUNT_ALL_USERS_SQL = "SELECT COUNT(*) AS user_count FROM users";
     private static final String SELECT_ALL_USERS_SQL = "SELECT * FROM users ORDER BY sn ASC";
+    private static final String DELETE_USER_BY_ID_SQL = "DELETE FROM users WHERE userid = ?";
 
     public int registerUser(User users) throws ClassNotFoundException {
 
@@ -244,6 +245,17 @@ public class UserDao {
             }
         }
         return allUser;
+    }
+
+    public boolean deleteUser(String userID) throws SQLException {
+        boolean d;
+        try (Connection connection = JDBCUtils.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_USER_BY_ID_SQL)){
+            preparedStatement.setString(1, userID);
+
+            d = preparedStatement.executeUpdate() > 0;
+        }
+        return d;
     }
 
 }
