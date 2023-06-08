@@ -82,7 +82,7 @@
                             <label class="form-label">Speciality</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="sID"><i class="fa-solid fa-tag"></i></span>
-                                <input type="text" name="specialityID" class="form-control" aria-label="Speciality ID" aria-describedby="sID" readonly value="<c:out value="${appointment.specialityID}"/>" />
+                                <input type="text" name="specialityID" class="form-control" aria-label="Speciality ID" aria-describedby="sID" readonly value="<c:out value="${appointment.specialtyName}"/>" />
                             </div>
                             <div class="input-group">&nbsp;</div>
                         </div>
