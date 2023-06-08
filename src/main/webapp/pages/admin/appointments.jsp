@@ -71,7 +71,7 @@
                             <tr>
                                 <td>DPA-APT-<c:out value="${appointment.appointmentID}"/></td>
                                 <td><c:out value="${appointment.userID}"/></td>
-                                <td><c:out value="${appointment.specialityID}"/></td>
+                                <td><c:out value="${appointment.specialtyName}"/></td>
                                 <td style="text-align: center">
                                     <c:choose>
                                         <c:when test="${appointment.status == 'Pending'}">
