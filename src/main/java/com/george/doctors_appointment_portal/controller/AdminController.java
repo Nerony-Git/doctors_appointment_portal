@@ -31,7 +31,7 @@ import java.util.List;
         "/add_doctor", "/add_specialty", "/add_new_user", "/edit_user", "/view_user", "/update_user",
         "/add_new_doctor", "/edit_doctor", "/view_doctor", "/update_doctor", "/cancel_appointment",
         "/edit_specialty", "/add_new_specialty", "/update_specialty", "/view_appointment", "/assign_doctor",
-        "/doctor_assign", "/delete_specialty"
+        "/doctor_assign", "/delete_specialty", "/delete_doctor"
 })
 public class AdminController extends HttpServlet {
     private AdminDao adminDao = new AdminDao();
@@ -161,6 +161,9 @@ public class AdminController extends HttpServlet {
                     break;
                 case "/delete_specialty":
                     deleteSpecialty(request, response);
+                    break;
+                case "/delete_doctor":
+                    deleteDoctor(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/admin_login.jsp");
@@ -673,6 +676,25 @@ public class AdminController extends HttpServlet {
             } else {
                 session.setAttribute("errorMsg", "Failed to delete specialty.");
                 response.sendRedirect("specialties");
+            }
+        } catch (SQLException e){
+            throw new ServletException(e);
+        }
+    }
+
+    private void deleteDoctor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String userID = request.getParameter("id");
+
+        HttpSession session = request.getSession();
+        try {
+            boolean d = doctorDao.deleteDoctor(userID);
+
+            if (d) {
+                session.setAttribute("successMsg", "Doctor deleted successfully.");
+                response.sendRedirect("doctors");
+            } else {
+                session.setAttribute("errorMsg", "Failed to delete doctor.");
+                response.sendRedirect("doctors");
             }
         } catch (SQLException e){
             throw new ServletException(e);
