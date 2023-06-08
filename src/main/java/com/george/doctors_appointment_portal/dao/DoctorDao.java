@@ -27,6 +27,7 @@ public class DoctorDao {
     private static final String SELECT_ALL_DOCTORS_SQL = "SELECT * FROM doctors ORDER BY sn ASC";
     private static final String COUNT_ALL_DOCTORS_SQL = "SELECT COUNT(*) AS doctor_count FROM doctors";
     private static final String SELECT_DOCTORS_BY_SPECIALTY_SQL = "SELECT * FROM doctors WHERE speciality = ? ORDER BY sn ASC";
+    private static final String DELETE_DOCTORS_BY_ID = "DELETE FROM doctors WHERE userid = ?";
 
     private SpecialityDao specialityDao = new SpecialityDao();
 
@@ -293,6 +294,17 @@ public class DoctorDao {
             }
         }
         return specialtyDoctor;
+    }
+
+    public boolean deleteDoctor(String userID) throws SQLException {
+        boolean d;
+        try (Connection connection = JDBCUtils.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(DELETE_DOCTORS_BY_ID)){
+            preparedStatement.setString(1, userID);
+
+            d = preparedStatement.executeUpdate() > 0;
+        }
+        return d;
     }
 
 }
