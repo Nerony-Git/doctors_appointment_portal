@@ -70,7 +70,7 @@
                             <tr>
                                 <td>DPA-APT-<c:out value="${appointment.appointmentID}"/></td>
                                 <td><c:out value="${appointment.userID}"/></td>
-                                <td><c:out value="${appointment.specialityID}"/></td>
+                                <td><c:out value="${appointment.specialtyName}"/></td>
                                 <td style="text-align: center">
                                     <div class="btn-group">
                                         <a href="assign_doctor?id=<c:out value="${appointment.appointmentID}"/>" class="btn btn-sm btn-warning"><i class="fa-solid fa-hospital-user"></i>&nbsp; Assign </a> &nbsp;
