@@ -30,7 +30,7 @@ import java.util.List;
         "/doctors", "/users", "/specialties", "/new_appointments", "/view_appointments", "/add_user",
         "/add_doctor", "/add_specialty", "/add_new_user", "/edit_user", "/view_user", "/update_user",
         "/add_new_doctor", "/edit_doctor", "/view_doctor", "/update_doctor", "/cancel_appointment",
-        "/edit_specialty", "/add_new_specialty", "/update_specialty", "/view_appointment"
+        "/edit_specialty", "/add_new_specialty", "/update_specialty", "/view_appointment", "/assign_doctor"
 })
 public class AdminController extends HttpServlet {
     private AdminDao adminDao = new AdminDao();
@@ -151,6 +151,9 @@ public class AdminController extends HttpServlet {
                     break;
                 case "/view_appointment":
                     viewAppointment(request, response);
+                    break;
+                case "/assign_doctor":
+                    assignAppointment(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/admin_login.jsp");
@@ -612,6 +615,40 @@ public class AdminController extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/view_appointment.jsp");
         request.setAttribute("appointment", appointment);
         dispatcher.forward(request, response);
+    }
+
+    private void assignAppointment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        int appointmentID = Integer.parseInt(request.getParameter("id"));
+        Appointment appointment = appointmentDao.getAppointment(appointmentID);
+        List<Doctor> specialtyDoctors = doctorDao.getDoctorBySpecialty(appointment.getSpecialityID());
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/assign_doctor.jsp");
+        request.setAttribute("appointment", appointment);
+        request.setAttribute("specialtyDoctors", specialtyDoctors);
+        System.out.println(specialtyDoctors);
+        dispatcher.forward(request, response);
+    }
+
+    private void adminUpdateAppointment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String status = request.getParameter("status");
+        int appointmentID = Integer.parseInt(request.getParameter("appointmentID"));
+
+        Appointment appointment = new Appointment(appointmentID, status);
+        HttpSession session = request.getSession();
+
+        try {
+            boolean d = appointmentDao.adminUpdateAppointment(appointment);
+
+            if (d) {
+                session.setAttribute("successMsg", "Doctor assigned to appointment successfully.");
+                response.sendRedirect("new_appointments");
+            } else {
+                session.setAttribute("errorMsg", "Failed to assign a doctor to appointment.");
+                response.sendRedirect("new_appointments");
+            }
+        } catch (SQLException e){
+            throw new ServletException(e);
+        }
     }
 
 }
