@@ -75,7 +75,7 @@
                                 <td style="text-align: center">
                                     <div class="btn-group">
                                         <a href="edit_specialty?id=<c:out value="${specialty.sID}"/>" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square"></i>&nbsp; Edit</a> &nbsp;
-                                        <a href="delete?id=<c:out value="${specialty.sID}"/>" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i> &nbsp; Delete</a>
+                                        <a href="delete_specialty?id=<c:out value="${specialty.sID}"/>" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i> &nbsp; Delete</a>
                                     </div>
                                 </td>
                             </tr>
