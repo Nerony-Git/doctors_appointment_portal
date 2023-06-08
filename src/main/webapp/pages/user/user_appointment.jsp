@@ -61,20 +61,17 @@
                             <th scope="col">Appointment ID</th>
                             <th scope="col">Appointment Date</th>
                             <th scope="col">Speciality</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Action</th>
+                            <th scope="col" style="text-align: center">Status</th>
+                            <th scope="col" style="text-align: center">Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         <c:forEach var="appointment" items="${appointmentList}">
                             <tr>
-                                <td>DAPT/<c:out value="${appointment.appointmentID}"/></td>
+                                <td>DPA-APT-<c:out value="${appointment.appointmentID}"/></td>
                                 <td><c:out value="${appointment.appointmentDate}"/></td>
-                                <td><c:out value="${appointment.specialityID}"/></td>
-                                <td><c:out value="${appointment.description}"/></td>
-                                <%--<td><c:out value="${appointment.status}"/></td>--%>
-                                <td>
+                                <td><c:out value="${appointment.specialtyName}"/></td>
+                                <td style="text-align: center">
                                     <c:choose>
                                         <c:when test="${appointment.status == 'Pending'}">
                                             <span class="badge bg-primary">Pending</span>
@@ -90,7 +87,9 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </td>
-                                <td><a href="user_view_appointment?id=<c:out value="${appointment.appointmentID}"/>" class="btn btn-sm btn-primary"><i class="fa-solid fa-eye"></i>&nbsp; View</a> </td>
+                                <td style="text-align: center">
+                                    <a href="user_view_appointment?id=<c:out value="${appointment.appointmentID}"/>" class="btn btn-sm btn-primary"><i class="fa-solid fa-eye"></i>&nbsp; View</a>
+                                </td>
                             </tr>
                         </c:forEach>
 
