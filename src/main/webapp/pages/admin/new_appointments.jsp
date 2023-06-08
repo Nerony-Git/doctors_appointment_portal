@@ -73,7 +73,7 @@
                                 <td><c:out value="${appointment.specialityID}"/></td>
                                 <td style="text-align: center">
                                     <div class="btn-group">
-                                        <a href="edit?id=<c:out value="${appointment.appointmentID}"/>" class="btn btn-sm btn-warning"><i class="fa-solid fa-hospital-user"></i>&nbsp; Assign </a> &nbsp;
+                                        <a href="assign_doctor?id=<c:out value="${appointment.appointmentID}"/>" class="btn btn-sm btn-warning"><i class="fa-solid fa-hospital-user"></i>&nbsp; Assign </a> &nbsp;
                                         <a href="cancel_appointment?id=<c:out value="${appointment.appointmentID}"/>" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i> &nbsp; Delete </a>
                                     </div>
                                 </td>
