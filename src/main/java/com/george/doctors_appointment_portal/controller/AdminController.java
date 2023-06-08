@@ -30,7 +30,8 @@ import java.util.List;
         "/doctors", "/users", "/specialties", "/new_appointments", "/view_appointments", "/add_user",
         "/add_doctor", "/add_specialty", "/add_new_user", "/edit_user", "/view_user", "/update_user",
         "/add_new_doctor", "/edit_doctor", "/view_doctor", "/update_doctor", "/cancel_appointment",
-        "/edit_specialty", "/add_new_specialty", "/update_specialty", "/view_appointment", "/assign_doctor"
+        "/edit_specialty", "/add_new_specialty", "/update_specialty", "/view_appointment", "/assign_doctor",
+        "/doctor_assign"
 })
 public class AdminController extends HttpServlet {
     private AdminDao adminDao = new AdminDao();
@@ -154,6 +155,9 @@ public class AdminController extends HttpServlet {
                     break;
                 case "/assign_doctor":
                     assignAppointment(request, response);
+                    break;
+                case "/doctor_assign":
+                    adminUpdateAppointment(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/admin_login.jsp");
@@ -630,10 +634,11 @@ public class AdminController extends HttpServlet {
     }
 
     private void adminUpdateAppointment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String status = request.getParameter("status");
-        int appointmentID = Integer.parseInt(request.getParameter("appointmentID"));
 
-        Appointment appointment = new Appointment(appointmentID, status);
+        int appointmentID = Integer.parseInt(request.getParameter("appointmentID"));
+        String doctorID = request.getParameter("doctorID");
+
+        Appointment appointment = new Appointment(appointmentID, doctorID);
         HttpSession session = request.getSession();
 
         try {
