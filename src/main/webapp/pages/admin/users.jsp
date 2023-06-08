@@ -80,7 +80,7 @@
                   <div class="btn-group">
                     <a href="view_user?id=<c:out value="${user.userID}"/>" class="btn btn-sm btn-primary"><i class="fa-solid fa-eye"></i>&nbsp; View</a> &nbsp;
                     <a href="edit_user?id=<c:out value="${user.userID}"/>" class="btn btn-sm btn-warning"><i class="fa-solid fa-user-pen"></i>&nbsp; Edit</a> &nbsp;
-                    <a href="delete?id=<c:out value="${user.userID}"/>" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i> &nbsp; Delete</a>
+                    <a href="delete_user?id=<c:out value="${user.userID}"/>" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i> &nbsp; Delete</a>
                   </div>
                 </td>
               </tr>
