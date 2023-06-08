@@ -44,10 +44,10 @@ public class Appointment {
         this.response = responses;
     }
 
-    public Appointment(long appointmentID, String status) {
+    public Appointment(long appointmentID, String doctorID) {
         super();
         this.appointmentID = appointmentID;
-        this.status = status;
+        this.doctorID = doctorID;
     }
 
     public Long getAppointmentID() {
