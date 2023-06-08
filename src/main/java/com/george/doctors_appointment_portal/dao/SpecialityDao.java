@@ -19,6 +19,7 @@ public class SpecialityDao {
     private static final String COUNT_ALL_SPECIALITY_SQL = "SELECT COUNT(*) AS speciality_count FROM speciality";
     private static final String UPDATE_SPECIALTY_SQL = "UPDATE speciality SET speciality_name = ? WHERE sid = ?";
     private static final String GET_LAST_SPECIALTY_ID = "SELECT sid FROM speciality ORDER BY sid DESC LIMIT 1";
+    private static final String DELETE_SPECIALTY_BY_ID = "DELETE FROM speciality WHERE sid = ?";
 
     public int insertSpeciality(Speciality speciality) throws SQLException {
         int result = 0;
@@ -135,5 +136,17 @@ public class SpecialityDao {
             }
         }
         return lastSpecialtyID;
+    }
+
+    public boolean deleteSpecialty(String sID) throws SQLException {
+        boolean s;
+
+        try (Connection connection = JDBCUtils.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_SPECIALTY_BY_ID)){
+            preparedStatement.setString(1, sID);
+
+            s = preparedStatement.executeUpdate() > 0;
+        }
+        return s;
     }
 }
