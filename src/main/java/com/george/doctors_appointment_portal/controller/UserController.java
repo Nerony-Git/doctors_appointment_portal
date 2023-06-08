@@ -289,7 +289,7 @@ public class UserController extends HttpServlet {
 
             if (a) {
                 session.setAttribute("successMsg", "Appointment booked successfully.");
-                response.sendRedirect("book_appointment");
+                response.sendRedirect("user_appointment");
             } else {
                 session.setAttribute("errorMsg", "Failed to book Appointment.");
                 response.sendRedirect("book_appointment");
