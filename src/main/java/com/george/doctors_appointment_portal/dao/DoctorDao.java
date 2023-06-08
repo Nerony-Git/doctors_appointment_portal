@@ -1,6 +1,7 @@
 package com.george.doctors_appointment_portal.dao;
 
 import com.george.doctors_appointment_portal.model.Doctor;
+import com.george.doctors_appointment_portal.model.Speciality;
 import com.george.doctors_appointment_portal.model.User;
 import com.george.doctors_appointment_portal.utils.JDBCUtils;
 
@@ -25,6 +26,7 @@ public class DoctorDao {
     private static final String DOCTOR_BY_ID = "SELECT * FROM doctors WHERE userid = ?";
     private static final String SELECT_ALL_DOCTORS_SQL = "SELECT * FROM doctors ORDER BY sn ASC";
     private static final String COUNT_ALL_DOCTORS_SQL = "SELECT COUNT(*) AS doctor_count FROM doctors";
+    private static final String SELECT_DOCTORS_BY_SPECIALTY_SQL = "SELECT * FROM doctors WHERE speciality = ? ORDER BY sn ASC";
 
     private SpecialityDao specialityDao = new SpecialityDao();
 
@@ -269,6 +271,28 @@ public class DoctorDao {
             }
         }
         return allDoctors;
+    }
+
+    public List<Doctor> getDoctorBySpecialty(String specialtyID) throws SQLException {
+        List<Doctor> specialtyDoctor = new ArrayList<>();
+
+        try (Connection connection = JDBCUtils.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(SELECT_DOCTORS_BY_SPECIALTY_SQL)){
+            preparedStatement.setString(1, specialtyID);
+            System.out.println(preparedStatement);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                String userID = resultSet.getString("userid");
+                String firstName = resultSet.getString("first_name");
+                String lastName = resultSet.getString("last_name");
+                String otherName = resultSet.getString("other_name");
+
+                specialtyDoctor.add(new Doctor(userID, firstName, lastName, otherName));
+                System.out.println(specialtyDoctor);
+            }
+        }
+        return specialtyDoctor;
     }
 
 }
