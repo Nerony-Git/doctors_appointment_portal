@@ -69,7 +69,7 @@
                             <label class="form-label">Appointment ID</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="aID"><i class="fa-solid fa-tags"></i></span>
-                                <input type="text" class="form-control" aria-label="Appointment" aria-describedby="aID" readonly value="DAPT/<c:out value="${appointment.appointmentID}"/>" />
+                                <input type="text" class="form-control" aria-label="Appointment" aria-describedby="aID" readonly value="DPA-APT-<c:out value="${appointment.appointmentID}"/>" />
                             </div>
                             <input type="hidden" name="appointmentID" value="<c:out value="${appointment.appointmentID}"/>">
                             <div class="input-group">&nbsp;</div>
