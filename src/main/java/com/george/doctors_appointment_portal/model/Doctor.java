@@ -55,6 +55,14 @@ public class Doctor implements Serializable {
         this.email = email;
     }
 
+    public Doctor(String userID, String firstName, String lastName, String otherName) {
+        super();
+        this.userID = userID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.otherName = otherName;
+    }
+
     public String getUserID() {
         return userID;
     }
