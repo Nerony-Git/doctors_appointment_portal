@@ -10,7 +10,7 @@
   <div class="container d-flex align-items-center justify-content-between">
     <div class="logo">
       <h1 class="text-light">
-        <a class="navbar-brand" href="<%= request.getContextPath() %>/">
+        <a class="navbar-brand" href="<%= request.getContextPath() %>/doctor_dashboard">
           <i class="fa-sharp fa-solid fa-hospital"></i>
           <span><strong>DPA </strong> Portal</span>
         </a>
