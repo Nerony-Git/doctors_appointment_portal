@@ -25,6 +25,7 @@ public class AppointmentDao {
     private static final String UPDATE_APPOINTMENT_BY_DOCTOR_SQL = "UPDATE appointments SET status = ?, response =? WHERE sn = ?";
     private static final String COUNT_ALL_APPOINTMENTS_SQL = "SELECT COUNT(*) AS appointment_count FROM appointments";
     private static final String COUNT_ALL_APPOINTMENT_SQL = "SELECT COUNT(*) AS appointments_count FROM appointments WHERE status = ?";
+    private static final String UPDATE_APPOINTMENT_BY_ADMIN_SQL = "UPDATE appointments SET doctor_id = ?, status = ? WHERE sn = ?";
 
     private SpecialityDao specialityDao = new SpecialityDao();
     private DoctorDao doctorDao = new DoctorDao();
@@ -61,14 +62,14 @@ public class AppointmentDao {
                 String userID = rs.getString("userid");
                 userID = userDao.getUsersName(userID);
                 String specialityID = rs.getString("speciality_id");
-                specialityID = specialityDao.getSpecialityName(specialityID);
+                String specialityName = specialityDao.getSpecialityName(specialityID);
                 String doctorID = rs.getString("doctor_id");
                 LocalDate appointmentDate = rs.getDate("appointment_date").toLocalDate();
                 String description = rs.getString("description");
                 String status = rs.getString("status");
                 String response = rs.getString("response");
 
-                appointments.add(new Appointment(appointmentID, userID, specialityID, doctorID, appointmentDate, description, status, response));
+                appointments.add(new Appointment(appointmentID, userID, specialityID, specialityName, doctorID, appointmentDate, description, status, response));
             }
         } catch (SQLException exception) {
             JDBCUtils.printSQLException(exception);
@@ -90,7 +91,7 @@ public class AppointmentDao {
                 String userID = rs.getString("userid");
                 userID = userDao.getUsersName(userID);
                 String specialityID = rs.getString("speciality_id");
-                specialityID = specialityDao.getSpecialityName(specialityID);
+                String specialityName = specialityDao.getSpecialityName(specialityID);
                 String doctorID = rs.getString("doctor_id");
                 doctorID = doctorDao.getDoctorName(doctorID);
                 LocalDate appointmentDate = rs.getDate("appointment_date").toLocalDate();
@@ -98,7 +99,7 @@ public class AppointmentDao {
                 String status = rs.getString("status");
                 String response = rs.getString("response");
 
-                appointments.add(new Appointment(appointmentID, userID, specialityID, doctorID, appointmentDate, description, status, response));
+                appointments.add(new Appointment(appointmentID, userID, specialityID, specialityName, doctorID, appointmentDate, description, status, response));
             }
         } catch (SQLException exception) {
             JDBCUtils.printSQLException(exception);
@@ -119,7 +120,7 @@ public class AppointmentDao {
                 String userID = rs.getString("userid");
                 userID = userDao.getUsersName(userID);
                 String specialityID = rs.getString("speciality_id");
-                specialityID = specialityDao.getSpecialityName(specialityID);
+                String specialityName = specialityDao.getSpecialityName(specialityID);
                 String doctorID = rs.getString("doctor_id");
                 doctorID = doctorDao.getDoctorName(doctorID);
                 LocalDate appointmentDate = rs.getDate("appointment_date").toLocalDate();
@@ -127,7 +128,7 @@ public class AppointmentDao {
                 String status = rs.getString("status");
                 String response = rs.getString("response");
 
-                userAppointments.add(new Appointment(appointmentID, userID, specialityID, doctorID, appointmentDate, description, status, response));
+                userAppointments.add(new Appointment(appointmentID, userID, specialityID, specialityName, doctorID, appointmentDate, description, status, response));
                 System.out.println(userAppointments);
             }
         } catch (SQLException exception) {
@@ -149,7 +150,7 @@ public class AppointmentDao {
                 String userID = rs.getString("userid");
                 userID = userDao.getUsersName(userID);
                 String specialityID = rs.getString("speciality_id");
-                specialityID = specialityDao.getSpecialityName(specialityID);
+                String specialityName = specialityDao.getSpecialityName(specialityID);
                 String doctorID = rs.getString("doctor_id");
                 doctorID = doctorDao.getDoctorName(doctorID);
                 LocalDate appointmentDate = rs.getDate("appointment_date").toLocalDate();
@@ -157,7 +158,7 @@ public class AppointmentDao {
                 String status = rs.getString("status");
                 String response = rs.getString("response");
 
-                doctorAppointments.add(new Appointment(appointmentID, userID, specialityID, doctorID, appointmentDate, description, status, response));
+                doctorAppointments.add(new Appointment(appointmentID, userID, specialityID, specialityName, doctorID, appointmentDate, description, status, response));
 
             }
         } catch (SQLException exception) {
@@ -181,7 +182,7 @@ public class AppointmentDao {
                 String userID = rs.getString("userid");
                 userID = userDao.getUsersName(userID);
                 String specialityID = rs.getString("speciality_id");
-                specialityID = specialityDao.getSpecialityName(specialityID);
+                String specialityName = specialityDao.getSpecialityName(specialityID);
                 String doctorID = rs.getString("doctor_id");
                 doctorID = doctorDao.getDoctorName(doctorID);
                 LocalDate appointmentDate = rs.getDate("appointment_date").toLocalDate();
@@ -189,7 +190,7 @@ public class AppointmentDao {
                 String status = rs.getString("status");
                 String response = rs.getString("response");
 
-                doctorAppointments.add(new Appointment(appointmentID, userID, specialityID, doctorID, appointmentDate, description, status, response));
+                doctorAppointments.add(new Appointment(appointmentID, userID, specialityID, specialityName, doctorID, appointmentDate, description, status, response));
 
             }
         } catch (SQLException exception) {
@@ -237,7 +238,7 @@ public class AppointmentDao {
                 String userID = rs.getString("userid");
                 userID = userDao.getUsersName(userID);
                 String specialityID = rs.getString("speciality_id");
-                specialityID = specialityDao.getSpecialityName(specialityID);
+                String specialityName = specialityDao.getSpecialityName(specialityID);
                 String doctorID = rs.getString("doctor_id");
                 doctorID = doctorDao.getDoctorName(doctorID);
                 LocalDate appointmentDate = rs.getDate("appointment_date").toLocalDate();
@@ -245,7 +246,7 @@ public class AppointmentDao {
                 String status = rs.getString("status");
                 String response = rs.getString("response");
 
-                appointment = new Appointment(id, userID, specialityID, doctorID, appointmentDate, description, status, response);
+                appointment = new Appointment(id, userID, specialityID, specialityName, doctorID, appointmentDate, description, status, response);
             }
         } catch (SQLException exception) {
             JDBCUtils.printSQLException(exception);
@@ -317,13 +318,29 @@ public class AppointmentDao {
         try (Connection connection = JDBCUtils.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(COUNT_ALL_APPOINTMENT_SQL)){
             preparedStatement.setString(1, status);
+            System.out.println(preparedStatement);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()){
                 totalAppointment = resultSet.getInt("appointments_count");
+                System.out.println(totalAppointment);
             }
         }
         return totalAppointment;
+    }
+
+    public boolean adminUpdateAppointment(Appointment appointment) throws SQLException {
+        boolean adminUpdated;
+        String status = "Pending";
+        try (Connection connection = JDBCUtils.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_APPOINTMENT_BY_ADMIN_SQL)){
+            preparedStatement.setString(1, appointment.getDoctorID());
+            preparedStatement.setString(2, status);
+            preparedStatement.setLong(3, appointment.getAppointmentID());
+            System.out.println(preparedStatement);
+            adminUpdated = preparedStatement.executeUpdate() > 0;
+        }
+        return adminUpdated;
     }
 
 }
