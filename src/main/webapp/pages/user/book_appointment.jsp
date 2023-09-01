@@ -13,7 +13,7 @@
 <head>
     
     <meta charset="ISO-8859-1">
-    <title>DPA Portal - Dashboard</title>
+    <title>DPA Portal - Book Appointment</title>
     <jsp:include page="../../assets/head/head.jsp"></jsp:include>
     <link rel="stylesheet" href="assets/css/main.css"/>
 
