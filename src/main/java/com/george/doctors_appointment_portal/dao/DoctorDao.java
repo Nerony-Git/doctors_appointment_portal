@@ -171,7 +171,7 @@ public class DoctorDao {
     }
 
     public boolean updateDoctor(Doctor doctor) throws SQLException {
-        boolean u;
+        boolean u = false;
 
         try (Connection connection = JDBCUtils.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_DOCTOR_SQL)){
@@ -185,12 +185,14 @@ public class DoctorDao {
             preparedStatement.setString(8, doctor.getUserID());
             System.out.println(preparedStatement);
             u = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e){
+            e.printStackTrace();
         }
         return u;
     }
 
     public boolean updateDoctors(Doctor doctor) throws SQLException {
-        boolean u;
+        boolean u = false;
 
         try (Connection connection = JDBCUtils.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_DOCTORS_SQL)){
@@ -205,6 +207,8 @@ public class DoctorDao {
             preparedStatement.setString(9, doctor.getUserID());
             System.out.println(preparedStatement);
             u = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e){
+            e.printStackTrace();
         }
         return u;
     }
