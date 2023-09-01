@@ -141,7 +141,7 @@ public class AdminDao {
     }
 
     public boolean updateAdmin(Admin admin) throws SQLException {
-        boolean u;
+        boolean u = false;
 
         try (Connection connection = JDBCUtils.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ADMIN_SQL)){
@@ -154,6 +154,8 @@ public class AdminDao {
             preparedStatement.setString(7, admin.getUserID());
             System.out.println(preparedStatement);
             u = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e){
+            e.printStackTrace();
         }
         return u;
     }
