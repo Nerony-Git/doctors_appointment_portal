@@ -14,7 +14,7 @@
 <head>
 
   <meta charset="ISO-8859-1">
-  <title>DPA Portal - Edit Customer </title>
+  <title>DPA Portal - View Customer </title>
   <jsp:include page="../../assets/head/head.jsp"></jsp:include>
   <link rel="stylesheet" href="assets/css/main.css"/>
 
