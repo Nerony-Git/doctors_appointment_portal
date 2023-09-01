@@ -12,7 +12,7 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>DPA Portal - User Login</title>
+    <title>DPA Portal</title>
     <jsp:include page="assets/head/head.jsp"></jsp:include>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/main.css"/>
 
@@ -20,7 +20,7 @@
 <body>
 
 <!-- ===== Slider Section ===== -->
-<section id="hero">
+<%--<section id="hero">
     <div class="hero-container">
         <div id="carouselExampleDark" class="carousel slide" data-bs-interval="5000" data-bs-ride="carousel">
             <div class="carousel-indicators">
@@ -102,7 +102,7 @@
             </button>
         </div>
     </div>
-</section>
+</section>--%>
 <!-- ===== End Slider Section ===== -->
 
 <!-- ===== Header ===== -->
