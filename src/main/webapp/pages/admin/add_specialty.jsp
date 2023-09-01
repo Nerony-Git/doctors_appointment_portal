@@ -13,7 +13,7 @@
 <head>
 
   <meta charset="ISO-8859-1">
-  <title>DPA Portal - Add New Specialty </title>
+  <title>DPA Portal - Add New Specialty</title>
   <jsp:include page="../../assets/head/head.jsp"></jsp:include>
   <link rel="stylesheet" href="assets/css/main.css"/>
 
