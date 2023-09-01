@@ -126,7 +126,7 @@ public class UserDao {
     }
 
     public boolean updateUser(User user) throws SQLException {
-        boolean u;
+        boolean u = false;
 
         try (Connection connection = JDBCUtils.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER_SQL)){
@@ -141,6 +141,8 @@ public class UserDao {
             preparedStatement.setString(9, user.getUserID());
             System.out.println(preparedStatement);
             u = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return u;
     }
