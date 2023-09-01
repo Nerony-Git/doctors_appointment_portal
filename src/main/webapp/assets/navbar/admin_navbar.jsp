@@ -20,7 +20,7 @@
 
         <nav id="navbar" class="navbar">
             <ul>
-                <li class="dropdown"><a href="#"><i class="fa-solid fa-circle-user fa-2x"></i> <span> &nbsp; ${admin.firstName} ${admin.lastName} </span> <i class="bi bi-chevron-down"></i> </a>
+                <li class="dropdown" id="user"><a href="#"><i class="fa-solid fa-circle-user fa-2x"></i> <span> &nbsp; ${admin.firstName} ${admin.lastName} </span> <i class="bi bi-chevron-down"></i> </a>
                     <ul>
                         <li><a class="nav-link" href="<%=request.getContextPath()%>/admin_view"><i class="fa-solid fa-id-card"></i> &nbsp; View Profile </a> </li>
                         <li><a class="nav-link" href="<%=request.getContextPath()%>/admin_edit"><i class="fa-solid fa-user-pen"></i> &nbsp; Edit Profile </a> </li>
