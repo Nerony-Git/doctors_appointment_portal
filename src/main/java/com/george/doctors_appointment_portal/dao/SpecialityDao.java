@@ -45,13 +45,15 @@ public class SpecialityDao {
     }
 
     public boolean updateSpecialty(Speciality speciality) throws SQLException {
-        boolean s;
+        boolean s = false;
 
         try (Connection connection = JDBCUtils.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_SPECIALTY_SQL)){
             preparedStatement.setString(1, speciality.getSpecialityName());
             preparedStatement.setString(2, speciality.getsID());
             s = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e){
+            e.printStackTrace();
         }
         return s;
     }
